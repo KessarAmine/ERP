@@ -1,0 +1,174 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+@{
+    ViewData["Title"] = "Magasin-Liste PDR";
+    Layout = "~/Views/Shared/_LayoutMagasinSuperviseur.cshtml";
+}
+@(Html.DevExtreme().TabPanel()
+.Height("100%")
+.Items(items =>
+{
+    items.Add()
+        .Title("Lieux")
+        .Template(new TemplateName("LieuxGrid"));
+    items.Add()
+        .Title("Gisements")
+        .Template(new TemplateName("GisementsGrid"));
+})
+)
+@using (Html.DevExtreme().NamedTemplate("LieuxGrid"))
+{
+
+@(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkLieu>()
+ .DataSource(ds => ds.Mvc()
+     .Controller("LieuxStockage")
+     .LoadAction("GetLieux")
+     .InsertAction("PostLieux")
+     .UpdateAction("PutLieux")
+     .DeleteAction("DeleteLieux")
+     .Key("CodeLieu"))
+     .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+     .Scrolling(scrolling => scrolling
+     .ScrollByContent(true)
+     .ShowScrollbar(ShowScrollbarMode.Always)
+     .Mode(GridScrollingMode.Virtual))
+     .Height("95%")
+     .RemoteOperations(true)
+     .NoDataText("Aucune donnée à afficher")
+     .CacheEnabled(true)
+     .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+     .Columns(columns => {
+         columns.AddFor(m => m.DesignationLieu);
+     })
+    .Editing(editing =>
+    {
+        editing.AllowUpdating(true);
+        editing.AllowDeleting(true);
+        editing.AllowAdding(true);
+        editing.Mode(GridEditMode.Row);
+    })
+   .ID("LieuxGrid")
+   .MasterDetail(md => md
+   .Enabled(true)
+   .Template(new TemplateName("LieuDetails")))
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+)
+}
+@using (Html.DevExtreme().NamedTemplate("LieuDetails"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Liste Articles")
+                .Template(new TemplateName("ArticlesGrid"))
+                .Option("ArticlesGrid", new { CodeLieu = new JS("data.CodeLieu") });
+        })
+        )
+}
+@using (Html.DevExtreme().NamedTemplate("ArticlesGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Areas.MagasinManager.Models.LieuPdrModel>()
+        .ShowBorders(true)
+        .LoadPanel(l => l.Enabled(true))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.CodePdr);
+            columns.AddFor(m => m.DesignationPdr);
+            columns.AddFor(m => m.ReferenceModele);
+            columns.AddFor(m => m.Quantite);
+        })
+         .DataSource(ds => ds.Mvc()
+             .Controller("LieuxStockage")
+             .LoadAction("GetArticlesLieux")
+             .Key("CodePdr")
+             .LoadParams(new
+             {
+                 CodeLieu = new JS("ArticlesGrid.CodeLieu")
+             }))
+           .Editing(editing =>
+           {
+               editing.AllowUpdating(false);
+               editing.AllowDeleting(false);
+               editing.AllowAdding(false);
+               editing.Mode(GridEditMode.Form);
+           })
+            )
+
+}
+@using (Html.DevExtreme().NamedTemplate("GisementsGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkGismentPdr>()
+ .DataSource(ds => ds.Mvc()
+     .Controller("LieuxStockage")
+     .LoadAction("GetGisement")
+     .InsertAction("PostGisement")
+     .UpdateAction("PutGisement")
+     .DeleteAction("DeleteGisement")
+     .Key("CodeGisment"))
+     .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+     .Scrolling(scrolling => scrolling
+     .ScrollByContent(true)
+     .ShowScrollbar(ShowScrollbarMode.Always)
+     .Mode(GridScrollingMode.Virtual))
+     .Height("95%")
+     .RemoteOperations(true)
+     .NoDataText("Aucune donnée à afficher")
+     .CacheEnabled(true)
+     .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+     .Columns(columns => {
+         columns.AddFor(m => m.DesignationGisment);
+     })
+    .Editing(editing =>
+    {
+        editing.AllowUpdating(true);
+        editing.AllowDeleting(true);
+        editing.AllowAdding(true);
+        editing.Mode(GridEditMode.Row);
+    })
+    .ID("GiseGrid")
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+)
+}
+<script>
+    function receptionCell_prepared(e) {
+        if (e.rowType === "data" && e.column.command === "edit") {
+            var isEditing = e.row.isEditing, $links = e.cellElement.find(".dx-link");
+            $links.text("");
+            if (isEditing) {
+                $links.filter(".dx-link-save").addClass("dx-icon-save");
+                $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+            } else {
+                $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+            }
+        }
+    }
+    var imprimerFicheArticle = function (e) {
+        var num = e.row.data.NumFicheArticle;
+        window.open(  ' @Url.Action("FicheArticleViewer", "MagasinManager")?id='+num, '_blank').focus();
+    }
+    function CollpaseAll(e) {
+        e.component.collapseAll(-1);
+    }
+</script>

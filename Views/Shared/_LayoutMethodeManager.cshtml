@@ -1,0 +1,194 @@
+﻿@using DevKbfSteel.Helpers;
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DevKbfSteel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    @* Uncomment to use the HtmlEditor control *@
+    @* <script src="https://cdnjs.cloudflare.com/ajax/libs/quill/1.3.6/quill.min.js"></script> *@
+
+    <link href="~/css/devextreme/dx-diagram.css" rel="stylesheet" />
+    <script src="~/js/devextreme/dx-diagram.js"></script>
+
+    <link href="~/css/devextreme/dx.common.css" rel="stylesheet" />
+    <link href="~/css/devextreme/dx.light.css" rel="stylesheet" />
+    <script src="~/js/devextreme/jszip.js"></script>
+
+    <link href="~/css/devextreme/dx-gantt.css" rel="stylesheet" />
+    <script src="~/js/devextreme/dx-gantt.js"></script>
+
+    <script src="~/js/devextreme/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+    <script src="~/js/thirdparty.bundle.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @* Uncomment to use Globalize for localization *@
+    @*<script src="~/js/devextreme/cldr.js"></script>*@
+    @*<script src="~/js/devextreme/cldr/event.js"></script>*@
+    @*<script src="~/js/devextreme/cldr/supplemental.js"></script>*@
+    @*<script src="~/js/devextreme/cldr/unresolved.js"></script>*@
+    @*<script src="~/js/devextreme/globalize.js"></script>*@
+    @*<script src="~/js/devextreme/globalize/message.js"></script>*@
+    @*<script src="~/js/devextreme/globalize/number.js"></script>*@
+    @*<script src="~/js/devextreme/globalize/currency.js"></script>*@
+    <script src="~/js/devextreme/globalize/date.js"></script>
+
+    @* Uncomment to enable client-side export *@
+    <script src="~/js/devextreme/dx.all.js"></script>
+
+    @* Uncomment to provide geo-data for the VectorMap control *@
+    @*<script src="~/js/devextreme/vectormap-data/world.js"></script>*@
+
+    <script src="~/js/devextreme/aspnet/dx.aspnet.mvc.js"></script>
+    <script src="~/js/devextreme/aspnet/dx.aspnet.data.js"></script>
+
+    <script src="~/node_modules/devextreme/dist/js/dx.aspnet.mvc.js"></script>
+</head>
+<header>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        @(Html.DevExtreme().Toolbar()
+    .ID("layout-toolbar")
+    .Items(items =>{
+        items.Add().Widget(w => w.Button()
+            .Icon("menu")
+            .OnClick("button_clickHandler")
+        ).Location(ToolbarItemLocation.Before);
+    })
+    .Width(37)
+)
+
+        <div class="container">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="MainMethodeManager">DevKbfSteel</a>
+            <a href="http://localhost:8084/" class="btn btn-outline-primary" target="_blank">
+                Admin Control Panel
+            </a>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <partial name="_LoginPartial.cshtml" />
+            </div>
+        </div>
+    </nav>
+</header>
+<body style="height:100%">
+    @(Html.DevExtreme().Drawer()
+    .ID("layout-drawer")
+    .MinSize(37)
+    .RevealMode(DrawerRevealMode.Expand)
+    .Opened(true)
+    .Template(@<text>
+        @(Html.DevExtreme().List()
+            .ID("ListTemp")
+            .Width(300)
+            .OnInitialized("list_onInitialized")
+            .Items(items => {
+                items.Add().Text("Demande de travail envoyees").Icon("fas fa-file-export").Option("path", "MethodeManager/MethodeManager/DemandeTravailsMethodeSent");
+                items.Add().Text("Demande de travail recues").Icon("fas fa-file-import").Option("path", "MethodeManager/MethodeManager/DemandeTravailsMethodeRecieved");
+                items.Add().Text("Ordres de travail envoyees").Icon("fas fa-file-export").Option("path", "MethodeManager/MethodeManager/OrdresTravailMethodeSent");
+                items.Add().Text("Suivi des Demandes de travail").Icon("fas fa-file-invoice").Option("path", "MethodeManager/MethodeManager/DemandeTravailsMethodeSuivi");
+                items.Add().Text("Suivi des ordres de travail").Icon("fas fa-file-alt").Option("path", "MethodeManager/MethodeManager/OrdresTravailsMethodeSuivi");
+                items.Add().Text("Suivi des activités mécanique").Icon("fas fa-chart-line").Option("path", "MethodeManager/MethodeManager/SuiviTraveaux");
+                items.Add().Text("Dossier Machines").Icon("fas fa-folder-open").Option("path", "MethodeManager/MethodeManager/DossierMachines");
+                items.Add().Text("Check List").Icon("fas fa-calendar-check").Option("path", "MethodeManager/MethodeManager/CheckList");
+
+                items.Add().Text("Gestion de Plannification").Icon("fas fa-calendar-alt").Option("path", "MethodeManager/MethodeManager/GestionPlannification");
+                items.Add().Text("Gestion du personnels").Icon("fas fa-user-friends").Option("path", "MethodeManager/MethodeManager/GestionPersonnels");
+                items.Add().Text("Liste PDR").Icon("fas fa-cogs").Option("path", "MethodeManager/MethodeManager/ListePDR");
+                items.Add().Text("Liste PDR à surveiller").Icon("fas fa-eye").Option("path", "MethodeManager/MethodeManager/PdrSurveille");
+                items.Add().Text("Demandes Fourniture").Icon("fas fa-file-invoice-dollar").Option("path", "MethodeManager/MethodeManager/DemandesFourniture");
+                items.Add().Text("Demandes Services").Icon("fas fa-tasks").Option("path", "MethodeManager/MethodeManager/DemandeService");
+                items.Add().Text("Project Manager").Icon("fas fa-project-diagram").Option("path", "MethodeManager/MethodeManager/ProjectManager");
+                items.Add().Text("Analytics").Icon("fas fa-chart-pie").Option("path", "MethodeManager/MethodeManager/Analytics");
+                items.Add().Text("Consignation").Icon("fas fa-user-cog").Option("path", "MethodeManager/MethodeManager/Consignation");
+
+                items.Add().Text("Configuration").Icon("fas fa-user-cog").Option("path", "MethodeManager/MethodeManager/Configuration");
+
+            })
+            .KeyExpr("path")
+            .SelectionMode(ListSelectionMode.Single)
+            .OnSelectionChanged("list_onSelectionChanged")
+        )
+    </text>)
+    .Content(@<text>@RenderBody()</text>)
+)
+    @(Html.DevExtreme().SpeedDialAction()
+    .ID("SmartAssist")
+    .Icon("fas fa-robot")
+    .Hint("Smart Assist")
+    .Index(1)
+    .OnClick(@<text>
+    function showPopUpSmartAssist() {
+        var popup = $("#SmartAssist-popup").dxPopup("instance");
+        popup.option("contentTemplate", $("#SmartAssist-template"));
+        popup.show();
+    }
+    </text>))
+    @(Html.DevExtreme().Popup()
+        .ID("SmartAssist-popup")
+        .ShowTitle(true)
+        .Title("Vos Tâches")
+        .Visible(false)
+        .DragEnabled(false)
+        .CloseOnOutsideClick(true)
+        .Width(600)
+        .Height(400)
+        .Position(pos => pos
+            .My(HorizontalAlignment.Right, VerticalAlignment.Bottom)
+            .At(HorizontalAlignment.Right, VerticalAlignment.Bottom)
+            .Of("#app-container")
+        )
+    )
+    @using (Html.DevExtreme().NamedTemplate("SmartAssist-template"))
+    {
+        @(Html.DevExtreme().List()
+    .Height("100%")
+    .DataSource(d => d.Mvc()
+    .Controller("SmartAssistCtrl")
+    .LoadAction("GetMethodes")
+    .Key("Id")
+    .LoadMode(DataSourceLoadMode.Raw))
+    .GroupTemplate(@<text>
+        <div><%- Area %></div>
+    </text>)
+
+    .OnItemClick(@<text>
+    function NivagateToPath(e) {
+    document.location.pathname = e.itemData.Path;
+    }
+    </text>)
+    .NoDataText("Aucune Tâche à signaler")
+    .ItemTemplate(@<text>
+        <div style="white-space: normal"><%- Action %></div>
+    </text>)
+    .PullRefreshEnabled(true)
+    )
+    }
+
+</body>
+</html>
+<script type="text/javascript">
+    function button_clickHandler(e) {
+        var drawer = $("#layout-drawer").dxDrawer("instance");
+        drawer.toggle();
+        sessionStorage.setItem("isDrawerOpen", JSON.stringify(drawer.option("opened")));
+    }
+    function list_onSelectionChanged(e) {
+        document.location.pathname = e.addedItems[0].path;
+    }
+    function list_onInitialized(e) {
+        const t = "@Url.Action()";
+        e.component.option("selectedItemKeys", ["@Url.Action()"])
+        var x = document.getElementsByClassName("dx-item dx-list-item");
+        setTimeout(() => {
+            var el = x.item(@XpertHelper.NavigationDrawerKey);
+            el.style.backgroundColor = "#8299ba";
+        }, 0);
+    }
+
+</script>

@@ -1,0 +1,233 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+
+@(Html.DevExtreme().TabPanel()
+.Items(items =>
+{
+    items.Add()
+        .Title("Commandes")
+        .Template(new TemplateName("CommandesGrid"));
+    items.Add()
+        .Title("Conventions")
+        .Template(new TemplateName("ConventionsGrid"));
+    items.Add()
+        .Title("Contrats")
+        .Template(new TemplateName("ContratsGrid"));
+})
+)
+@using (Html.DevExtreme().NamedTemplate("CommandesGrid"))
+{
+
+    <script>
+        function gridBox_valueChangedCommande(args, setValueMethod) {
+            var $dataGrid = $("#embedded-Commande");
+            if ($dataGrid.length) {
+                var dataGrid = $dataGrid.dxDataGrid("instance");
+                dataGrid.selectRows(args.value, false);
+            }
+            setValueMethod(args.value);
+        }
+    </script>
+    @(Html.DevExtreme().DropDownBox()
+                .ValueExpr("NumeroFournisseur")
+                .DisplayExpr("SocieteFournisseur")
+                .DataSource(d => d.Mvc()
+                .Controller("Fournisseurs")
+                .LoadAction("GetFournisseurs")
+                .UpdateAction("PutFournisseurs")
+                .InsertAction("PostFournisseurs")
+                .LoadMode(DataSourceLoadMode.Raw)
+                .Key("NumeroFournisseur"))
+                .Placeholder("Select a value...")
+                .ShowClearButton(true)
+                .OnValueChanged(@"function(args) { gridBox_valueChangedCommande(args, setValue); }")
+                .ContentTemplate(@<text>
+                    @(Html.DevExtreme().DataGrid()
+                        .ID("embedded-Commande")
+                        .DataSource(new JS(@"component.getDataSource()"))
+                        .Columns(columns =>
+                        {
+                            columns.Add().DataField("NumeroFournisseur").AllowEditing(false);
+                            columns.Add().DataField("SocieteFournisseur");
+                            columns.Add().DataField("Adresse");
+                            columns.Add().DataField("Fonction");
+                            columns.Add()
+                            .Type(GridCommandColumnType.Buttons)
+                            .Width(110)
+                            .Buttons(b =>
+                            {
+                                b.Add().Name(GridColumnButtonName.Edit);
+                            });
+                        })
+                        .Editing(editing =>
+                        {
+                            editing.AllowUpdating(true);
+                            editing.AllowDeleting(false);
+                            editing.AllowAdding(true);
+                            editing.Mode(GridEditMode.Popup)
+                             .Popup(p => p.Title("Editer Fournisseur")
+                             .ShowTitle(true)
+                             .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+                        })
+                        .HoverStateEnabled(true)
+                        .Paging(p => p.PageSize(10))
+                        .FilterRow(f => f.Visible(true))
+                        .Scrolling(s => s.Mode(GridScrollingMode.Infinite))
+                        .Height(345)
+                        .Selection(s => s.Mode(SelectionMode.Single))
+                        .SelectedRowKeys(new JS("component.option('value')"))
+                        .OnSelectionChanged(@"function(args) { onSelectionChanged(args, component); }")
+                    )
+                    @(Html.DevExtreme().Button()
+                         .ElementAttr(new { style = "margin-top:10px;float:right" })
+                         .Text("Close")
+                         .OnClick(@"function(args) { onCloseBtnClick(args, component); }"))
+                </text>)
+)
+}
+@using (Html.DevExtreme().NamedTemplate("ConventionsGrid"))
+{
+
+    <script>
+        function gridBox_valueChangedContart(args, setValueMethod) {
+            var $dataGrid = $("#embedded-Contart");
+            if ($dataGrid.length) {
+                var dataGrid = $dataGrid.dxDataGrid("instance");
+                dataGrid.selectRows(args.value, false);
+            }
+            setValueMethod(args.value);
+        }
+    </script>
+    @(Html.DevExtreme().DropDownBox()
+                .ValueExpr("NumeroFournisseur")
+                .DisplayExpr("SocieteFournisseur")
+                .DataSource(d => d.Mvc()
+                .Controller("Fournisseurs")
+                .LoadAction("GetFournisseurs")
+                .UpdateAction("PutFournisseurs")
+                .InsertAction("PostFournisseurs")
+                .LoadMode(DataSourceLoadMode.Raw)
+                .Key("NumeroFournisseur"))
+                .Placeholder("Select a value...")
+                .ShowClearButton(true)
+                .OnValueChanged(@"function(args) { gridBox_valueChangedContart(args, setValue); }")
+                .ContentTemplate(@<text>
+                    @(Html.DevExtreme().DataGrid()
+                        .ID("embedded-Contart")
+                        .DataSource(new JS(@"component.getDataSource()"))
+                        .Columns(columns =>
+                        {
+                            columns.Add().DataField("NumeroFournisseur").AllowEditing(false);
+                            columns.Add().DataField("SocieteFournisseur");
+                            columns.Add().DataField("Adresse");
+                            columns.Add().DataField("Fonction");
+                            columns.Add()
+                            .Type(GridCommandColumnType.Buttons)
+                            .Width(110)
+                            .Buttons(b =>
+                            {
+                                b.Add().Name(GridColumnButtonName.Edit);
+                            });
+                        })
+                        .Editing(editing =>
+                        {
+                            editing.AllowUpdating(true);
+                            editing.AllowDeleting(false);
+                            editing.AllowAdding(true);
+                            editing.Mode(GridEditMode.Popup)
+                             .Popup(p => p.Title("Editer Fournisseur")
+                             .ShowTitle(true)
+                             .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+                        })
+                        .HoverStateEnabled(true)
+                        .Paging(p => p.PageSize(10))
+                        .FilterRow(f => f.Visible(true))
+                        .Scrolling(s => s.Mode(GridScrollingMode.Infinite))
+                        .Height(345)
+                        .Selection(s => s.Mode(SelectionMode.Single))
+                        .SelectedRowKeys(new JS("component.option('value')"))
+                        .OnSelectionChanged(@"function(args) { onSelectionChanged(args, component); }")
+                    )
+                    @(Html.DevExtreme().Button()
+                         .ElementAttr(new { style = "margin-top:10px;float:right" })
+                         .Text("Close")
+                         .OnClick(@"function(args) { onCloseBtnClick(args, component); }"))
+                </text>)
+)
+}
+@using (Html.DevExtreme().NamedTemplate("ContratsGrid"))
+{
+
+    <script>
+        function gridBox_valueChangedContrats(args, setValueMethod) {
+            var $dataGrid = $("#embedded-Contrats");
+            if ($dataGrid.length) {
+                var dataGrid = $dataGrid.dxDataGrid("instance");
+                dataGrid.selectRows(args.value, false);
+            }
+            setValueMethod(args.value);
+        }
+    </script>
+    @(Html.DevExtreme().DropDownBox()
+                .ValueExpr("NumeroFournisseur")
+                .DisplayExpr("SocieteFournisseur")
+                .DataSource(d => d.Mvc()
+                .Controller("Fournisseurs")
+                .LoadAction("GetFournisseurs")
+                .UpdateAction("PutFournisseurs")
+                .InsertAction("PostFournisseurs")
+                .LoadMode(DataSourceLoadMode.Raw)
+                .Key("NumeroFournisseur"))
+                .Placeholder("Select a value...")
+                .ShowClearButton(true)
+                .OnValueChanged(@"function(args) { gridBox_valueChangedContrats(args, setValue); }")
+                .ContentTemplate(@<text>
+                    @(Html.DevExtreme().DataGrid()
+                        .ID("embedded-Contrats")
+                        .DataSource(new JS(@"component.getDataSource()"))
+                        .Columns(columns =>
+                        {
+                            columns.Add().DataField("NumeroFournisseur").AllowEditing(false);
+                            columns.Add().DataField("SocieteFournisseur");
+                            columns.Add().DataField("Adresse");
+                            columns.Add().DataField("Fonction");
+                            columns.Add()
+                            .Type(GridCommandColumnType.Buttons)
+                            .Width(110)
+                            .Buttons(b =>
+                            {
+                                b.Add().Name(GridColumnButtonName.Edit);
+                            });
+                        })
+                        .Editing(editing =>
+                        {
+                            editing.AllowUpdating(true);
+                            editing.AllowDeleting(false);
+                            editing.AllowAdding(true);
+                            editing.Mode(GridEditMode.Popup)
+                             .Popup(p => p.Title("Editer Fournisseur")
+                             .ShowTitle(true)
+                             .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+                        })
+                        .HoverStateEnabled(true)
+                        .Paging(p => p.PageSize(10))
+                        .FilterRow(f => f.Visible(true))
+                        .Scrolling(s => s.Mode(GridScrollingMode.Infinite))
+                        .Height(345)
+                        .Selection(s => s.Mode(SelectionMode.Single))
+                        .SelectedRowKeys(new JS("component.option('value')"))
+                        .OnSelectionChanged(@"function(args) { onSelectionChanged(args, component); }")
+                    )
+                    @(Html.DevExtreme().Button()
+                         .ElementAttr(new { style = "margin-top:10px;float:right" })
+                         .Text("Close")
+                         .OnClick(@"function(args) { onCloseBtnClick(args, component); }"))
+                </text>)
+)
+}

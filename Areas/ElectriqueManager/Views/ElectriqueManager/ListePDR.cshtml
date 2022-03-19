@@ -1,0 +1,194 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+@{
+    ViewData["Title"] = "Electrique-Liste PDR";
+    Layout = "~/Views/Shared/_LayoutElectriqueManager.cshtml";
+}
+@(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkPdr>()
+ .DataSource(ds => ds.Mvc()
+     .Controller("StkPdrs")
+     .LoadAction("GetPDR")
+     .Key("CodePdr"))
+     .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+     .Scrolling(scrolling => scrolling
+     .ScrollByContent(true)
+     .ShowScrollbar(ShowScrollbarMode.Always)
+     .Mode(GridScrollingMode.Virtual))
+     .Height("95%")
+     .RemoteOperations(true)
+     .ID("demandesTravailGrid")
+     .NoDataText("Aucune donnée à afficher")
+     .CacheEnabled(true)
+     .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+     .Columns(columns => {
+         columns.AddFor(m => m.CodePdr);
+         columns.AddFor(m => m.DesignationPdr);
+         columns.AddFor(m => m.CodeUniteMesurePdr).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("StkPdrs").LoadAction("UniteMesureLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+     })
+   .MasterDetail(md => md
+   .Enabled(true)
+   .Template(new TemplateName("PdrDetails")))
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+)
+@(Html.DevExtreme().Popup()
+.ID("Add-popup")
+.ShowTitle(true)
+.Title("Envoyer un OT")
+.Visible(false)
+.DragEnabled(false)
+.CloseOnOutsideClick(true)
+)
+@using (Html.DevExtreme().NamedTemplate("PdrDetails"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Fiche Article")
+                .Template(new TemplateName("FicheArticleGrid"))
+                .Option("FicheArticleGrid", new { CodePdr = new JS("data.CodePdr"), codeService = XpertHelper.CodeElectrique });
+        })
+        )
+}
+@using (Html.DevExtreme().NamedTemplate("FicheArticleGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkFicheArticle>()
+        .ShowBorders(true)
+        .LoadPanel(l => l.Enabled(true))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.Date);
+            columns.AddFor(m => m.Emeteur).AllowEditing(false).Lookup(lookup => lookup
+                .DataSource(ds => ds.WebApi().Controller("DemandeTravails").LoadAction("StructureLookup").Key("Value"))
+                .ValueExpr("Value")
+                .DisplayExpr("Text")
+                .AllowClearing(true)
+            );
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b => {
+                    b.Add().Name(GridColumnButtonName.Edit).Icon("edit");
+                    b.Add().Name(GridColumnButtonName.Delete).Icon("trash");
+                    b.Add()
+                            .Hint("Imprimer Fiche Article")
+                            .OnClick(@<text>imprimerFicheArticle</text>)
+                            .Icon("print");
+                });
+        })
+         .DataSource(ds => ds.Mvc()
+             .Controller("StkPdrs")
+             .LoadAction("GetFicheArticle")
+             .InsertAction("PostFicheArticleElectrique")
+             .UpdateAction("PutFicheArticle")
+             .DeleteAction("DeleteFicheArticle")
+             .Key("NumFicheArticle")
+             .LoadParams(new
+             {
+                 CodePdr = new JS("FicheArticleGrid.CodePdr"),
+                 codeService = XpertHelper.CodeElectrique
+             }))
+           .MasterDetail(md => md
+           .Enabled(true)
+           .Template(new TemplateName("FicheArticleDetails")))
+           .Editing(editing =>
+           {
+               editing.AllowUpdating(true);
+               editing.AllowDeleting(true);
+               editing.AllowAdding(true);
+               editing.Mode(GridEditMode.Form);
+           })
+            )
+
+}
+@using (Html.DevExtreme().NamedTemplate("FicheArticleDetails"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Données de plannification")
+                .Template(new TemplateName("StockContrainteGrid"))
+                .Option("DonnePlannificationGrid", new { CodeFicheArticle = new JS("data.NumFicheArticle"), codeService = XpertHelper.CodeElectrique });
+        })
+        )
+}
+@using (Html.DevExtreme().NamedTemplate("StockContrainteGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkPdrStockContrainte>()
+        .ShowBorders(true)
+        .LoadPanel(l => l.Enabled(true))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.StockMaximum);
+            columns.AddFor(m => m.StockMinimum);
+            columns.AddFor(m => m.StockSécurité);
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b => {
+                    b.Add().Name(GridColumnButtonName.Edit).Icon("edit");
+                    b.Add().Name(GridColumnButtonName.Delete).Icon("trash");
+                });
+        })
+         .DataSource(ds => ds.Mvc()
+             .Controller("StkPdrs")
+             .LoadAction("GetContrainteStockage")
+             .InsertAction("PostContrainteStockageElectrique")
+             .UpdateAction("PutContrainteStockage")
+             .DeleteAction("DeleteContrainteStockage")
+             .Key("Id")
+             .LoadParams(new
+             {
+                 CodeFicheArticle = new JS("DonnePlannificationGrid.CodeFicheArticle"),
+                 codeService = XpertHelper.CodeElectrique
+             }))
+            .Editing(editing =>
+            {
+                editing.AllowUpdating(true);
+                editing.AllowDeleting(true);
+                editing.AllowAdding(true);
+                editing.Mode(GridEditMode.Form);
+            })
+
+    )
+}
+<script>
+    function receptionCell_prepared(e) {
+        if (e.rowType === "data" && e.column.command === "edit") {
+            var isEditing = e.row.isEditing, $links = e.cellElement.find(".dx-link");
+            $links.text("");
+            if (isEditing) {
+                $links.filter(".dx-link-save").addClass("dx-icon-save");
+                $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+            } else {
+                $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+            }
+        }
+    }
+    var imprimerFicheArticle = function (e) {
+        var num = e.row.data.NumFicheArticle;
+        window.open(  ' @Url.Action("FicheArticleViewer", "ElectriqueManager")?id='+num, '_blank').focus();
+    }
+
+
+</script>

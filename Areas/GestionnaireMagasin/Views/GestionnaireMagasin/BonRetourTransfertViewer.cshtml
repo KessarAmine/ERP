@@ -1,0 +1,19 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers;
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Retour Transfert N° " + XpertHelperGestionnaireMagasin.NumBonRetourTransfertXtra;
+}
+<title>@ViewData["Title"]</title>
+@{BonRetourTransfert raport = new BonRetourTransfert();
+    raport.Parameters["NumBonRetourTransfert"].Value = XpertHelperGestionnaireMagasin.NumBonRetourTransfertXtra;
+    raport.Name = "Retour Transfert N° " + XpertHelperGestionnaireMagasin.NumBonRetourTransfertXtra;
+    raport.RequestParameters = false;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

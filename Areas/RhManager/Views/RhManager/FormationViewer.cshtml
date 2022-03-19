@@ -1,0 +1,20 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Formation N° :" + XpertHelper.RhIdFormation;
+}
+<title>@ViewData["Title"]</title>
+@{
+    Formation raport = new Formation();
+    raport.Parameters["NumFormation"].Value = XpertHelper.RhIdFormation;
+    raport.Name = "Formation N° :" + XpertHelper.RhIdFormation;
+    raport.RequestParameters = false;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

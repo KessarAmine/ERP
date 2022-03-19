@@ -1,0 +1,12 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+
+@{RaportDemandeTravail raport = new RaportDemandeTravail();
+    raport.Parameters["NumDt"].Value = 6;
+    raport.Name = "generatedPdf";
+    raport.RequestParameters = false;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

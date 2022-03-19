@@ -1,0 +1,21 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Suivi Movements";
+}
+<title>@ViewData["Title"]</title>
+@{
+    SuiviMovements raport = new SuiviMovements();
+    raport.Parameters["dateDebut"].Value = DateTime.Now;
+    raport.Parameters["dateFin"].Value = DateTime.Now;
+    raport.Name = "SuiviMovements_" + raport.Parameters["dateDebut"].Value + "_" + raport.Parameters["dateFin"].Value;
+    raport.RequestParameters = true;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

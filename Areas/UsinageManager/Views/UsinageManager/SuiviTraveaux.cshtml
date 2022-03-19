@@ -1,0 +1,191 @@
+﻿@using DevKbfSteel.Models
+@using DevKbfSteel.Helpers
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@{
+    ViewData["Title"] = "Usinage-Suivi des travaux";
+    Layout = "~/Views/Shared/_LayoutUsinageManager.cshtml";
+}
+@(Html.DevExtreme().Toolbar()
+    .Items(items =>
+    {
+        items.Add()
+           .Widget(w => w
+           .Button()
+           .Icon("refresh")
+           .OnClick("refreshButton_click")
+       )
+       .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+       .Location(ToolbarItemLocation.Before);
+
+        items.Add()
+            .Widget(w => w.DateBox().Type(DateBoxType.Date).ApplyButtonText("Appliquer").Value(DateTime.Now.Date).DisplayFormat("yyyy-MM-dd").ID("FilterDateDebut"))
+            .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+            .Location(ToolbarItemLocation.Before);
+
+        items.Add()
+            .Widget(w => w.DateBox().Type(DateBoxType.Date).ApplyButtonText("Appliquer").Value(DateTime.Now.Date).DisplayFormat("yyyy-MM-dd").ID("FilterDateFin"))
+            .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+            .Location(ToolbarItemLocation.Before);
+
+        items.Add()
+        .Widget(w => w.Button()
+            .Icon("fas fa-clipboard-list")
+            .OnClick("FicheSuiviActiviteMecanique_click")
+            .Hint("Fiche de suivi des activitées mécanique")
+    )
+
+    .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+    .Location(ToolbarItemLocation.Before);
+
+    items.Add()
+        .Widget(w => w.Button()
+            .Icon("fas fa-calendar-check")
+            .OnClick("RapportMensuelDTOT_click")
+            .Hint("Rapport Mensuelle DT OT")
+    )
+
+    .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+    .Location(ToolbarItemLocation.Before);
+
+    items.Add()
+        .Widget(w => w.Button()
+            .Icon("fas fa-industry")
+            .OnClick("RapportObjectifsQualiteViewerMecanique_click")
+            .Hint("Objectif Qualité maintenance")
+    )
+
+    .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+    .Location(ToolbarItemLocation.Before);
+
+    }
+    )
+)
+@(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.AssOtTraveaux>()
+ .DataSource(ds => ds.Mvc()
+     .Controller("AssOtTraveaux")
+     .LoadAction("GetSuivi")
+     .Key("Id")
+     .LoadParams(new { dateDebut = new JS("dateDebutBox_value"), dateFin = new JS("dateFinBox_value"), Structure =XpertHelper.CodeUsinage })
+ )
+ .Height("95%")
+ .RemoteOperations(true)
+ .ID("demandesTravailGrid")
+.Scrolling(scrolling => scrolling
+.ScrollByContent(true)
+.ShowScrollbar(ShowScrollbarMode.Always)
+.Mode(GridScrollingMode.Virtual))
+ .NoDataText("Aucune donnée à afficher")
+ .CacheEnabled(true)
+.ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+ .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+ .Columns(columns => {
+     columns.AddFor(m => m.TypeTraveaux)
+     .Lookup(lookup => lookup
+     .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("TypeTraveauxLookup").Key("Value"))
+     .AllowClearing(true)
+     .ValueExpr("Value")
+     .DisplayExpr("Text"));
+     columns.AddFor(m => m.Qte);
+     columns.AddFor(m => m.CodeMachine).Caption("Machine")
+     .Lookup(lookup => lookup
+     .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("MachinesLookup").Key("Value"))
+     .AllowClearing(true)
+     .ValueExpr("Value")
+     .DisplayExpr("Text"));
+     columns.AddFor(m => m.CodeEquipement).Caption("Equipement")
+     .Lookup(lookup => lookup
+     .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("EquipementsLookup").Key("Value"))
+     .AllowClearing(true)
+     .ValueExpr("Value")
+     .DisplayExpr("Text"));
+     columns.AddFor(m => m.Autres);
+     columns.AddFor(m => m.NumOt).Caption("Date Intervention").Lookup(lookup => lookup
+     .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("DateInterventionLookup").Key("Value"))
+     .AllowClearing(true)
+     .ValueExpr("Value")
+     .DisplayExpr("Text"))
+     .Format("d/M/yyyy")
+     .HeaderFilter(headerfilter => headerfilter.GroupInterval(HeaderFilterGroupInterval.Month));
+     columns.AddFor(m => m.NumOt).Caption("Durée Intervention")
+     .Lookup(lookup => lookup
+     .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("DureeInterventionLookup").Key("Value"))
+     .AllowClearing(true)
+     .ValueExpr("Value")
+     .DisplayExpr("Text"));
+ })
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+)
+
+<script>
+
+    function refreshButton_click() {
+        DevExpress.ui.notify("Rafraichissement en cours!");
+        var demandesTravailGrid = $("#demandesTravailGrid").dxDataGrid("instance");
+        var demandesTravailDS = demandesTravailGrid.getDataSource();
+        demandesTravailGrid.beginCustomLoading("Chargement en cours...");
+        demandesTravailDS.reload();
+        demandesTravailGrid.refresh();
+        demandesTravailGrid.endCustomLoading();
+    }
+
+    function FicheSuiviActiviteMecanique_click() {
+        //GetDateDebut GetDateFin
+        var ServiceCurrent = "Usinage"
+        var Datedebut = $("#FilterDateDebut").dxDateBox("instance").option("text");
+        var Datefin = $("#FilterDateFin").dxDateBox("instance").option("text");
+        window.open(' @Url.Action("ActiviteUsinageViewer", "UsinageManager")?ServiceCurrent=' + ServiceCurrent + '&Datedebut=' + Datedebut + '&Datefin=' + Datefin,
+            '_blank').focus();
+    }
+    function RapportMensuelDTOT_click() {
+        //GetDateDebut GetDateFin
+        var Datedebut = $("#FilterDateDebut").dxDateBox("instance").option("text");
+        var Datefin = $("#FilterDateFin").dxDateBox("instance").option("text");
+        window.open(' @Url.Action("RapportMensuelViewerUsinage", "UsinageManager")?Datedebut=' + Datedebut + '&Datefin=' + Datefin,
+            '_blank').focus();
+    }
+    function RapportObjectifsQualiteViewerMecanique_click() {
+        //GetDateDebut GetDateFin
+        var Datedebut = $("#FilterDateDebut").dxDateBox("instance").option("text");
+        var Datefin = $("#FilterDateFin").dxDateBox("instance").option("text");
+        window.open( ' @Url.Action("ObjectifsQualiteViewerUsinage", "UsinageManager")?Datedebut=' + Datedebut + '&Datefin=' + Datefin,
+            '_blank').focus();
+    }
+    function dateDebutBox_value() {
+        var dateDebutBox = $("#FilterDateDebut").dxDateBox("instance");
+        console.log(dateDebutBox.option('value'));
+        return new Date(dateDebutBox.option('value')).toJSON();
+    }
+
+    function dateFinBox_value() {
+        var dateFinBox = $("#FilterDateFin").dxDateBox("instance");
+        console.log(dateFinBox.option('value'));
+        return new Date(dateFinBox.option('value')).toJSON();
+    }
+
+    function receptionCell_prepared(e) {
+        if (e.rowType === "data" && e.column.command === "edit") {
+            var isEditing = e.row.isEditing, $links = e.cellElement.find(".dx-link");
+            $links.text("");
+            if (isEditing) {
+                $links.filter(".dx-link-save").addClass("dx-icon-save");
+                $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+            } else {
+                $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+            }
+        }
+        }
+
+</script>

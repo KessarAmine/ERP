@@ -1,0 +1,139 @@
+﻿@using DevKbfSteel.Models
+@using DevKbfSteel.Helpers
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@{
+    ViewData["Title"] = "Configuration des Tables";
+    Layout = "~/Views/Shared/_LayoutRhManager.cshtml";
+}
+@(Html.DevExtreme().TabPanel()
+.Height("100%")
+.Items(items =>
+{
+    items.Add()
+        .Title("Postes")
+        .Template(new TemplateName("PostesGrid"));
+    items.Add()
+        .Title("Agences Bancaires")
+        .Template(new TemplateName("AgencesBancairesGrid"));
+})
+)
+@using (Html.DevExtreme().NamedTemplate("PostesGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.GrhPostes>()
+     .DataSource(ds => ds.Mvc()
+     .Controller("RhPostes")
+     .LoadAction("Get")
+     .InsertAction("Post")
+     .UpdateAction("Put")
+     .DeleteAction("Delete")
+     .Key("CodePoste")
+     )
+    .Scrolling(scrolling => scrolling
+    .ScrollByContent(true)
+    .ShowScrollbar(ShowScrollbarMode.Always)
+    .Mode(GridScrollingMode.Virtual))
+    .Height("95%")
+    .RemoteOperations(true)
+    .NoDataText("Aucune donnée à afficher")
+    .CacheEnabled(true)
+    .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+    .Columns(columns => {
+        columns.AddFor(m => m.CodeDepartement)
+        .Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("RhPostes").LoadAction("DepartementLookup").Key("Value"))
+        .AllowClearing(true)
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        );
+        columns.AddFor(m => m.EffectifRequis);
+        columns.AddFor(m => m.Intitule);
+        columns.AddFor(m => m.IntituleArabe);
+        columns.AddFor(m => m.SalaireBase);
+    })
+    .Editing(editing =>
+    {
+        editing.AllowUpdating(true);
+        editing.AllowDeleting(true);
+        editing.AllowAdding(true);
+        editing.Mode(GridEditMode.Form);
+    })
+    .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(headerfilter => headerfilter.Visible(true))
+    .GroupPanel(p => p.Visible(true))
+    .AllowColumnReordering(true)
+    .AllowColumnResizing(true)
+    .OnCellPrepared("receptionCell_prepared")
+    .Selection(s => s.Mode(SelectionMode.Multiple))
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("AgencesBancairesGrid"))
+{
+
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.GrhAgencesBancaire>()
+     .DataSource(ds => ds.Mvc()
+     .Controller("RhAgencesBancaires")
+     .LoadAction("Get")
+     .InsertAction("Post")
+     .UpdateAction("Put")
+     .DeleteAction("Delete")
+     .Key("Id")
+     )
+    .Scrolling(scrolling => scrolling
+    .ScrollByContent(true)
+    .ShowScrollbar(ShowScrollbarMode.Always)
+    .Mode(GridScrollingMode.Virtual))
+    .Height("95%")
+    .RemoteOperations(true)
+    .NoDataText("Aucune donnée à afficher")
+    .CacheEnabled(true)
+    .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+    .Columns(columns => {
+        columns.AddFor(m => m.NatureAgence)
+        .Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("RhAgencesBancaires").LoadAction("NatureAgenceLookup").Key("Value"))
+        .AllowClearing(true)
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        );
+        columns.AddFor(m => m.NomAgence);
+        columns.AddFor(m => m.Localisation);
+        columns.AddFor(m => m.RibEntreprise);
+    })
+    .Editing(editing =>
+    {
+        editing.AllowUpdating(true);
+        editing.AllowDeleting(true);
+        editing.AllowAdding(true);
+        editing.Mode(GridEditMode.Form);
+    })
+    .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(headerfilter => headerfilter.Visible(true))
+    .GroupPanel(p => p.Visible(true))
+    .AllowColumnReordering(true)
+    .AllowColumnResizing(true)
+    .OnCellPrepared("receptionCell_prepared")
+    .Selection(s => s.Mode(SelectionMode.Multiple))
+    )
+}
+<script>
+    function receptionCell_prepared(e) {
+        if (e.rowType === "data" && e.column.command === "edit") {
+            var isEditing = e.row.isEditing, $links = e.cellElement.find(".dx-link");
+            $links.text("");
+            if (isEditing) {
+                $links.filter(".dx-link-save").addClass("dx-icon-save");
+                $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+            } else {
+                $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+            }
+        }
+    }
+</script>

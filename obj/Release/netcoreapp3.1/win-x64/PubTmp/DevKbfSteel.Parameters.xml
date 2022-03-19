@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="KbfSteelWeb" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\HP\\source\\repos\\DevKbfSteel\\DevKbfSteel\\obj\\Release\\netcoreapp3\.1\\win-x64\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="DevKbfSteel.Data.AuthDbContextContext" description="" value="Server=.\SQLEXPRESS;Database=KBFsteel;Trusted_Connection=True;MultipleActiveResultSets=true" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\HP\\source\\repos\\DevKbfSteel\\DevKbfSteel\\obj\\Release\\netcoreapp3\.1\\win-x64\\PubTmp\\EFSQLScripts\\DevKbfSteel\.Data\.AuthDbContextContext\.sql$" />
+  </parameter>
+  <parameter name="DevKbfSteel.Entities.KBFsteelContext" description="" value="Server=.\SQLEXPRESS;Database=KBFsteel;Trusted_Connection=True;MultipleActiveResultSets=true" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^C:\\Users\\HP\\source\\repos\\DevKbfSteel\\DevKbfSteel\\obj\\Release\\netcoreapp3\.1\\win-x64\\PubTmp\\EFSQLScripts\\DevKbfSteel\.Entities\.KBFsteelContext\.sql$" />
+  </parameter>
+</parameters>

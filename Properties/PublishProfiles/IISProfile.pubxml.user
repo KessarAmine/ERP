@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Ce fichier est utilisé par le processus de publication/package de votre projet web. Vous pouvez personnaliser le comportement de ce processus
+en modifiant ce fichier MSBuild. Pour en savoir plus à ce sujet, visitez https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword />
+    <History>False|2021-08-02T18:35:43.1316585Z;False|2021-08-02T20:29:35.8815496+02:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="AuthDbContextContextConnection">
+      <Value>Server=.\SQLEXPRESS%3bDatabase=KBFsteel%3bTrusted_Connection=True%3bMultipleActiveResultSets=true</Value>
+    </DestinationConnectionStrings>
+    <DestinationConnectionStrings Include="KbfSteelConnection">
+      <Value>Server=.\SQLEXPRESS%3bDatabase=KBFsteel%3bTrusted_Connection=True%3bMultipleActiveResultSets=true</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="DevKbfSteel.Data.AuthDbContextContext">
+      <Value>Server=.\SQLEXPRESS%3bDatabase=KBFsteel%3bTrusted_Connection=True%3bMultipleActiveResultSets=true</Value>
+    </EFMigrations>
+    <EFMigrations Include="DevKbfSteel.Entities.KBFsteelContext">
+      <Value>Server=.\SQLEXPRESS%3bDatabase=KBFsteel%3bTrusted_Connection=True%3bMultipleActiveResultSets=true</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

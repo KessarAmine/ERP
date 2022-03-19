@@ -1,0 +1,19 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers;
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Suivi Preventif Mensuelle ";
+}
+<title>@ViewData["Title"]</title>
+@{PlannificationMensuelle raport = new PlannificationMensuelle();
+    raport.Parameters["Mois"].Value = XpertHelper.ReportPreventifDate;
+    raport.Name = "Planningreventif_du_" + XpertHelper.ReportPreventifMonth + "_" + XpertHelper.ReportPreventifYear;
+    raport.RequestParameters = false;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

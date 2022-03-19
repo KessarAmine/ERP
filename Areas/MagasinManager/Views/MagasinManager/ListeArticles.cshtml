@@ -1,0 +1,372 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+@{
+    ViewData["Title"] = "Magasin-Liste PDR";
+    Layout = "~/Views/Shared/_LayoutMagasinManager.cshtml";
+}
+@(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkPdr>()
+         .DataSource(ds => ds.Mvc()
+             .Controller("StkPdrs")
+             .LoadAction("GetArticles")
+             .InsertAction("PostArticles")
+             .UpdateAction("PutPDR")
+             .DeleteAction("DeletePDR")
+             .Key("CodePdr"))
+     .ID("ArticlesGrid")
+    .OnRowExpanding("CollpaseAll")
+    .OnRowExpanded("refreshButton_click")
+     .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+     .Scrolling(scrolling => scrolling
+     .ScrollByContent(true)
+     .ShowScrollbar(ShowScrollbarMode.Always)
+     .Mode(GridScrollingMode.Virtual))
+     .Height("95%")
+     .RemoteOperations(true)
+     .NoDataText("Aucune donnée à afficher")
+     .CacheEnabled(true)
+     .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+     .Columns(columns => {
+         columns.AddFor(m => m.CodePdr).AllowEditing(false);
+         columns.AddFor(m => m.DesignationPdr);
+         columns.AddFor(m => m.ReferenceModele);
+         columns.AddFor(m => m.CodeUniteMesurePdr).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("StkPdrs").LoadAction("UniteMesureLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+         columns.AddFor(m => m.CodeFabricant).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("StkPdrs").LoadAction("CodeFabricantLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+         columns.AddFor(m => m.CodeFamillePdr).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("StkPdrs").LoadAction("FamilleLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+         columns.AddFor(m => m.CodeSousFamillePdr).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("StkPdrs").LoadAction("SousFamilleLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+         columns.AddFor(m => m.CodeGroupe).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("StkPdrs").LoadAction("GroupeLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+         columns.AddFor(m => m.Conditionnement);
+         columns.AddFor(m => m.TypeValorisation).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("StkPdrs").LoadAction("TypeValorisationLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+         columns.AddFor(m => m.TypeArticle).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("StkPdrs").LoadAction("TypeArticleLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+         columns.AddFor(m => m.CompteComptable);
+     })
+    .Editing(editing =>
+    {
+        editing.AllowUpdating(true);
+        editing.AllowDeleting(true);
+        editing.AllowAdding(true);
+        editing.Mode(GridEditMode.Form);
+    })
+   .MasterDetail(md => md
+   .Enabled(true)
+   .Template(new TemplateName("PdrDetails")))
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+)
+@(Html.DevExtreme().Popup()
+.ID("Add-popup")
+.ShowTitle(true)
+.Title("Editer")
+.Visible(false)
+.DragEnabled(false)
+.CloseOnOutsideClick(true)
+)
+@using (Html.DevExtreme().NamedTemplate("PdrDetails"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Fiche Article")
+                .Template(new TemplateName("FicheArticleGrid"))
+                .Option("FicheArticleGrid", new { CodePdr = new JS("data.CodePdr"), codeService = XpertHelper.CodeMagasin });
+            items.Add()
+                .Title("Suivi des mouvements")
+                .Template(new TemplateName("SuiviGrid"))
+                .Option("SuiviGrid", new { CodePdr = new JS("data.CodePdr")});
+            items.Add()
+                .Title("Donnees de stockage")
+                .Template(new TemplateName("EmplacementGrid"))
+                .Option("EmplacementGrid", new { CodePdr = new JS("data.CodePdr")});
+        })
+        )
+}
+@using (Html.DevExtreme().NamedTemplate("FicheArticleGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkFicheArticle>()
+        .ShowBorders(true)
+        .LoadPanel(l => l.Enabled(true))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.Date);
+            columns.AddFor(m => m.Emeteur).AllowEditing(false).Lookup(lookup => lookup
+                .DataSource(ds => ds.WebApi().Controller("DemandeTravails").LoadAction("StructureLookup").Key("Value"))
+                .ValueExpr("Value")
+                .DisplayExpr("Text")
+                .AllowClearing(true)
+            );
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b => {
+                    b.Add().Name(GridColumnButtonName.Edit).Icon("edit");
+                    b.Add().Name(GridColumnButtonName.Delete).Icon("trash");
+                    b.Add()
+                            .Hint("Imprimer Fiche Article")
+                            .OnClick(@<text>imprimerFicheArticle</text>)
+                            .Icon("print");
+                });
+        })
+         .DataSource(ds => ds.Mvc()
+             .Controller("StkPdrs")
+             .LoadAction("GetFicheArticle")
+             .InsertAction("PostFicheArticleMagasin")
+             .UpdateAction("PutFicheArticle")
+             .DeleteAction("DeleteFicheArticle")
+             .Key("NumFicheArticle")
+             .LoadParams(new
+             {
+                 CodePdr = new JS("FicheArticleGrid.CodePdr"),
+                 codeService = new JS("FicheArticleGrid.codeService")
+             }))
+           .MasterDetail(md => md
+           .Enabled(true)
+           .Template(new TemplateName("FicheArticleDetails")))
+           .Editing(editing =>
+           {
+               editing.AllowUpdating(true);
+               editing.AllowDeleting(true);
+               editing.AllowAdding(true);
+               editing.Mode(GridEditMode.Form);
+           })
+            )
+
+}
+@using (Html.DevExtreme().NamedTemplate("FicheArticleDetails"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Données de plannification")
+                .Template(new TemplateName("StockContrainteGrid"))
+                .Option("DonnePlannificationGrid", new { CodeFicheArticle = new JS("data.NumFicheArticle"), codeService = XpertHelper.CodeMagasin });
+        })
+        )
+}
+@using (Html.DevExtreme().NamedTemplate("StockContrainteGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkPdrStockContrainte>()
+        .ShowBorders(true)
+        .LoadPanel(l => l.Enabled(true))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.StockMaximum);
+            columns.AddFor(m => m.StockMinimum);
+            columns.AddFor(m => m.StockSécurité);
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b => {
+                    b.Add().Name(GridColumnButtonName.Edit).Icon("edit");
+                    b.Add().Name(GridColumnButtonName.Delete).Icon("trash");
+                });
+        })
+         .DataSource(ds => ds.Mvc()
+             .Controller("StkPdrs")
+             .LoadAction("GetContrainteStockage")
+             .InsertAction("PostContrainteStockageMagasin")
+             .UpdateAction("PutContrainteStockage")
+             .DeleteAction("DeleteContrainteStockage")
+             .Key("Id")
+             .LoadParams(new
+             {
+                 CodeFicheArticle = new JS("DonnePlannificationGrid.CodeFicheArticle"),
+                 codeService = new JS("DonnePlannificationGrid.codeService")
+             }))
+            .Editing(editing =>
+            {
+                editing.AllowUpdating(true);
+                editing.AllowDeleting(true);
+                editing.AllowAdding(true);
+                editing.Mode(GridEditMode.Form);
+            })
+
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("EmplacementGrid"))
+{
+@(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkEmplacement>()
+   .ShowBorders(true)
+   .LoadPanel(l => l.Enabled(true))
+   .Columns(columns =>
+   {
+       columns.AddFor(m => m.CodeLieu).Caption("Lieu").Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("StkPdrs").LoadAction("CodelieuLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+       columns.AddFor(m => m.CodeGisement).Caption("Gisement").Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("StkPdrs").LoadAction("CodeGisementLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+   })
+   .DataSource(ds => ds.Mvc()
+       .Controller("StkPdrs")
+       .LoadAction("GetEmplacementPDR")
+       .InsertAction("PostEmplacementPDR")
+       .UpdateAction("PutEmplacementPDR")
+       .DeleteAction("DeleteEmplacementPDR")
+       .LoadParams(new
+       {
+           CodePdr = new JS("EmplacementGrid.CodePdr")
+       })
+       .Key("NumEmplacement")
+       )
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(true);
+       editing.AllowDeleting(true);
+       editing.AllowAdding(true);
+       editing.Mode(GridEditMode.Form);
+   })
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+)
+
+}
+@using (Html.DevExtreme().NamedTemplate("SuiviGrid"))
+{
+@(Html.DevExtreme().DataGrid<DevKbfSteel.Areas.MagasinManager.Models.SuiviPdrModel>()
+   .ShowBorders(true)
+   .LoadPanel(l => l.Enabled(true))
+   .Columns(columns =>
+   {
+       columns.AddFor(m => m.DateMovement)
+        .Format("yyyy-MM-dd")
+        .HeaderFilter(headerfilter => headerfilter.GroupInterval(HeaderFilterGroupInterval.Month));
+       columns.AddFor(m => m.NumeroTypeMovement);
+       columns.AddFor(m => m.TypeMovement);
+       columns.AddFor(m => m.Quantite);
+       columns.AddFor(m => m.Cout);
+       columns.AddFor(m => m.Valeur);
+       columns.AddFor(m => m.Reste);
+       columns.AddFor(m => m.Acteur);
+   })
+   .DataSource(ds => ds.Mvc()
+       .Controller("StkPdrs")
+       .LoadAction("GetSuiviPDR")
+       .LoadParams(new
+       {
+           CodePdr = new JS("SuiviGrid.CodePdr")
+       }))
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(false);
+       editing.AllowDeleting(false);
+       editing.AllowAdding(false);
+       editing.Mode(GridEditMode.Form);
+   })
+   .OnToolbarPreparing("toolbar_preparing_Rapport")
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+)
+
+}
+
+<script>
+    function receptionCell_prepared(e) {
+        if (e.rowType === "data" && e.column.command === "edit") {
+            var isEditing = e.row.isEditing, $links = e.cellElement.find(".dx-link");
+            $links.text("");
+            if (isEditing) {
+                $links.filter(".dx-link-save").addClass("dx-icon-save");
+                $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+            } else {
+                $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+            }
+        }
+    }
+    function refreshButton_click() {
+        DevExpress.ui.notify("Rafraichissement en cours!");
+        var demandesTravailGrid = $("#ArticlesGrid").dxDataGrid("instance");
+        var demandesTravailDS = demandesTravailGrid.getDataSource();
+        demandesTravailGrid.beginCustomLoading("Chargement en cours...");
+        demandesTravailDS.reload();
+        demandesTravailGrid.refresh();
+        demandesTravailGrid.endCustomLoading();
+    }
+    function toolbar_preparing_Rapport(e) {
+        e.toolbarOptions.items.unshift({
+            location: "after",
+            widget: "dxButton",
+            options: {
+                icon: "print",
+                width: 34,
+                onClick: function (e) {
+                    window.open(' @Url.Action("SuiviArticleViewer", "MagasinManager")', '_blank').focus();
+                }
+            }
+        });
+    }
+    function CollpaseAll(e) {
+        e.component.collapseAll(-1);
+    }
+
+    var imprimerFicheArticle = function (e) {
+        var num = e.row.data.NumFicheArticle;
+        window.open(  ' @Url.Action("FicheArticleViewer", "MagasinManager")?id='+num, '_blank').focus();
+    }
+</script>

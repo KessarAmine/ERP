@@ -1,0 +1,694 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="20.2.6.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.2, Version=20.2.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="ParametresProduction" SnapGridSize="25" ReportUnit="TenthsOfAMillimeter" Margins="34, 24, 53, 254" PaperKind="A4Rotated" PageWidth="2970" PageHeight="2100" Version="20.2" DataMember="Query" DataSource="#Ref-0" Dpi="254" Font="Arial, 9.75pt">
+  <Extensions>
+    <Item1 Ref="2" Key="VSReportExtInfo" Value=".vsrepx" />
+  </Extensions>
+  <Parameters>
+    <Item1 Ref="4" ValueInfo="0" Name="NumRapport" Type="#Ref-3" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="5" ControlType="TopMarginBand" Name="TopMargin" HeightF="52.9166679" Dpi="254" />
+    <Item2 Ref="6" ControlType="BottomMarginBand" Name="BottomMargin" HeightF="254" Dpi="254">
+      <Controls>
+        <Item1 Ref="7" ControlType="XRPageInfo" Name="pageInfo2" TextFormatString="Page {0} of {1}" TextAlignment="MiddleCenter" SizeF="2694.94,58.4200058" LocationFloat="0,68.57995" Dpi="254">
+          <StylePriority Ref="8" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="9" ControlType="XRPageInfo" Name="pageInfo1" PageInfo="DateTime" TextAlignment="MiddleCenter" SizeF="2694.94,58.42" LocationFloat="0,10.1599283" Dpi="254">
+          <StylePriority Ref="10" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="11" ControlType="XRLine" Name="line3" SizeF="675.8055,5.879629" LocationFloat="1016.20038,0" Dpi="254" />
+      </Controls>
+    </Item2>
+    <Item3 Ref="12" ControlType="DetailBand" Name="Detail" HeightF="129.781342" Dpi="254">
+      <Controls>
+        <Item1 Ref="13" ControlType="XRLabel" Name="label147" TextAlignment="MiddleCenter" SizeF="719.426758,129.781342" LocationFloat="2156.41528,0" Dpi="254" BackColor="Transparent" Borders="Left, Bottom">
+          <StylePriority Ref="14" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="15" ControlType="XRLabel" Name="label8" Text="PUISSANCE MOTEUR K/W" TextAlignment="MiddleCenter" SizeF="298.8235,129.781342" LocationFloat="1857.5918,0" Dpi="254" Font="Tahoma, 9pt, style=Bold, charSet=0" ForeColor="White" BackColor="SteelBlue" Borders="Top, Bottom">
+          <StylePriority Ref="16" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="17" ControlType="XRLabel" Name="label9" Text="AMPERAGE" TextAlignment="MiddleCenter" SizeF="249.019531,129.781342" LocationFloat="1608.57214,0" Dpi="254" Font="Tahoma, 9pt, style=Bold, charSet=0" ForeColor="White" BackColor="SteelBlue" Borders="Top, Bottom">
+          <StylePriority Ref="18" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="19" ControlType="XRLabel" Name="label6" Text="VITESSE LINIAIRE" TextAlignment="MiddleCenter" SizeF="317.500061,129.781342" LocationFloat="895.7541,0" Dpi="254" Font="Tahoma, 9pt, style=Bold, charSet=0" ForeColor="White" BackColor="SteelBlue" Borders="Top, Bottom">
+          <StylePriority Ref="20" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item4>
+        <Item5 Ref="21" ControlType="XRLabel" Name="label7" Text="RAPPORT DE TRANSMISSION DE LA BOITE A VITESSE" TextAlignment="MiddleCenter" SizeF="395.318237,129.781342" LocationFloat="1213.25415,0" Dpi="254" Font="Tahoma, 9pt, style=Bold, charSet=0" ForeColor="White" BackColor="SteelBlue" Borders="Top, Bottom">
+          <StylePriority Ref="22" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item5>
+        <Item6 Ref="23" ControlType="XRLabel" Name="label5" Text="MOTEUR/RPM VITESSE DE ROTATION T/MIN" TextAlignment="MiddleCenter" SizeF="298.8235,129.781342" LocationFloat="596.9306,0" Dpi="254" Font="Tahoma, 9pt, style=Bold, charSet=0" ForeColor="White" BackColor="SteelBlue" Borders="Top, Bottom">
+          <StylePriority Ref="24" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item6>
+        <Item7 Ref="25" ControlType="XRLabel" Name="label58" Text="DIAMETRE CYLINDRE LAMINANT" TextAlignment="MiddleCenter" SizeF="301.9752,129.781342" LocationFloat="294.9554,0" Dpi="254" Font="Tahoma, 9pt, style=Bold, charSet=0" ForeColor="White" BackColor="SteelBlue" Borders="Top, Bottom">
+          <StylePriority Ref="26" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item7>
+        <Item8 Ref="27" ControlType="XRLabel" Name="label45" Text="N° Cage" TextAlignment="MiddleCenter" SizeF="269.956543,129.381241" LocationFloat="24.9987278,0" Dpi="254" Font="Arial, 12pt, style=Bold, charSet=0" ForeColor="DarkRed" BackColor="Transparent" BorderColor="DarkRed" Borders="Top, Bottom">
+          <StylePriority Ref="28" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item8>
+      </Controls>
+    </Item3>
+    <Item4 Ref="29" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="188.4768" Dpi="254">
+      <Controls>
+        <Item1 Ref="30" ControlType="XRLabel" Name="label2" Text="Réf: PRQ PR03" TextAlignment="MiddleLeft" SizeF="386.270752,48.5588379" LocationFloat="2458.55566,15.2400064" Dpi="254" Borders="Top, Right">
+          <StylePriority Ref="31" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="32" ControlType="XRLabel" Name="label1" Text="PARAMETRES DE PRODUCTION" TextAlignment="MiddleCenter" SizeF="2128.73438,173.236679" LocationFloat="329.821167,15.2400064" Dpi="254" Font="Tahoma, 20.25pt, style=Bold, charSet=0" Borders="Top, Right, Bottom">
+          <StylePriority Ref="33" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="34" ControlType="XRLabel" Name="label3" Text="Rév 01" TextAlignment="MiddleLeft" SizeF="386.270752,63.20118" LocationFloat="2458.55566,63.7989" Dpi="254" Borders="Right">
+          <StylePriority Ref="35" UseBorders="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="36" ControlType="XRLabel" Name="label4" TextFormatString="N° :{0}/21" Multiline="true" TextAlignment="MiddleLeft" SizeF="386.27124,61.4767151" LocationFloat="2458.55566,127.000092" Dpi="254" Padding="5,5,0,0,254" Borders="Right, Bottom">
+          <DataBindings>
+            <Item1 Ref="38" Parameter="#Ref-4" PropertyName="Text" DataMember="NumRapport" />
+          </DataBindings>
+          <StylePriority Ref="39" UseBorders="false" UseTextAlignment="false" />
+        </Item4>
+        <Item5 Ref="40" ControlType="XRPictureBox" Name="xrPictureBox1" ImageSource="img,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" Sizing="StretchImage" ImageAlignment="MiddleCenter" SizeF="314.581238,173.236679" LocationFloat="15.2399883,15.2399883" Dpi="254" Borders="Left, Top, Bottom">
+          <StylePriority Ref="41" UseBorders="false" />
+        </Item5>
+      </Controls>
+    </Item4>
+    <Item5 Ref="42" ControlType="DetailReportBand" Name="DetailReport" Level="0" DataSource="#Ref-0" Dpi="254">
+      <Bands>
+        <Item1 Ref="43" ControlType="DetailBand" Name="Detail1" HeightF="417.7976" Dpi="254">
+          <HierarchyPrintOptions Ref="44" Indent="50.8" />
+          <Controls>
+            <Item1 Ref="45" ControlType="XRLabel" Name="label38" TextAlignment="MiddleLeft" SizeF="184.0354,65.36786" LocationFloat="2691.80859,352.429749" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="46" PropertyName="Text" DataMember="Query.ParCM" />
+              </DataBindings>
+              <StylePriority Ref="47" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item1>
+            <Item2 Ref="48" ControlType="XRLabel" Name="label37" TextAlignment="MiddleLeft" SizeF="184.0354,70.62033" LocationFloat="2691.80859,281.809631" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="49" PropertyName="Text" DataMember="Query.ParLBF" />
+              </DataBindings>
+              <StylePriority Ref="50" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item2>
+            <Item3 Ref="51" ControlType="XRLabel" Name="label36" TextAlignment="MiddleLeft" SizeF="184.0354,69.45327" LocationFloat="2691.80859,212.356323" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="52" PropertyName="Text" DataMember="Query.ParLBN" />
+              </DataBindings>
+              <StylePriority Ref="53" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="54" ControlType="XRLabel" Name="label35" TextAlignment="MiddleLeft" SizeF="184.0354,69.45327" LocationFloat="2691.80859,142.9032" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="55" PropertyName="Text" DataMember="Query.ParLPB" />
+              </DataBindings>
+              <StylePriority Ref="56" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="57" ControlType="XRLabel" Name="label34" TextAlignment="MiddleLeft" SizeF="184.0354,69.45327" LocationFloat="2691.80859,73.44988" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="58" PropertyName="Text" DataMember="Query.ParVMCV" />
+              </DataBindings>
+              <StylePriority Ref="59" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item5>
+            <Item6 Ref="60" ControlType="XRLabel" Name="label29" Text="Vitesse moteur cisaille volante" TextAlignment="MiddleLeft" SizeF="535.3921,69.45327" LocationFloat="2156.4165,73.44988" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="61" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item6>
+            <Item7 Ref="62" ControlType="XRLabel" Name="label30" Text="Longeur premiere barre" TextAlignment="MiddleLeft" SizeF="535.3921,69.45326" LocationFloat="2156.4165,142.9032" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="63" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item7>
+            <Item8 Ref="64" ControlType="XRLabel" Name="label31" Text="Longeur barre normale" TextAlignment="MiddleLeft" SizeF="535.3921,69.45328" LocationFloat="2156.4165,212.3565" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="65" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item8>
+            <Item9 Ref="66" ControlType="XRLabel" Name="label32" Text="Loongeur barre finale" TextAlignment="MiddleLeft" SizeF="535.3921,70.62015" LocationFloat="2156.4165,281.809631" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="67" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item9>
+            <Item10 Ref="68" ControlType="XRLabel" Name="label33" Text="Compteur cassette" TextAlignment="MiddleLeft" SizeF="535.3921,65.36755" LocationFloat="2156.4165,352.430054" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="69" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item10>
+            <Item11 Ref="70" ControlType="XRLabel" Name="label28" Text="1120 KW AC 991 RPM" TextAlignment="MiddleCenter" SizeF="298.823364,344.347717" LocationFloat="1857.59314,73.44988" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <StylePriority Ref="71" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item11>
+            <Item12 Ref="72" ControlType="XRLabel" Name="label18" TextAlignment="MiddleCenter" SizeF="249.019409,65.36755" LocationFloat="1608.57373,352.430054" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="73" PropertyName="Text" DataMember="Query.ParP5A" />
+              </DataBindings>
+              <StylePriority Ref="74" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item12>
+            <Item13 Ref="75" ControlType="XRLabel" Name="label19" TextAlignment="MiddleCenter" SizeF="249.019409,70.62015" LocationFloat="1608.57373,281.809631" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="76" PropertyName="Text" DataMember="Query.ParP4A" />
+              </DataBindings>
+              <StylePriority Ref="77" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item13>
+            <Item14 Ref="78" ControlType="XRLabel" Name="label25" TextAlignment="MiddleCenter" SizeF="249.019409,69.45328" LocationFloat="1608.57373,212.3565" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="79" PropertyName="Text" DataMember="Query.ParP3A" />
+              </DataBindings>
+              <StylePriority Ref="80" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item14>
+            <Item15 Ref="81" ControlType="XRLabel" Name="label26" TextAlignment="MiddleCenter" SizeF="249.019409,69.45326" LocationFloat="1608.57373,142.9032" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="82" PropertyName="Text" DataMember="Query.ParP2A" />
+              </DataBindings>
+              <StylePriority Ref="83" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item15>
+            <Item16 Ref="84" ControlType="XRLabel" Name="label27" TextAlignment="MiddleCenter" SizeF="249.019409,69.45327" LocationFloat="1608.57373,73.44988" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="85" PropertyName="Text" DataMember="Query.ParP1A" />
+              </DataBindings>
+              <StylePriority Ref="86" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item16>
+            <Item17 Ref="87" ControlType="XRLabel" Name="label17" Text="8" TextAlignment="MiddleCenter" SizeF="395.318359,344.347717" LocationFloat="1213.25537,73.44988" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <StylePriority Ref="88" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item17>
+            <Item18 Ref="89" ControlType="XRLabel" Name="label16" TextAlignment="MiddleCenter" SizeF="317.500061,344.347717" LocationFloat="895.7553,73.44988" Dpi="254" BackColor="Transparent" Borders="Left, Bottom">
+              <StylePriority Ref="90" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item18>
+            <Item19 Ref="91" ControlType="XRLabel" Name="label20" TextAlignment="MiddleCenter" SizeF="298.8235,69.45327" LocationFloat="596.9318,73.44988" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="92" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item19>
+            <Item20 Ref="93" ControlType="XRLabel" Name="label21" TextAlignment="MiddleCenter" SizeF="298.8235,69.45326" LocationFloat="596.9318,142.9032" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="94" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item20>
+            <Item21 Ref="95" ControlType="XRLabel" Name="label22" TextAlignment="MiddleCenter" SizeF="298.8235,69.45328" LocationFloat="596.9318,212.3565" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="96" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item21>
+            <Item22 Ref="97" ControlType="XRLabel" Name="label23" TextAlignment="MiddleCenter" SizeF="298.8235,70.62015" LocationFloat="596.9318,281.809631" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="98" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item22>
+            <Item23 Ref="99" ControlType="XRLabel" Name="label24" TextAlignment="MiddleCenter" SizeF="298.8235,65.36755" LocationFloat="596.9318,352.430054" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="100" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item23>
+            <Item24 Ref="101" ControlType="XRLabel" Name="label15" TextAlignment="MiddleCenter" SizeF="301.975159,344.347717" LocationFloat="294.9566,73.44988" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="102" PropertyName="Text" DataMember="Query.ParDCL" />
+              </DataBindings>
+              <StylePriority Ref="103" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item24>
+            <Item25 Ref="104" ControlType="XRLabel" Name="label14" Text="5 Passe" TextAlignment="MiddleCenter" SizeF="269.956543,65.36755" LocationFloat="24.9999943,352.430054" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="105" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item25>
+            <Item26 Ref="106" ControlType="XRLabel" Name="label12" Text="3 Passe" TextAlignment="MiddleCenter" SizeF="269.956543,70.62021" LocationFloat="24.9999943,212.3565" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="107" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item26>
+            <Item27 Ref="108" ControlType="XRLabel" Name="label13" Text="4 Passe" TextAlignment="MiddleCenter" SizeF="269.956543,69.45327" LocationFloat="24.9999943,282.9767" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="109" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item27>
+            <Item28 Ref="110" ControlType="XRLabel" Name="label11" Text="2 Passe" TextAlignment="MiddleCenter" SizeF="269.956543,69.45327" LocationFloat="24.9999943,142.9032" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="111" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item28>
+            <Item29 Ref="112" ControlType="XRLabel" Name="label48" Text="1 Passe" TextAlignment="MiddleCenter" SizeF="269.956543,69.45327" LocationFloat="24.9999943,73.44988" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="113" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item29>
+            <Item30 Ref="114" ControlType="XRLabel" Name="label10" Text="1- Dégrossissage" TextAlignment="MiddleCenter" SizeF="2850.844,73.44988" LocationFloat="24.9999943,0" Dpi="254" Font="Arial, 12pt, style=Bold, charSet=0" ForeColor="DarkRed" BackColor="Transparent" BorderColor="DarkRed" Borders="Top, Bottom">
+              <StylePriority Ref="115" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item30>
+          </Controls>
+        </Item1>
+      </Bands>
+    </Item5>
+    <Item6 Ref="116" ControlType="DetailReportBand" Name="DetailReport1" Level="1" DataSource="#Ref-0" Dpi="254">
+      <Bands>
+        <Item1 Ref="117" ControlType="DetailBand" Name="Detail2" HeightF="399.121338" Dpi="254">
+          <HierarchyPrintOptions Ref="118" Indent="50.8" />
+          <Controls>
+            <Item1 Ref="119" ControlType="XRLabel" Name="label77" TextAlignment="MiddleLeft" SizeF="184.0354,114.977028" LocationFloat="2691.808,73.44988" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="120" PropertyName="Text" DataMember="Query.ParVMCE5" />
+              </DataBindings>
+              <StylePriority Ref="121" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item1>
+            <Item2 Ref="122" ControlType="XRLabel" Name="label78" Text="Vitesse moteur cassette cisaille à ebouter c5" TextAlignment="MiddleLeft" SizeF="535.3921,114.976646" LocationFloat="2156.41626,73.450264" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="123" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item2>
+            <Item3 Ref="124" ControlType="XRLabel" Name="label75" TextAlignment="MiddleLeft" SizeF="184.0354,70.62077" LocationFloat="2691.80835,188.42691" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="125" PropertyName="Text" DataMember="Query.ParLT" />
+              </DataBindings>
+              <StylePriority Ref="126" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="127" ControlType="XRLabel" Name="label76" Text="Longeur tête" TextAlignment="MiddleLeft" SizeF="535.3921,70.62012" LocationFloat="2156.4165,188.427292" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="128" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="129" ControlType="XRLabel" Name="label73" Text="Longeur queue" TextAlignment="MiddleLeft" SizeF="535.3921,70.62012" LocationFloat="2156.41626,259.0475" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="130" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item5>
+            <Item6 Ref="131" ControlType="XRLabel" Name="label74" TextAlignment="MiddleLeft" SizeF="184.0354,70.62077" LocationFloat="2691.80786,259.047119" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="132" PropertyName="Text" DataMember="Query.ParLQ" />
+              </DataBindings>
+              <StylePriority Ref="133" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item6>
+            <Item7 Ref="134" ControlType="XRLabel" Name="label71" TextAlignment="MiddleLeft" SizeF="535.3921,69.45361" LocationFloat="2156.41626,329.667725" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="135" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item7>
+            <Item8 Ref="136" ControlType="XRLabel" Name="label72" TextAlignment="MiddleLeft" SizeF="184.0354,69.45361" LocationFloat="2691.80835,329.667725" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <StylePriority Ref="137" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item8>
+            <Item9 Ref="138" ControlType="XRLabel" Name="label67" Text="800 KW DC" TextAlignment="MiddleCenter" SizeF="298.82312,114.977028" LocationFloat="1857.59314,73.44988" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="139" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item9>
+            <Item10 Ref="140" ControlType="XRLabel" Name="label68" Text="500 KW DC" TextAlignment="MiddleCenter" SizeF="298.82312,69.45326" LocationFloat="1857.593,189.594376" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="141" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item10>
+            <Item11 Ref="142" ControlType="XRLabel" Name="label69" Text="500 KW DC" TextAlignment="MiddleCenter" SizeF="298.823364,70.62015" LocationFloat="1857.593,259.0475" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="143" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item11>
+            <Item12 Ref="144" ControlType="XRLabel" Name="label70" Text="500 KW DC" TextAlignment="MiddleCenter" SizeF="298.823364,69.45331" LocationFloat="1857.593,329.6679" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="145" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item12>
+            <Item13 Ref="146" ControlType="XRLabel" Name="label63" TextAlignment="MiddleCenter" SizeF="249.019409,114.977028" LocationFloat="1608.57373,73.44988" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="147" PropertyName="Text" DataMember="Query.ParGrpInter2A" />
+              </DataBindings>
+              <StylePriority Ref="148" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item13>
+            <Item14 Ref="149" ControlType="XRLabel" Name="label64" TextAlignment="MiddleCenter" SizeF="249.019409,69.45326" LocationFloat="1608.57361,189.594376" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="150" PropertyName="Text" DataMember="Query.ParGrpInter3A" />
+              </DataBindings>
+              <StylePriority Ref="151" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item14>
+            <Item15 Ref="152" ControlType="XRLabel" Name="label65" TextAlignment="MiddleCenter" SizeF="249.019409,70.62015" LocationFloat="1608.57361,259.0475" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="153" PropertyName="Text" DataMember="Query.ParGrpInter4A" />
+              </DataBindings>
+              <StylePriority Ref="154" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item15>
+            <Item16 Ref="155" ControlType="XRLabel" Name="label66" TextAlignment="MiddleCenter" SizeF="249.019409,69.45331" LocationFloat="1608.57361,329.6679" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="156" PropertyName="Text" DataMember="Query.ParGrpInter5A" />
+              </DataBindings>
+              <StylePriority Ref="157" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item16>
+            <Item17 Ref="158" ControlType="XRLabel" Name="label59" Text="14.269" TextAlignment="MiddleCenter" SizeF="395.318359,114.977028" LocationFloat="1213.25537,73.4499741" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="159" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item17>
+            <Item18 Ref="160" ControlType="XRLabel" Name="label60" Text="10.5" TextAlignment="MiddleCenter" SizeF="395.318359,70.62015" LocationFloat="1213.25513,259.0476" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="161" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item18>
+            <Item19 Ref="162" ControlType="XRLabel" Name="label61" Text="12.304" TextAlignment="MiddleCenter" SizeF="395.318359,69.45328" LocationFloat="1213.25513,189.594467" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="163" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item19>
+            <Item20 Ref="164" ControlType="XRLabel" Name="label62" Text="7.895" TextAlignment="MiddleCenter" SizeF="395.318359,69.45325" LocationFloat="1213.25513,329.6681" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="165" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item20>
+            <Item21 Ref="166" ControlType="XRLabel" Name="label54" TextAlignment="MiddleCenter" SizeF="317.500061,69.45328" LocationFloat="895.7551,329.6679" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="167" PropertyName="Text" DataMember="Query.ParGrpInter5VL" />
+              </DataBindings>
+              <StylePriority Ref="168" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item21>
+            <Item22 Ref="169" ControlType="XRLabel" Name="label55" TextAlignment="MiddleCenter" SizeF="317.500061,69.45326" LocationFloat="895.7551,189.594376" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="170" PropertyName="Text" DataMember="Query.ParGrpInter3VL" />
+              </DataBindings>
+              <StylePriority Ref="171" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item22>
+            <Item23 Ref="172" ControlType="XRLabel" Name="label56" TextAlignment="MiddleCenter" SizeF="317.500061,70.62015" LocationFloat="895.7551,259.0475" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="173" PropertyName="Text" DataMember="Query.ParGrpInter4VL" />
+              </DataBindings>
+              <StylePriority Ref="174" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item23>
+            <Item24 Ref="175" ControlType="XRLabel" Name="label57" TextAlignment="MiddleCenter" SizeF="317.500061,114.977028" LocationFloat="895.7553,73.44988" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="176" PropertyName="Text" DataMember="Query.ParGrpInter2VL" />
+              </DataBindings>
+              <StylePriority Ref="177" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item24>
+            <Item25 Ref="178" ControlType="XRLabel" Name="label50" TextAlignment="MiddleCenter" SizeF="298.8235,114.977028" LocationFloat="596.9318,73.44988" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="179" PropertyName="Text" DataMember="Query.ParGrpInter2MVR" />
+              </DataBindings>
+              <StylePriority Ref="180" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item25>
+            <Item26 Ref="181" ControlType="XRLabel" Name="label51" TextAlignment="MiddleCenter" SizeF="298.8235,70.62015" LocationFloat="596.931641,259.0475" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="182" PropertyName="Text" DataMember="Query.ParGrpInter4MVR" />
+              </DataBindings>
+              <StylePriority Ref="183" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item26>
+            <Item27 Ref="184" ControlType="XRLabel" Name="label52" TextAlignment="MiddleCenter" SizeF="298.8235,69.45326" LocationFloat="596.931641,189.594376" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="185" PropertyName="Text" DataMember="Query.ParGrpInter3MVR" />
+              </DataBindings>
+              <StylePriority Ref="186" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item27>
+            <Item28 Ref="187" ControlType="XRLabel" Name="label53" TextAlignment="MiddleCenter" SizeF="298.8235,69.45325" LocationFloat="596.931641,329.6679" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="188" PropertyName="Text" DataMember="Query.ParGrpInter5MVR" />
+              </DataBindings>
+              <StylePriority Ref="189" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item28>
+            <Item29 Ref="190" ControlType="XRLabel" Name="label44" TextAlignment="MiddleCenter" SizeF="301.975281,69.45322" LocationFloat="294.9564,329.6681" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="191" PropertyName="Text" DataMember="Query.ParGrpInter5DCL" />
+              </DataBindings>
+              <StylePriority Ref="192" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item29>
+            <Item30 Ref="193" ControlType="XRLabel" Name="label46" TextAlignment="MiddleCenter" SizeF="301.975281,69.45328" LocationFloat="294.9564,189.594467" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="194" PropertyName="Text" DataMember="Query.ParGrpInter3DCL" />
+              </DataBindings>
+              <StylePriority Ref="195" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item30>
+            <Item31 Ref="196" ControlType="XRLabel" Name="label47" TextAlignment="MiddleCenter" SizeF="301.975281,70.62015" LocationFloat="294.9564,259.0476" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="197" PropertyName="Text" DataMember="Query.ParGrpInter4DCL" />
+              </DataBindings>
+              <StylePriority Ref="198" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item31>
+            <Item32 Ref="199" ControlType="XRLabel" Name="label49" TextAlignment="MiddleCenter" SizeF="301.975281,114.977028" LocationFloat="294.956543,73.4499741" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="200" PropertyName="Text" DataMember="Query.ParGrpInter2DCL" />
+              </DataBindings>
+              <StylePriority Ref="201" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item32>
+            <Item33 Ref="202" ControlType="XRLabel" Name="label40" Text="2" TextAlignment="MiddleCenter" SizeF="269.956543,114.977028" LocationFloat="24.9999943,73.44988" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="203" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item33>
+            <Item34 Ref="204" ControlType="XRLabel" Name="label41" Text="3" TextAlignment="MiddleCenter" SizeF="269.956543,69.45327" LocationFloat="24.9998512,189.594376" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="205" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item34>
+            <Item35 Ref="206" ControlType="XRLabel" Name="label42" Text="4" TextAlignment="MiddleCenter" SizeF="269.956543,70.62021" LocationFloat="24.9998512,259.0477" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="207" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item35>
+            <Item36 Ref="208" ControlType="XRLabel" Name="label43" Text="5" TextAlignment="MiddleCenter" SizeF="269.956543,69.45327" LocationFloat="24.9998512,329.6679" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="209" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item36>
+            <Item37 Ref="210" ControlType="XRLabel" Name="label39" Text="2- GRP-INTER" TextAlignment="MiddleCenter" SizeF="2850.844,73.44988" LocationFloat="24.9999943,0" Dpi="254" Font="Arial, 12pt, style=Bold, charSet=0" ForeColor="DarkRed" BackColor="Transparent" BorderColor="DarkRed" Borders="Top, Bottom">
+              <StylePriority Ref="211" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item37>
+          </Controls>
+        </Item1>
+      </Bands>
+    </Item6>
+    <Item7 Ref="212" ControlType="DetailReportBand" Name="DetailReport2" Level="2" DataSource="#Ref-0" Dpi="254">
+      <Bands>
+        <Item1 Ref="213" ControlType="DetailBand" Name="Detail3" HeightF="630.4375" Dpi="254">
+          <HierarchyPrintOptions Ref="214" Indent="50.8" />
+          <Controls>
+            <Item1 Ref="215" ControlType="XRLabel" Name="label141" Text="400 KW DC" TextAlignment="MiddleCenter" SizeF="298.823364,69.45331" LocationFloat="1857.592,560.9837" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="216" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item1>
+            <Item2 Ref="217" ControlType="XRLabel" Name="label136" Text="400 KW DC" TextAlignment="MiddleCenter" SizeF="298.823364,69.45331" LocationFloat="1857.59314,491.530853" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="218" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item2>
+            <Item3 Ref="219" ControlType="XRLabel" Name="label125" Text="400 KW DC" TextAlignment="MiddleCenter" SizeF="298.822144,69.45291" LocationFloat="1857.59338,422.077728" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="220" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="221" ControlType="XRLabel" Name="label120" Text="400 KW DC" TextAlignment="MiddleCenter" SizeF="298.823364,70.62039" LocationFloat="1857.59241,351.45694" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="222" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="223" ControlType="XRLabel" Name="label112" Text="400 KW DC" TextAlignment="MiddleCenter" SizeF="298.823364,68.48001" LocationFloat="1857.59314,282.9771" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="224" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item5>
+            <Item6 Ref="225" ControlType="XRLabel" Name="label131" TextAlignment="MiddleLeft" SizeF="184.0354,69.45361" LocationFloat="2691.80786,560.983765" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <StylePriority Ref="226" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item6>
+            <Item7 Ref="227" ControlType="XRLabel" Name="label132" Text="1.25" TextAlignment="MiddleCenter" SizeF="395.317871,69.45337" LocationFloat="1213.25439,560.984131" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="228" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item7>
+            <Item8 Ref="229" ControlType="XRLabel" Name="label133" TextAlignment="MiddleLeft" SizeF="535.3921,69.45361" LocationFloat="2156.41553,560.983765" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="230" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item8>
+            <Item9 Ref="231" ControlType="XRLabel" Name="label134" TextAlignment="MiddleCenter" SizeF="317.500244,69.45355" LocationFloat="895.75415,560.983948" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="232" PropertyName="Text" DataMember="Query.ParGrpFin13VL" />
+              </DataBindings>
+              <StylePriority Ref="233" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item9>
+            <Item10 Ref="234" ControlType="XRLabel" Name="label135" TextAlignment="MiddleCenter" SizeF="301.975281,69.45322" LocationFloat="294.955627,560.984131" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="235" PropertyName="Text" DataMember="Query.ParGrpFin13DCL" />
+              </DataBindings>
+              <StylePriority Ref="236" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item10>
+            <Item11 Ref="237" ControlType="XRLabel" Name="label137" TextAlignment="MiddleCenter" SizeF="249.019409,69.45331" LocationFloat="1608.57275,560.984131" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="238" PropertyName="Text" DataMember="Query.ParGrpFin13A" />
+              </DataBindings>
+              <StylePriority Ref="239" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item11>
+            <Item12 Ref="240" ControlType="XRLabel" Name="label138" TextAlignment="MiddleCenter" SizeF="298.8235,69.45325" LocationFloat="596.930664,560.984131" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="241" PropertyName="Text" DataMember="Query.ParGrpFin13MVR" />
+              </DataBindings>
+              <StylePriority Ref="242" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item12>
+            <Item13 Ref="243" ControlType="XRLabel" Name="label139" TextAlignment="MiddleCenter" SizeF="298.8235,69.45325" LocationFloat="596.931458,491.53064" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="244" PropertyName="Text" DataMember="Query.ParGrpFin12MVR" />
+              </DataBindings>
+              <StylePriority Ref="245" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item13>
+            <Item14 Ref="246" ControlType="XRLabel" Name="label140" TextAlignment="MiddleCenter" SizeF="249.019409,69.45331" LocationFloat="1608.57324,491.53064" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="247" PropertyName="Text" DataMember="Query.ParGrpFin12A" />
+              </DataBindings>
+              <StylePriority Ref="248" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item14>
+            <Item15 Ref="249" ControlType="XRLabel" Name="label142" TextAlignment="MiddleLeft" SizeF="184.0354,69.45361" LocationFloat="2691.808,491.530457" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <StylePriority Ref="250" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item15>
+            <Item16 Ref="251" ControlType="XRLabel" Name="label143" TextAlignment="MiddleCenter" SizeF="317.500122,69.45331" LocationFloat="895.7545,491.530457" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="252" PropertyName="Text" DataMember="Query.ParGrpFin12VL" />
+              </DataBindings>
+              <StylePriority Ref="253" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item16>
+            <Item17 Ref="254" ControlType="XRLabel" Name="label144" TextAlignment="MiddleLeft" SizeF="535.3921,69.45361" LocationFloat="2156.41626,491.530457" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="255" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item17>
+            <Item18 Ref="256" ControlType="XRLabel" Name="label145" Text="1.75" TextAlignment="MiddleCenter" SizeF="395.317871,69.453125" LocationFloat="1213.25476,491.53064" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="257" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item18>
+            <Item19 Ref="258" ControlType="XRLabel" Name="label146" TextAlignment="MiddleCenter" SizeF="301.975281,69.45322" LocationFloat="294.956024,491.53064" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="259" PropertyName="Text" DataMember="Query.ParGrpFin12DCL" />
+              </DataBindings>
+              <StylePriority Ref="260" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item19>
+            <Item20 Ref="261" ControlType="XRLabel" Name="label115" TextAlignment="MiddleCenter" SizeF="301.975281,70.62012" LocationFloat="294.9563,351.457123" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="262" PropertyName="Text" DataMember="Query.ParGrpFin10DCL" />
+              </DataBindings>
+              <StylePriority Ref="263" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item20>
+            <Item21 Ref="264" ControlType="XRLabel" Name="label116" Text="2.25" TextAlignment="MiddleCenter" SizeF="395.318237,70.62021" LocationFloat="1213.25476,351.457123" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="265" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item21>
+            <Item22 Ref="266" ControlType="XRLabel" Name="label117" TextAlignment="MiddleLeft" SizeF="535.3921,70.6203" LocationFloat="2156.41626,351.457123" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="267" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item22>
+            <Item23 Ref="268" ControlType="XRLabel" Name="label118" TextAlignment="MiddleCenter" SizeF="317.5003,70.62039" LocationFloat="895.754944,351.45694" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="269" PropertyName="Text" DataMember="Query.ParGrpFin10VL" />
+              </DataBindings>
+              <StylePriority Ref="270" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item23>
+            <Item24 Ref="271" ControlType="XRLabel" Name="label119" TextAlignment="MiddleLeft" SizeF="184.0354,70.6203" LocationFloat="2691.80835,351.457123" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <StylePriority Ref="272" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item24>
+            <Item25 Ref="273" ControlType="XRLabel" Name="label121" TextAlignment="MiddleCenter" SizeF="249.019409,70.62021" LocationFloat="1608.57336,351.457123" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="274" PropertyName="Text" DataMember="Query.ParGrpFin10A" />
+              </DataBindings>
+              <StylePriority Ref="275" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item25>
+            <Item26 Ref="276" ControlType="XRLabel" Name="label122" TextAlignment="MiddleCenter" SizeF="298.8235,70.62021" LocationFloat="596.9315,351.457123" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="277" PropertyName="Text" DataMember="Query.ParGrpFin10MVR" />
+              </DataBindings>
+              <StylePriority Ref="278" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item26>
+            <Item27 Ref="279" ControlType="XRLabel" Name="label123" TextAlignment="MiddleCenter" SizeF="298.8235,69.45325" LocationFloat="596.930969,422.077423" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="280" PropertyName="Text" DataMember="Query.ParGrpFin11MVR" />
+              </DataBindings>
+              <StylePriority Ref="281" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item27>
+            <Item28 Ref="282" ControlType="XRLabel" Name="label124" TextAlignment="MiddleCenter" SizeF="249.019409,69.45331" LocationFloat="1608.573,422.077423" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="283" PropertyName="Text" DataMember="Query.ParGrpFin11A" />
+              </DataBindings>
+              <StylePriority Ref="284" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item28>
+            <Item29 Ref="285" ControlType="XRLabel" Name="label126" TextAlignment="MiddleCenter" SizeF="301.975281,69.45322" LocationFloat="294.95575,422.077637" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="286" PropertyName="Text" DataMember="Query.ParGrpFin11DCL" />
+              </DataBindings>
+              <StylePriority Ref="287" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item29>
+            <Item30 Ref="288" ControlType="XRLabel" Name="label127" TextAlignment="MiddleCenter" SizeF="317.500061,69.45352" LocationFloat="895.754333,422.077332" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="289" PropertyName="Text" DataMember="Query.ParGrpFin11VL" />
+              </DataBindings>
+              <StylePriority Ref="290" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item30>
+            <Item31 Ref="291" ControlType="XRLabel" Name="label128" TextAlignment="MiddleLeft" SizeF="535.3921,69.45361" LocationFloat="2156.41577,422.07724" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="292" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item31>
+            <Item32 Ref="293" ControlType="XRLabel" Name="label129" Text="1.5" TextAlignment="MiddleCenter" SizeF="395.3181,69.45325" LocationFloat="1213.25452,422.0775" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="294" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item32>
+            <Item33 Ref="295" ControlType="XRLabel" Name="label130" TextAlignment="MiddleLeft" SizeF="184.0354,69.45361" LocationFloat="2691.80786,422.07724" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <StylePriority Ref="296" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item33>
+            <Item34 Ref="297" ControlType="XRLabel" Name="label107" TextAlignment="MiddleLeft" SizeF="184.0354,68.48041" LocationFloat="2691.80786,282.9767" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="298" PropertyName="Text" DataMember="Query.ParRMP3" />
+              </DataBindings>
+              <StylePriority Ref="299" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item34>
+            <Item35 Ref="300" ControlType="XRLabel" Name="label108" Text="2.6" TextAlignment="MiddleCenter" SizeF="395.317871,68.47992" LocationFloat="1213.25476,282.9771" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="301" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item35>
+            <Item36 Ref="302" ControlType="XRLabel" Name="label109" Text="3- Role moteur RPM" TextAlignment="MiddleLeft" SizeF="535.3921,68.48041" LocationFloat="2156.41577,282.9767" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="303" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item36>
+            <Item37 Ref="304" ControlType="XRLabel" Name="label110" TextAlignment="MiddleCenter" SizeF="317.500122,68.48044" LocationFloat="895.7545,282.9767" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="305" PropertyName="Text" DataMember="Query.ParGrpFin9VL" />
+              </DataBindings>
+              <StylePriority Ref="306" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item37>
+            <Item38 Ref="307" ControlType="XRLabel" Name="label111" TextAlignment="MiddleCenter" SizeF="301.9753,68.48001" LocationFloat="294.955841,282.9771" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="308" PropertyName="Text" DataMember="Query.ParGrpFin9DCL" />
+              </DataBindings>
+              <StylePriority Ref="309" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item38>
+            <Item39 Ref="310" ControlType="XRLabel" Name="label113" TextAlignment="MiddleCenter" SizeF="249.019409,68.4801941" LocationFloat="1608.573,282.976929" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="311" PropertyName="Text" DataMember="Query.ParGrpFin9A" />
+              </DataBindings>
+              <StylePriority Ref="312" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item39>
+            <Item40 Ref="313" ControlType="XRLabel" Name="label114" TextAlignment="MiddleCenter" SizeF="298.8235,68.4801941" LocationFloat="596.931,282.976929" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="314" PropertyName="Text" DataMember="Query.ParGrpFin9MVR" />
+              </DataBindings>
+              <StylePriority Ref="315" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item40>
+            <Item41 Ref="316" ControlType="XRLabel" Name="label99" TextAlignment="MiddleCenter" SizeF="298.8235,69.45325" LocationFloat="596.931641,213.5234" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="317" PropertyName="Text" DataMember="Query.ParGrpFin8MVR" />
+              </DataBindings>
+              <StylePriority Ref="318" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item41>
+            <Item42 Ref="319" ControlType="XRLabel" Name="label100" TextAlignment="MiddleCenter" SizeF="249.019409,69.45331" LocationFloat="1608.57361,213.5234" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="320" PropertyName="Text" DataMember="Query.ParGrpFin8A" />
+              </DataBindings>
+              <StylePriority Ref="321" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item42>
+            <Item43 Ref="322" ControlType="XRLabel" Name="label101" Text="400 KW DC" TextAlignment="MiddleCenter" SizeF="298.823364,69.45331" LocationFloat="1857.593,213.5234" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="323" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item43>
+            <Item44 Ref="324" ControlType="XRLabel" Name="label102" TextAlignment="MiddleCenter" SizeF="301.975281,69.45322" LocationFloat="294.9564,213.5236" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="325" PropertyName="Text" DataMember="Query.ParGrpFin8DCL" />
+              </DataBindings>
+              <StylePriority Ref="326" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item44>
+            <Item45 Ref="327" ControlType="XRLabel" Name="label103" TextAlignment="MiddleCenter" SizeF="317.500122,69.45349" LocationFloat="895.7551,213.523224" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="328" PropertyName="Text" DataMember="Query.ParGrpFin8VL" />
+              </DataBindings>
+              <StylePriority Ref="329" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item45>
+            <Item46 Ref="330" ControlType="XRLabel" Name="label104" Text="2- Role moteur RPM" TextAlignment="MiddleLeft" SizeF="535.3921,69.45361" LocationFloat="2156.41626,213.523224" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="331" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item46>
+            <Item47 Ref="332" ControlType="XRLabel" Name="label105" Text="3.25" TextAlignment="MiddleCenter" SizeF="395.318,69.45323" LocationFloat="1213.25537,213.5236" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="333" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item47>
+            <Item48 Ref="334" ControlType="XRLabel" Name="label106" TextAlignment="MiddleLeft" SizeF="184.0354,69.45361" LocationFloat="2691.80835,213.523224" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="335" PropertyName="Text" DataMember="Query.ParRMP2" />
+              </DataBindings>
+              <StylePriority Ref="336" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item48>
+            <Item49 Ref="337" ControlType="XRLabel" Name="label97" Text="1- Role moteur RPM" TextAlignment="MiddleLeft" SizeF="535.3921,69.45293" LocationFloat="2156.4165,142.903488" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="338" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item49>
+            <Item50 Ref="339" ControlType="XRLabel" Name="label98" TextAlignment="MiddleLeft" SizeF="184.0354,69.45322" LocationFloat="2691.808,142.903488" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="340" PropertyName="Text" DataMember="Query.ParRPM1" />
+              </DataBindings>
+              <StylePriority Ref="341" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item50>
+            <Item51 Ref="342" ControlType="XRLabel" Name="label95" TextAlignment="MiddleLeft" SizeF="535.3921,69.45361" LocationFloat="2156.41626,73.44988" Dpi="254" BackColor="Transparent" Borders="Bottom">
+              <StylePriority Ref="343" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item51>
+            <Item52 Ref="344" ControlType="XRLabel" Name="label96" TextAlignment="MiddleLeft" SizeF="184.0354,69.45361" LocationFloat="2691.808,73.44988" Dpi="254" BackColor="Transparent" Borders="Left, Right, Bottom">
+              <StylePriority Ref="345" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item52>
+            <Item53 Ref="346" ControlType="XRLabel" Name="label94" Text="630 KW DC" TextAlignment="MiddleCenter" SizeF="298.82312,138.906433" LocationFloat="1857.59314,73.44988" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="347" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item53>
+            <Item54 Ref="348" ControlType="XRLabel" Name="label92" Text="4.15" TextAlignment="MiddleCenter" SizeF="395.318359,69.45325" LocationFloat="1213.25537,142.9032" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="349" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item54>
+            <Item55 Ref="350" ControlType="XRLabel" Name="label93" Text="6" TextAlignment="MiddleCenter" SizeF="395.318359,69.4530258" LocationFloat="1213.25537,73.44988" Dpi="254" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Transparent" Borders="Right, Bottom">
+              <StylePriority Ref="351" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item55>
+            <Item56 Ref="352" ControlType="XRLabel" Name="label91" TextAlignment="MiddleCenter" SizeF="249.019409,140.073517" LocationFloat="1608.57361,73.44988" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="353" PropertyName="Text" DataMember="Query.ParGrpFin67A" />
+              </DataBindings>
+              <StylePriority Ref="354" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item56>
+            <Item57 Ref="355" ControlType="XRLabel" Name="label90" TextAlignment="MiddleCenter" SizeF="317.499939,140.073517" LocationFloat="895.7553,73.44988" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="356" PropertyName="Text" DataMember="Query.ParGrpFin67VL" />
+              </DataBindings>
+              <StylePriority Ref="357" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item57>
+            <Item58 Ref="358" ControlType="XRLabel" Name="label89" TextAlignment="MiddleCenter" SizeF="298.823669,140.073517" LocationFloat="596.931641,73.44988" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="359" PropertyName="Text" DataMember="Query.ParGrpFin67MVR" />
+              </DataBindings>
+              <StylePriority Ref="360" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item58>
+            <Item59 Ref="361" ControlType="XRLabel" Name="label88" TextAlignment="MiddleCenter" SizeF="301.975281,140.073517" LocationFloat="294.9566,73.44988" Dpi="254" BackColor="Transparent" Borders="Right, Bottom">
+              <DataBindings>
+                <Item1 Ref="362" PropertyName="Text" DataMember="Query.ParGrpFin67DCL" />
+              </DataBindings>
+              <StylePriority Ref="363" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item59>
+            <Item60 Ref="364" ControlType="XRLabel" Name="label87" Text="13" TextAlignment="MiddleCenter" SizeF="269.956543,69.45325" LocationFloat="24.9998512,560.983765" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="365" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item60>
+            <Item61 Ref="366" ControlType="XRLabel" Name="label86" Text="12" TextAlignment="MiddleCenter" SizeF="269.956543,69.45325" LocationFloat="24.9998512,491.53064" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="367" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item61>
+            <Item62 Ref="368" ControlType="XRLabel" Name="label83" Text="11" TextAlignment="MiddleCenter" SizeF="269.956543,69.45327" LocationFloat="24.9998512,422.077332" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="369" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item62>
+            <Item63 Ref="370" ControlType="XRLabel" Name="label84" Text="10" TextAlignment="MiddleCenter" SizeF="269.956543,70.62021" LocationFloat="24.9998512,351.457123" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="371" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item63>
+            <Item64 Ref="372" ControlType="XRLabel" Name="label85" Text="9" TextAlignment="MiddleCenter" SizeF="269.956543,68.48041" LocationFloat="24.9998512,282.9767" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="373" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item64>
+            <Item65 Ref="374" ControlType="XRLabel" Name="label80" Text="6" TextAlignment="MiddleCenter" SizeF="269.956543,69.45327" LocationFloat="24.9998512,73.44988" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="375" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item65>
+            <Item66 Ref="376" ControlType="XRLabel" Name="label81" Text="7" TextAlignment="MiddleCenter" SizeF="269.956543,70.62021" LocationFloat="24.9998512,142.9032" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="377" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item66>
+            <Item67 Ref="378" ControlType="XRLabel" Name="label82" Text="8" TextAlignment="MiddleCenter" SizeF="269.956543,69.45327" LocationFloat="24.9998512,213.5234" Dpi="254" BackColor="Azure" Borders="Bottom">
+              <StylePriority Ref="379" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item67>
+            <Item68 Ref="380" ControlType="XRLabel" Name="label79" Text="3- GRP-FINISSEUR" TextAlignment="MiddleCenter" SizeF="2850.844,73.44988" LocationFloat="24.9999943,0" Dpi="254" Font="Arial, 12pt, style=Bold, charSet=0" ForeColor="DarkRed" BackColor="Transparent" BorderColor="DarkRed" Borders="Top, Bottom">
+              <StylePriority Ref="381" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item68>
+          </Controls>
+        </Item1>
+      </Bands>
+    </Item7>
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v20.2" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9IktiZlN0ZWVsQ29ubmVjdGlvbiIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz48UXVlcnkgVHlwZT0iQ3VzdG9tU3FsUXVlcnkiIE5hbWU9IlF1ZXJ5Ij48UGFyYW1ldGVyIE5hbWU9Ik51bVJhcHBvcnQiIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkludDMyKSg/TnVtUmFwcG9ydCk8L1BhcmFtZXRlcj48U3FsPlNFTEVDVCANCglQYXJEQ0wNCgksW1BhckdycEludGVyMkRDTF0NCiAgICAgICxbUGFyR3JwSW50ZXIzRENMXQ0KICAgICAgLFtQYXJHcnBJbnRlcjREQ0xdDQogICAgICAsW1BhckdycEludGVyNURDTF0NCiAgICAgICxbUGFyR3JwRmluNjdEQ0xdDQogICAgICAsW1BhckdycEZpbjhEQ0xdDQogICAgICAsW1BhckdycEZpbjlEQ0xdDQogICAgICAsW1BhckdycEZpbjEwRENMXQ0KICAgICAgLFtQYXJHcnBGaW4xMURDTF0NCiAgICAgICxbUGFyR3JwRmluMTJEQ0xdDQogICAgICAsW1BhckdycEZpbjEzRENMXQ0KICAgICAgLFtQYXJHcnBJbnRlcjJNVlJdDQogICAgICAsW1BhckdycEludGVyM01WUl0NCiAgICAgICxbUGFyR3JwSW50ZXI0TVZSXQ0KICAgICAgLFtQYXJHcnBJbnRlcjVNVlJdDQogICAgICAsW1BhckdycEZpbjY3TVZSXQ0KICAgICAgLFtQYXJHcnBGaW44TVZSXQ0KICAgICAgLFtQYXJHcnBGaW45TVZSXQ0KICAgICAgLFtQYXJHcnBGaW4xME1WUl0NCiAgICAgICxbUGFyR3JwRmluMTFNVlJdDQogICAgICAsW1BhckdycEZpbjEyTVZSXQ0KICAgICAgLFtQYXJHcnBGaW4xM01WUl0NCiAgICAgICxbUGFyR3JwSW50ZXIyVkxdDQogICAgICAsW1BhckdycEludGVyM1ZMXQ0KICAgICAgLFtQYXJHcnBJbnRlcjRWTF0NCiAgICAgICxbUGFyR3JwSW50ZXI1VkxdDQogICAgICAsW1BhckdycEZpbjY3VkxdDQogICAgICAsW1BhckdycEZpbjhWTF0NCiAgICAgICxbUGFyR3JwRmluOVZMXQ0KICAgICAgLFtQYXJHcnBGaW4xMFZMXQ0KICAgICAgLFtQYXJHcnBGaW4xMVZMXQ0KICAgICAgLFtQYXJHcnBGaW4xMlZMXQ0KICAgICAgLFtQYXJHcnBGaW4xM1ZMXQ0KICAgICAgLFtQYXJHcnBJbnRlcjJBXQ0KICAgICAgLFtQYXJHcnBJbnRlcjNBXQ0KICAgICAgLFtQYXJHcnBJbnRlcjRBXQ0KICAgICAgLFtQYXJHcnBJbnRlcjVBXQ0KICAgICAgLFtQYXJHcnBGaW42N0FdDQogICAgICAsW1BhckdycEZpbjhBXQ0KICAgICAgLFtQYXJHcnBGaW45QV0NCiAgICAgICxbUGFyR3JwRmluMTBBXQ0KICAgICAgLFtQYXJHcnBGaW4xMUFdDQogICAgICAsW1BhckdycEZpbjEyQV0NCiAgICAgICxbUGFyR3JwRmluMTNBXQ0KICAgICAgLFtQYXJWTUNWXQ0KICAgICAgLFtQYXJMUEJdDQogICAgICAsW1BhckxCTl0NCiAgICAgICxbUGFyTEJGXQ0KICAgICAgLFtQYXJDTV0NCiAgICAgICxbUGFyVk1DRTVdDQogICAgICAsW1BhckxUXQ0KICAgICAgLFtQYXJMUV0NCiAgICAgICxbUGFyUlBNMV0NCiAgICAgICxbUGFyUk1QMl0NCiAgICAgICxbUGFyUk1QM10NCiAgICAgICxbUGFyUDFBXQ0KICAgICAgLFtQYXJQMkFdDQogICAgICAsW1BhclAzQV0NCiAgICAgICxbUGFyUDRBXQ0KICAgICAgLFtQYXJQNUFdDQogIEZST00gSm91cm5lZVByb2R1Y3Rpb24NCiAgV0hFUkUgTnVtUmFwcG9ydCA9IEBOdW1SYXBwb3J0PC9TcWw+PC9RdWVyeT48UmVzdWx0U2NoZW1hPjxEYXRhU2V0IE5hbWU9InNxbERhdGFTb3VyY2UxIj48VmlldyBOYW1lPSJRdWVyeSI+PEZpZWxkIE5hbWU9IlBhckRDTCIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJHcnBJbnRlcjJEQ0wiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwSW50ZXIzRENMIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEludGVyNERDTCIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJHcnBJbnRlcjVEQ0wiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluNjdEQ0wiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluOERDTCIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJHcnBGaW45RENMIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEZpbjEwRENMIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEZpbjExRENMIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEZpbjEyRENMIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEZpbjEzRENMIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEludGVyMk1WUiIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJHcnBJbnRlcjNNVlIiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwSW50ZXI0TVZSIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEludGVyNU1WUiIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJHcnBGaW42N01WUiIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJHcnBGaW44TVZSIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEZpbjlNVlIiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluMTBNVlIiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluMTFNVlIiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluMTJNVlIiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluMTNNVlIiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwSW50ZXIyVkwiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwSW50ZXIzVkwiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwSW50ZXI0VkwiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwSW50ZXI1VkwiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluNjdWTCIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJHcnBGaW44VkwiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluOVZMIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEZpbjEwVkwiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluMTFWTCIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJHcnBGaW4xMlZMIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEZpbjEzVkwiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwSW50ZXIyQSIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJHcnBJbnRlcjNBIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEludGVyNEEiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwSW50ZXI1QSIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJHcnBGaW42N0EiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluOEEiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluOUEiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluMTBBIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckdycEZpbjExQSIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJHcnBGaW4xMkEiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyR3JwRmluMTNBIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhclZNQ1YiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyTFBCIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhckxCTiIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJMQkYiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyQ00iIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyVk1DRTUiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyTFQiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyTFEiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyUlBNMSIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJSTVAyIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhclJNUDMiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyUDFBIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhclAyQSIgVHlwZT0iRG91YmxlIiAvPjxGaWVsZCBOYW1lPSJQYXJQM0EiIFR5cGU9IkRvdWJsZSIgLz48RmllbGQgTmFtZT0iUGFyUDRBIiBUeXBlPSJEb3VibGUiIC8+PEZpZWxkIE5hbWU9IlBhclA1QSIgVHlwZT0iRG91YmxlIiAvPjwvVmlldz48L0RhdGFTZXQ+PC9SZXN1bHRTY2hlbWE+PENvbm5lY3Rpb25PcHRpb25zIENsb3NlQ29ubmVjdGlvbj0idHJ1ZSIgLz48L1NxbERhdGFTb3VyY2U+" />
+  </ComponentStorage>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.2" Ref="3" Content="System.Int32" Type="System.Type" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

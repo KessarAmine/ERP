@@ -1,0 +1,193 @@
+﻿@using DevKbfSteel.Helpers
+<html style="height:100%;">
+<Dashboard CurrencyCulture="en-US">
+
+</Dashboard>
+<body style="height: 98%;">
+    @(Html.DevExtreme().Chart()
+    .ID("chart")
+    .CommonSeriesSettings(s => s.ArgumentField("NomCage"))
+    .Panes(p => {
+        p.Add().Name("TopPane");
+        p.Add().Name("BottomPane");
+    })
+    .Series(s => {
+
+        s.Add()
+        .Pane("TopPane")
+            .Type(SeriesType.Bar)
+            .ValueField("NombreInterventionsMecanique")
+            .Name("Nombre Interventions Mécanique")
+            .Label(l => l
+                .Visible(true)
+                .CustomizeText(@<text>
+                    function (){
+                        return this.valueText;
+                    }
+                </text>));
+        s.Add()
+        .Pane("TopPane")
+            .Type(SeriesType.Bar)
+            .ValueField("NombreInterventionsElectrique")
+            .Name("Nombre Interventions Electrique")
+            .Label(l => l
+                .Visible(true)
+                .CustomizeText(@<text>
+                    function (){
+                        return this.valueText;
+                    }
+                </text>));
+        s.Add()
+            .Pane("BottomPane")
+            .Type(SeriesType.Bar)
+            .ValueField("DureeInterventionsMecanique")
+            .Name("Duree Interventions Mécanique")
+            .Label(l => l
+                .Visible(true)
+                .CustomizeText(@<text>
+                    function (){
+                        return this.valueText;
+                    }
+                </text>));
+        s.Add()
+            .Pane("BottomPane")
+            .Type(SeriesType.Bar)
+            .ValueField("DureeInterventionsElectrique")
+            .Name("Duree Interventions Electrique")
+            .Label(l => l
+                .Visible(true)
+                .CustomizeText(@<text>
+                    function (){
+                        return this.valueText;
+                    }
+                </text>));
+    })
+    .ValueAxis(a => {
+        a.Add()
+            .Pane("BottomPane")
+            .Grid(g => g.Visible(true))
+            .Title(t => t.Text("Durée(minutes)"));
+        a.Add()
+            .Pane("TopPane")
+            .Grid(g => g.Visible(true))
+            .Title(t => t.Text("Comptage"));
+    })
+    .Legend(l => l
+        .VerticalAlignment(VerticalEdge.Bottom)
+        .HorizontalAlignment(HorizontalAlignment.Center)
+    )
+    .Export(e => e.Enabled(true))
+    .Title(t => t.Text("Etat des cages (suivi des interventions)"))
+    .DataSource(d => d.Mvc()
+        .Controller("Dashboard")
+        .LoadAction("GetCagesTravauxMethode")
+    )
+)
+        @(Html.DevExtreme().PieChart()
+    .ID("pie")
+    .Size(s => s.Width(700))
+    .Palette(VizPalette.DarkMoon)
+    .Legend(l => l
+    .HorizontalAlignment(HorizontalAlignment.Center)
+    .VerticalAlignment(VerticalEdge.Bottom)
+    )
+    .Series(s => {
+    s.Add()
+         .ArgumentField("StatutDT")
+         .ValueField("CountDt")
+         .Label(l => l
+             .Visible(true)
+             .Connector(c => c
+                 .Visible(true)
+                 .Width(1)
+             )
+         .Format(Format.FixedPoint)
+             .CustomizeText(@<text>
+                function (point) {
+                    return point.argumentText + ": " + point.valueText;
+                }
+            </text>)
+     );
+    }
+    )
+    .Title("Etat des demandes de travails Reçues")
+    .Export(e => e.Enabled(true))
+    .OnPointClick(@<text>
+        function (e) {
+            var point = e.target;
+            toggleVisibility(point);
+        }
+    </text>)
+    .OnLegendClick(@<text>
+        function (e) {
+            var arg = e.target;
+            toggleVisibility(this.getAllSeries()[0].getPointsByArg(arg)[0]);
+        }
+    </text>)
+    .DataSource(d => d.Mvc()
+        .Controller("Dashboard")
+        .LoadAction("GetStatutDtsMethode")
+    )
+)
+
+        @(Html.DevExtreme().PieChart()
+    .ID("pie2")
+    .Size(s => s.Width(700))
+    .Palette(VizPalette.DarkMoon)
+    .Legend(l => l
+    .HorizontalAlignment(HorizontalAlignment.Center)
+    .VerticalAlignment(VerticalEdge.Bottom)
+    )
+    .Series(s => {
+    s.Add()
+         .ArgumentField("StatutDT")
+         .ValueField("CountDt")
+         .Label(l => l
+             .Visible(true)
+             .Connector(c => c
+                 .Visible(true)
+                 .Width(1)
+             )
+         .Format(Format.FixedPoint)
+             .CustomizeText(@<text>
+                function (point) {
+                    return point.argumentText + ": " + point.valueText;
+                }
+            </text>)
+     );
+    }
+    )
+    .Title("Etat des demandes de travails Reçues")
+    .Export(e => e.Enabled(true))
+    .OnPointClick(@<text>
+        function (e) {
+            var point = e.target;
+            toggleVisibility(point);
+        }
+    </text>)
+    .OnLegendClick(@<text>
+        function (e) {
+            var arg = e.target;
+            toggleVisibility(this.getAllSeries()[0].getPointsByArg(arg)[0]);
+        }
+    </text>)
+    .DataSource(d => d.Mvc()
+        .Controller("Dashboard")
+        .LoadAction("GetStatutDtsMethode")
+    )
+)
+    </body>
+</html>
+
+<script>
+    function toggleVisibility(item) {
+        if (item.isVisible()) {
+            item.hide();
+        } else {
+            item.show();
+        }
+    }
+    function GetTravaux() {
+        var travaux = @XpertHelper.getTravauxDashboard();
+    }
+</script>

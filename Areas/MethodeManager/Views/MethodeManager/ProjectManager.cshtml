@@ -1,0 +1,74 @@
+﻿@using DevKbfSteel.Models
+@using DevKbfSteel.Areas.MethodeManager.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+@{
+    ViewData["Title"] = "Méthodes-Gestion des projets";
+    Layout = "~/Views/Shared/_LayoutMethodeManager.cshtml";
+}
+@(Html.DevExtreme().Gantt<Tasks>()
+        .ID("gantt")
+        .Tasks(t => t
+            .DataSource(ds => ds.Array().Data(SampleData.GanttTaskss).Key("ID"))
+            .KeyExpr("ID")
+            .TitleExpr("Title")
+            .ParentIdExpr("ParentId")
+            .StartExpr("Start")
+            .EndExpr("End")
+            .ProgressExpr("Progress")
+        )
+        .Dependencies(d => d
+            .DataSource(ds => ds.Array().Data(SampleData.GanttDependencies).Key("ID"))
+            .KeyExpr("ID")
+            .PredecessorIdExpr("PredecessorId")
+            .SuccessorIdExpr("SuccessorId")
+            .TypeExpr("Type")
+        )
+        .Resources(r => r
+            .DataSource(ds => ds.Array().Data(SampleData.GanttResources).Key("ID"))
+            .KeyExpr("ID")
+            .TextExpr("Text")
+        )
+        .ResourceAssignments(ra => ra
+            .DataSource(ds => ds.Array().Data(SampleData.GanttResourceAssignments).Key("ID"))
+            .KeyExpr("ID")
+            .TaskIdExpr("TaskId")
+            .ResourceIdExpr("ResourceId")
+        )
+        .Editing(e => e.Enabled(true))
+        .Validation(v => v.AutoUpdateParentTasks(true))
+        .Toolbar(t => {
+            t.Items(i => {
+                i.Add().Name(GanttToolbarItem.Undo);
+                i.Add().Name(GanttToolbarItem.Redo);
+                i.Add().Name(GanttToolbarItem.Separator);
+                i.Add().Name(GanttToolbarItem.CollapseAll);
+                i.Add().Name(GanttToolbarItem.ExpandAll);
+                i.Add().Name(GanttToolbarItem.Separator);
+                i.Add().Name(GanttToolbarItem.AddTask);
+                i.Add().Name(GanttToolbarItem.DeleteTask);
+                i.Add().Name(GanttToolbarItem.Separator);
+                i.Add().Name(GanttToolbarItem.ZoomIn);
+                i.Add().Name(GanttToolbarItem.ZoomOut);
+            });
+        })
+        .Columns(columns => {
+            columns.AddFor(m => m.Title)
+                .Caption("Subject")
+                .Width(300);
+            columns.AddFor(m => m.Start)
+                .Caption("Start Date");
+            columns.AddFor(m => m.End)
+                .Caption("End Date");
+        })
+        .ScaleType(GanttScaleType.Weeks)
+        .TaskListWidth(500)
+    )
+<script>
+
+</script>

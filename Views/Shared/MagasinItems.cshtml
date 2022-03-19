@@ -1,0 +1,41 @@
+﻿@model IEnumerable<DevKbfSteel.Areas.MagasinManager.Models.GroupedMenuItem>
+@(Html.DevExtreme().List()
+        .Width(300)
+        .DataSource(Model)
+        .OnInitialized("list_onInitialized")
+        .Grouped(true)
+        .CollapsibleGroups(true)
+        .GroupTemplate(@<text>
+            <div>Assigned: <%- key %></div>
+        </text>)
+        .CollapsibleGroups(true)
+        .KeyExpr("Path")
+        .SelectionMode(ListSelectionMode.Single)
+        .OnSelectionChanged("list_onSelectionChanged")
+)
+<script type="text/javascript">
+    function button_clickHandler(e) {
+        var drawer = $("#layout-drawer").dxDrawer("instance");
+        drawer.toggle();
+        sessionStorage.setItem("isDrawerOpen", JSON.stringify(drawer.option("opened")));
+    }
+    function list_onSelectionChanged(e) {
+        document.location.pathname = e.addedItems[0].path;
+        $("#layout-drawer").dxDrawer("hide");
+
+    }
+    function list_onInitialized(e) {
+        var drawer = $("#layout-drawer").dxDrawer("instance");
+        var elementsArray = document.getElementsByClassName("dx-item dx-list-item");
+        var i;
+        for (i = 0; i < elementsArray.length; i++) {
+            var sub = elementsArray[i];
+            if (sub.innerText == "Demande de travail envoyees") {
+                console.log("Innnnn");
+            }
+        }
+        const t = "@Url.Action()";
+        e.component.option("selectedItemKeys", ["@Url.Action()"]);
+    }
+
+</script>

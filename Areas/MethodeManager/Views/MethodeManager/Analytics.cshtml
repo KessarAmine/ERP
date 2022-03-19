@@ -1,0 +1,161 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+@{
+    ViewData["Title"] = "Méthodes-Analytics";
+    Layout = "~/Views/Shared/_LayoutMethodeManager.cshtml";
+}
+
+@(Html.DevExtreme().TabPanel()
+        .Height("100%")
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Loi de Paréto")
+                .Template(new TemplateName("Pareto"));
+            items.Add()
+                .Title("Loi d'Ichigawa")
+                .Template(new TemplateName("Ichigawa"));
+        })
+)
+@using (Html.DevExtreme().NamedTemplate("Pareto"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Height("100%")
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Arrets Correctif")
+                .Template(new TemplateName("ArretsCorrectif"));
+            items.Add()
+                .Title("Arrets Préventifs")
+                .Template(new TemplateName("ArretsPréventifs"));
+        })
+        )
+
+}
+
+@using (Html.DevExtreme().NamedTemplate("ArretsCorrectif"))
+{
+
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Models.AnalyticsTravauxMachines>()
+ .DataSource(ds => ds.Mvc()
+     .Controller("Dashboard")
+     .LoadAction("GetMachinesTravauxAnalytics")
+     .Key("NomMachine")
+     .LoadParams(new { Codemaintenance = 0}))
+     .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+     .Scrolling(scrolling => scrolling
+     .ScrollByContent(true)
+     .ShowScrollbar(ShowScrollbarMode.Always)
+     .Mode(GridScrollingMode.Virtual))
+     .Height("95%")
+     .RemoteOperations(true)
+     .NoDataText("Aucune donnée à afficher")
+     .CacheEnabled(true)
+     .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+     .Columns(columns => {
+         columns.AddFor(m => m.NomMachine).Caption("Machine");
+         columns.AddFor(m => m.DureeInterventionsCorrectif).Caption("Temps arret Correctif");
+         columns.AddFor(m => m.PourcentageDureeInterventionsCorrectif).Caption("% d'arret Correctif");
+         columns.AddFor(m => m.PourcentageCumuleDureeInterventionsCorrectif).Caption("% Cumulé d'arret Correctif");
+     })
+    .Sorting(sorting => sorting.Mode(GridSortingMode.Single))
+    .Summary(s => s.TotalItems(items =>
+    {
+        items.AddFor(m => m.DureeInterventionsCorrectif)
+            .SummaryType(SummaryType.Sum)
+            .ShowInColumn("DureeInterventionsCorrectif")
+            .DisplayFormat("Total: {0}");
+    }))
+
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+)
+    @(Html.DevExtreme().Popup()
+.ID("Add-popup")
+.ShowTitle(true)
+.Title("Ajouter une demande Service")
+.Visible(false)
+.DragEnabled(false)
+.CloseOnOutsideClick(true)
+)
+}
+@using (Html.DevExtreme().NamedTemplate("ArretsPréventifs"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Models.AnalyticsTravauxMachines>()
+ .DataSource(ds => ds.Mvc()
+     .Controller("Dashboard")
+     .LoadAction("GetMachinesTravauxAnalytics")
+     .Key("NomMachine")
+     .LoadParams(new { Codemaintenance = 1}))
+     .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+     .Scrolling(scrolling => scrolling
+     .ScrollByContent(true)
+     .ShowScrollbar(ShowScrollbarMode.Always)
+     .Mode(GridScrollingMode.Virtual))
+     .Height("95%")
+     .RemoteOperations(true)
+     .NoDataText("Aucune donnée à afficher")
+     .CacheEnabled(true)
+     .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+     .Columns(columns => {
+         columns.AddFor(m => m.NomMachine).Caption("Machine");
+         columns.AddFor(m => m.DureeInterventionsPréventif).Caption("Temps arret Préventif");
+         columns.AddFor(m => m.PourcentageDureeInterventionsPréventif).Caption("% d'arret Préventif");
+         columns.AddFor(m => m.PourcentageCumuleDureeInterventionsPréventif).Caption("% Cumulé d'arret Préventif");
+     })
+    .Sorting(sorting => sorting.Mode(GridSortingMode.Single))
+    .Summary(s => s.TotalItems(items =>
+    {
+        items.AddFor(m => m.DureeInterventionsPréventif)
+            .SummaryType(SummaryType.Sum)
+            .ShowInColumn("DureeInterventionsPréventif")
+            .DisplayFormat("Total : {0} Mns");
+    }))
+
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+)
+    @(Html.DevExtreme().Popup()
+.ID("Add-popup")
+.ShowTitle(true)
+.Title("Ajouter une demande Service")
+.Visible(false)
+.DragEnabled(false)
+.CloseOnOutsideClick(true)
+)
+}
+<script>
+    function receptionCell_prepared(e) {
+        if (e.rowType === "data" && e.column.command === "edit") {
+            var isEditing = e.row.isEditing, $links = e.cellElement.find(".dx-link");
+            $links.text("");
+            if (isEditing) {
+                $links.filter(".dx-link-save").addClass("dx-icon-save");
+                $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+            } else {
+                $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+            }
+        }
+    }
+
+</script>

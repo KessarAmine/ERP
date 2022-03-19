@@ -1,0 +1,253 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+@{
+    ViewData["Title"] = "Magasin - Configuration";
+    Layout = "~/Views/Shared/_LayoutMagasinManager.cshtml";
+}
+
+@(Html.DevExtreme().TabPanel()
+.Height("100%")
+.Items(items =>
+{
+    items.Add()
+        .Title("Familles Articles")
+        .Template(new TemplateName("FAGrid"));
+    items.Add()
+        .Title("Sous Famille Articles")
+        .Template(new TemplateName("SFAGrid"));
+    items.Add()
+        .Title("Centres de frais")
+        .Template(new TemplateName("CFGrid"));
+})
+)
+@using (Html.DevExtreme().NamedTemplate("FAGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkFamillePdr>()
+            .DataSource(ds => ds.Mvc()
+            .Controller("ConfigurationMagasin")
+            .LoadAction("GetFamilles")
+            .InsertAction("PostFamilles")
+            .UpdateAction("PutFamilles")
+            .DeleteAction("DeleteFamilles")
+            .Key("CodeFamillePdr")
+            )
+     .Scrolling(scrolling => scrolling
+     .ScrollByContent(true)
+     .ShowScrollbar(ShowScrollbarMode.Always)
+     .Mode(GridScrollingMode.Virtual))
+    .RemoteOperations(true)
+    .NoDataText("Aucune donnée à afficher")
+    .CacheEnabled(true)
+    .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+    .Columns(columns => {
+        columns.AddFor(m => m.CodeFamillePdr);
+        columns.AddFor(m => m.DesignationFamillePdr);
+    })
+   .Height("95%")
+   .ColumnChooser(cc => cc
+   .Enabled(true)
+   .AllowSearch(true))
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(true);
+       editing.AllowDeleting(true);
+       editing.AllowAdding(true);
+       editing.Mode(GridEditMode.Form);
+   })
+)
+}
+@using (Html.DevExtreme().NamedTemplate("SFAGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkSousFamillePdr>()
+            .DataSource(ds => ds.Mvc()
+            .Controller("ConfigurationMagasin")
+            .LoadAction("GetSousFamille")
+            .InsertAction("PostSousFamille")
+            .UpdateAction("PutSousFamille")
+            .DeleteAction("DeleteSousFamille")
+            .Key("CodeSousFamille")
+            )
+     .Scrolling(scrolling => scrolling
+     .ScrollByContent(true)
+     .ShowScrollbar(ShowScrollbarMode.Always)
+     .Mode(GridScrollingMode.Virtual))
+    .RemoteOperations(true)
+    .NoDataText("Aucune donnée à afficher")
+    .CacheEnabled(true)
+    .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+    .Columns(columns => {
+        columns.AddFor(m => m.CodeSousFamille);
+        columns.AddFor(m => m.CodeFamille)
+            .Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi().Controller("ConfigurationMagasin").LoadAction("FamilleLookup").Key("Value"))
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            .AllowClearing(true));
+        columns.AddFor(m => m.DesignationSousFamille);
+    })
+   .Height("95%")
+   .ColumnChooser(cc => cc
+   .Enabled(true)
+   .AllowSearch(true))
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(true);
+       editing.AllowDeleting(true);
+       editing.AllowAdding(true);
+       editing.Mode(GridEditMode.Form);
+   })
+)
+}
+@using (Html.DevExtreme().NamedTemplate("CFGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkCentreFrais>()
+            .DataSource(ds => ds.Mvc()
+            .Controller("ConfigurationMagasin")
+            .LoadAction("GetCentreFrais")
+            .InsertAction("PostCentreFrais")
+            .UpdateAction("PutCentreFrais")
+            .DeleteAction("DeleteCentreFrais")
+            .Key("CodeCentreFrais")
+            )
+     .Scrolling(scrolling => scrolling
+     .ScrollByContent(true)
+     .ShowScrollbar(ShowScrollbarMode.Always)
+     .Mode(GridScrollingMode.Virtual))
+    .RemoteOperations(true)
+    .NoDataText("Aucune donnée à afficher")
+    .CacheEnabled(true)
+    .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+    .Columns(columns => {
+        columns.AddFor(m => m.CodeCentreFrais).AllowEditing(false);
+        columns.AddFor(m => m.DesignationCentreFrais);
+    })
+   .Height("95%")
+   .ColumnChooser(cc => cc
+   .Enabled(true)
+   .AllowSearch(true))
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(true);
+       editing.AllowDeleting(true);
+       editing.AllowAdding(true);
+       editing.Mode(GridEditMode.Form);
+   })
+)
+}
+
+<script>
+
+    function gridBoxIdEmployee_valueChanged(e) {
+        var $dataGrid = $("#embedded-datagridMultipleIdEmployee");
+        if ($dataGrid.length) {
+            var dataGrid = $dataGrid.dxDataGrid("instance");
+            dataGrid.selectRows(e.value, false);
+        }
+    }
+
+    function gridBox_valueChanged(args, setValueMethod) {
+        var $dataGrid = $("#embedded-datagridMultipleIdEmployee");
+
+        if ($dataGrid.length) {
+            var dataGrid = $dataGrid.dxDataGrid("instance");
+            dataGrid.selectRows(args.value, false);
+        }
+        setValueMethod(args.value);
+    }
+    function onSelectionChanged(e, dropDownBoxInstance) {
+        var keys = e.selectedRowKeys;
+        dropDownBoxInstance.option("value", keys);
+        console.log(dropDownBoxInstance);
+    }
+
+    function refreshButton_click() {
+        DevExpress.ui.notify("Rafraichissement en cours!");
+        var demandesTravailGrid = $("#RhContratsDesEmployesGrid").dxDataGrid("instance");
+        var demandesTravailDS = demandesTravailGrid.getDataSource();
+        demandesTravailGrid.beginCustomLoading("Chargement en cours...");
+        demandesTravailDS.reload();
+        demandesTravailGrid.refresh();
+        demandesTravailGrid.endCustomLoading();
+    }
+
+    function addButton_click() {
+        DevExpress.ui.notify("Ajouter une demande!");
+        window.location.href = '@Url.Action("NewReception")';
+    }
+
+    function dateDebutBox_value() {
+        var dateDebutBox = $("#FilterDateDebut").dxDateBox("instance");
+        console.log(dateDebutBox.option('value'));
+        return new Date(dateDebutBox.option('value')).toJSON();
+    }
+
+    function dateFinBox_value() {
+        var dateFinBox = $("#FilterDateFin").dxDateBox("instance");
+        console.log(dateFinBox.option('value'));
+        return new Date(dateFinBox.option('value')).toJSON();
+    }
+
+    function receptionCell_prepared(e) {
+        if (e.rowType === "data" && e.column.command === "edit") {
+            var isEditing = e.row.isEditing, $links = e.cellElement.find(".dx-link");
+            $links.text("");
+            if (isEditing) {
+                $links.filter(".dx-link-save").addClass("dx-icon-save");
+                $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+            } else {
+                $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+            }
+        }
+        if (e.rowType === "data") {
+            var dangerColor = "#f54542";
+            if (e.column.dataField == "DateFinAmbouche") {
+                var Today = new Date();
+                var str = e.value;
+                var aday = new Date();
+                aday = str;
+                console.log(aday);
+                console.log(aday.getMonth() + 1);
+                var month = Today.getMonth() + 1;
+                if (month >= 12) {
+                    month = 0;
+                }
+                console.log(month);
+                if ((aday.getMonth() + 1 - month ) <= 2) {
+                    $(e.cellElement).get(0).style.backgroundColor = dangerColor;
+                }
+            }
+        }
+    }
+
+</script>

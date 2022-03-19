@@ -1,0 +1,93 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+@using DevKbfSteel.Areas.MagasinManager.Models;
+
+@{
+    ViewData["Title"] = "Magasin-Liste Fournisseurs";
+    Layout = "~/Views/Shared/_LayoutMagasinManager.cshtml";
+}
+@(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.ApproFournisseurs>()
+.ID("Fournissuers")
+.DataSource(ds => ds.Mvc()
+.Controller("Fournisseurs")
+.LoadAction("GetFournisseurs")
+.InsertAction("PostFournisseurs")
+.UpdateAction("PutFournisseurs")
+.DeleteAction("DeleteFournisseurs")
+.Key("NumeroFournisseur")
+)
+.RemoteOperations(true)
+.NoDataText("Aucune donnée à afficher")
+.CacheEnabled(true)
+.SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+.Columns(columns => {
+    columns.AddFor(m => m.SocieteFournisseur).Caption("Nom");
+    columns.AddFor(m => m.Adresse);
+    columns.AddFor(m => m.Fonction);
+    columns.AddFor(m => m.Telephone);
+    columns.AddFor(m => m.Gmail);
+    columns.AddFor(m => m.Contact);
+    columns.AddFor(m => m.Nrc).Visible(false);
+    columns.AddFor(m => m.Mf).Visible(false);
+    columns.AddFor(m => m.Art);
+    columns.AddFor(m => m.CodePostal).Visible(false);
+    columns.AddFor(m => m.Fax).Visible(false);
+    columns.AddFor(m => m.Pays).Visible(false);
+    columns.AddFor(m => m.Ville).Visible(false);
+})
+.ColumnChooser(cc => cc
+.Enabled(true)
+.AllowSearch(true))
+.Height("95%")
+.Export(e => e.Enabled(true).AllowExportSelectedData(true))
+.FilterRow(f => f.Visible(true))
+.HeaderFilter(headerfilter => headerfilter.Visible(true))
+.GroupPanel(p => p.Visible(true))
+.AllowColumnReordering(true)
+.AllowColumnResizing(true)
+.OnCellPrepared("receptionCell_prepared")
+.Selection(s => s.Mode(SelectionMode.Multiple))
+.Editing(editing =>
+{
+    editing.AllowUpdating(true);
+    editing.AllowDeleting(true);
+    editing.AllowAdding(true);
+    editing.Mode(GridEditMode.Form);
+})
+.OnRowExpanding("CollpaseAll")
+.OnRowExpanded("refreshButton_click")
+)
+<script>
+    function refreshButton_click() {
+        DevExpress.ui.notify("Rafraichissement en cours!");
+        var demandesTravailGrid = $("#Fournissuers").dxDataGrid("instance");
+        var demandesTravailDS = demandesTravailGrid.getDataSource();
+        demandesTravailGrid.beginCustomLoading("Chargement en cours...");
+        demandesTravailDS.reload();
+        demandesTravailGrid.refresh();
+        demandesTravailGrid.endCustomLoading();
+    }
+    function receptionCell_prepared(e) {
+        if (e.rowType === "data" && e.column.command === "edit") {
+            var isEditing = e.row.isEditing, $links = e.cellElement.find(".dx-link");
+            $links.text("");
+            if (isEditing) {
+                $links.filter(".dx-link-save").addClass("dx-icon-save");
+                $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+            } else {
+                $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+            }
+        }
+    }
+    function CollpaseAll(e) {
+        e.component.collapseAll(-1);
+    }
+
+</script>

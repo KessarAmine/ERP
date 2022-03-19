@@ -1,0 +1,86 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+@{
+    ViewData["Title"] = "Méthodes-PDR à surveiller";
+    Layout = "~/Views/Shared/_LayoutMethodeManager.cshtml";
+}
+
+@(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.StkPdrStockSurveillenceService>()
+ .DataSource(ds => ds.Mvc()
+     .Controller("StkPdrs")
+     .LoadAction("GetPDRSurveille")
+     .InsertAction("PostPDRSurveille")
+     .UpdateAction("PutPDRSurveille")
+     .DeleteAction("DeletePDRSurveille")
+     .Key("Id")
+     .LoadParams(new { CodeStructure = XpertHelper.CodeMethode}))
+     .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+     .Scrolling(scrolling => scrolling
+     .ScrollByContent(true)
+     .ShowScrollbar(ShowScrollbarMode.Always)
+     .Mode(GridScrollingMode.Virtual))
+     .Height("95%")
+     .RemoteOperations(true)
+     .ID("demandesTravailGrid")
+     .NoDataText("Aucune donnée à afficher")
+     .CacheEnabled(true)
+     .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+ .Columns(columns => {
+
+ columns.AddFor(m => m.CodePdr)
+     .EditCellTemplate(@<text> @Html.Partial("DxDropDownBoxArticlesFourniture") </text>)
+     .Lookup(lookup => lookup
+      .DataSource(ds => ds.WebApi().Controller("StkPdrs").LoadAction("DesignationPdrLookup").Key("Value"))
+      .ValueExpr("Value")
+      .DisplayExpr("Text")
+      .AllowClearing(true));
+
+     columns.AddFor(m => m.QteAlerte);
+
+     columns.Add()
+        .Type(GridCommandColumnType.Buttons)
+        .Width(110)
+        .Buttons(b => {
+            b.Add().Name(GridColumnButtonName.Edit);
+            b.Add().Name(GridColumnButtonName.Delete);
+        });
+ })
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(true);
+       editing.AllowDeleting(true);
+       editing.AllowAdding(true);
+       editing.Mode(GridEditMode.Row);
+   })
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+)
+
+
+<script>
+    function receptionCell_prepared(e) {
+        if (e.rowType === "data" && e.column.command === "edit") {
+            var isEditing = e.row.isEditing, $links = e.cellElement.find(".dx-link");
+            $links.text("");
+            if (isEditing) {
+                $links.filter(".dx-link-save").addClass("dx-icon-save");
+                $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+            } else {
+                $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+            }
+        }
+    }
+</script>

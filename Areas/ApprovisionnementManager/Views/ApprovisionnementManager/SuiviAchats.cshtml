@@ -1,0 +1,418 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@{
+    ViewData["Title"] = "Bons de Production";
+    Layout = "~/Views/Shared/_LayoutApprovisionnementManager.cshtml";
+}
+
+@(Html.DevExtreme().Toolbar()
+    .Items(items =>
+    {
+        items.Add()
+           .Widget(w => w
+           .Button()
+           .Icon("refresh")
+           .OnClick("refreshButton_click")
+       )
+       .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+       .Location(ToolbarItemLocation.Before);
+
+        items.Add()
+            .Widget(w => w.DateBox().Type(DateBoxType.Date).ApplyButtonText("Appliquer").Value(DateTime.Now.Date).DisplayFormat("dd/MM/yyyy").ID("FilterDateDebut"))
+            .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+            .Location(ToolbarItemLocation.Before);
+
+        items.Add()
+            .Widget(w => w.DateBox().Type(DateBoxType.Date).ApplyButtonText("Appliquer").Value(DateTime.Now.Date).DisplayFormat("dd/MM/yyyy").ID("FilterDateFin"))
+            .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+            .Location(ToolbarItemLocation.Before)
+    .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+    .Location(ToolbarItemLocation.Before);
+
+    }
+    )
+)
+@(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.ApproDemandeAchats>()
+        .ID("DemandesAchats")
+        .DataSource(ds => ds.Mvc()
+        .Controller("ApproDemandeAchats")
+        .LoadAction("Get")
+        .InsertAction("Post")
+        .UpdateAction("Put")
+        .DeleteAction("Delete")
+        .Key("NumDemandeAchat")
+        .LoadParams(new { dateDebut = new JS("dateDebutBox_value"), dateFin = new JS("dateFinBox_value") })
+
+    )
+    .RemoteOperations(true)
+    .Columns(columns => {
+
+        columns.AddFor(m => m.NumDemandeAchat);
+        columns.AddFor(m => m.DateDemandeAchat)
+        .Format("dd/MM/yyyy HH:mm")
+        .DataType(GridColumnDataType.DateTime)
+        .HeaderFilter(headerfilter => headerfilter.GroupInterval(HeaderFilterGroupInterval.Month));
+
+
+        columns.AddFor(m => m.CodeServiceDemandeur)
+        .Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi()
+            .Controller("ApproDemandeAchats")
+            .LoadAction("ApproServicesDemandeursLookup")
+            .Key("Value"))
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            
+        );
+
+    })
+    .RemoteOperations(true)
+    .MasterDetail(md => md
+    .Enabled(true)
+    .Template(new TemplateName("SuiviDemande"))
+    )
+
+    .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(headerfilter => headerfilter.Visible(true))
+    .GroupPanel(p => p.Visible(true))
+    .AllowColumnReordering(true)
+    .AllowColumnResizing(true)
+    .OnCellPrepared("receptionCell_prepared")
+    .NoDataText("Aucune donnée à afficher")
+    .CacheEnabled(true)
+    .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+    .RemoteOperations(true)
+    .Selection(s => s.Mode(SelectionMode.Multiple))
+    .Editing(editing =>
+    {
+        editing.AllowUpdating(true);
+        editing.AllowDeleting(true);
+        editing.AllowAdding(true);
+        editing.Mode(GridEditMode.Popup)
+        .Popup(p => p.Title("Editer Demande")
+        .ShowTitle(true)
+        .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+    })
+)
+
+
+@using (Html.DevExtreme().NamedTemplate("SuiviDemande"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Articles Demandes")
+                .Template(new TemplateName("ArticlesGrid"))
+                .Option("Articles", new { id = new JS("data.NumDemandeAchat") });
+            items.Add()
+                .Title("Bons Entrees")
+                .Template(new TemplateName("BonsGrid"))
+                .Option("Bons", new { id = new JS("data.NumDemandeAchat") });
+        })
+        )
+}
+
+
+@using (Html.DevExtreme().NamedTemplate("ArticlesGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.ApproArticlesDemandes>()
+        .ShowBorders(true)
+        .LoadPanel(l => l.Enabled(false))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.NumeroDemande).Caption("#Demande");
+            columns.AddFor(m => m.CodeArticle).Caption("Desgination Article");
+            columns.AddFor(m => m.Qte);
+            columns.AddFor(m => m.QteLivrees).Caption("QTE Livree");
+            columns.AddFor(m => m.QteReste).Caption("QTE Reste")
+            .CalculateCellValue(@<text>
+                    function(data) {
+                        return [data.Qte - data.QteLivrees];
+                    }
+                </text>);
+            ;
+
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b =>
+                {
+                    b.Add().Name(GridColumnButtonName.Edit);
+                    b.Add().Name(GridColumnButtonName.Delete);
+                });
+        })
+         .DataSource(ds => ds.Mvc()
+             .Controller("ApproDemandeAchats")
+             .LoadAction("GetArticles")
+             .InsertAction("PostArticles")
+             .DeleteAction("DeleteArticles")
+             .UpdateAction("PutArticles")
+             .Key("Id")
+             .LoadParams(new
+             {
+                 id = new JS("Articles.id")
+             }
+             )
+            )
+        .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+        .FilterRow(f => f.Visible(true))
+        .HeaderFilter(headerfilter => headerfilter.Visible(true))
+        .GroupPanel(p => p.Visible(true))
+        .AllowColumnReordering(true)
+        .AllowColumnResizing(true)
+        .OnCellPrepared("receptionCell_prepared")
+        .NoDataText("Aucune donnée à afficher")
+        .CacheEnabled(true)
+        .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+        .RemoteOperations(true)
+        .Selection(s => s.Mode(SelectionMode.Multiple))
+        .Editing(editing =>
+        {
+            editing.AllowUpdating(true);
+            editing.AllowDeleting(true);
+            editing.AllowAdding(true);
+            editing.Mode(GridEditMode.Popup)
+            .Popup(p => p.Title("Editer Demande")
+            .ShowTitle(true)
+            .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+        })
+    )
+}
+
+@using (Html.DevExtreme().NamedTemplate("BonsGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.ApproBonsEntrees>()
+        .ShowBorders(true)
+        .LoadPanel(l => l.Enabled(false))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.NumBon).Caption("#Bon");
+            columns.AddFor(m => m.DateEntree).Caption("Date Entree")
+            .Format("dd/MM/yyyy HH:mm")
+            .DataType(GridColumnDataType.DateTime)
+            .HeaderFilter(headerfilter => headerfilter.GroupInterval(HeaderFilterGroupInterval.Month));
+
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b =>
+                {
+                    b.Add().Name(GridColumnButtonName.Edit);
+                    b.Add().Name(GridColumnButtonName.Delete);
+                });
+        })
+         .DataSource(ds => ds.Mvc()
+             .Controller("ApproDemandeAchats")
+             .LoadAction("GetBons")
+             .InsertAction("PostBons")
+             .DeleteAction("DeleteBons")
+             .UpdateAction("PutBons")
+             .Key("NumBon")
+             .LoadParams(new
+             {
+                 id = new JS("Bons.id")
+             }
+             )
+            )
+        .MasterDetail(md => md
+        .Enabled(true)
+        .Template(new TemplateName("ArticlesEntrees"))
+        )
+        .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+        .FilterRow(f => f.Visible(true))
+        .HeaderFilter(headerfilter => headerfilter.Visible(true))
+        .GroupPanel(p => p.Visible(true))
+        .AllowColumnReordering(true)
+        .AllowColumnResizing(true)
+        .OnCellPrepared("receptionCell_prepared")
+        .NoDataText("Aucune donnée à afficher")
+        .CacheEnabled(true)
+        .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+        .RemoteOperations(true)
+        .Selection(s => s.Mode(SelectionMode.Multiple))
+        .Editing(editing =>
+        {
+            editing.AllowUpdating(true);
+            editing.AllowDeleting(true);
+            editing.AllowAdding(true);
+            editing.Mode(GridEditMode.Popup)
+            .Popup(p => p.Title("Editer Demande")
+            .ShowTitle(true)
+            .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+        })
+    )
+}
+
+
+
+@using (Html.DevExtreme().NamedTemplate("ArticlesEntrees"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Articles Entrees")
+                .Template(new TemplateName("ArticlesEntreesGrid"))
+                .Option("ArticlesEntrees", new { id = new JS("data.NumBon") });
+        })
+        )
+}
+
+
+@using (Html.DevExtreme().NamedTemplate("ArticlesEntreesGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.ApproArticlesEntres>()
+        .ShowBorders(true)
+        .LoadPanel(l => l.Enabled(false))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.NumBon).Caption("#Bon");
+            columns.AddFor(m => m.DesignationArticle).Caption("Designation Article")
+            .Lookup(lookup => lookup
+            .DataSource(ds => ds.Mvc()
+            .Controller("ApproDemandeAchats")
+            .LoadAction("DesignationArticlesDeamndeLookup")
+            .LoadParams(new
+            {
+                id = new JS("ArticlesEntrees.id")
+            }
+            )
+            .Key("Value"))
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+
+            );
+            columns.AddFor(m => m.Qte).Caption("QTE");
+
+
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b =>
+                {
+                    b.Add().Name(GridColumnButtonName.Edit);
+                    b.Add().Name(GridColumnButtonName.Delete);
+                });
+        })
+         .DataSource(ds => ds.Mvc()
+             .Controller("ApproDemandeAchats")
+             .LoadAction("GetArticlesEntres")
+             .InsertAction("PostArticleEntres")
+             .DeleteAction("DeleteArticlesEntres")
+             .UpdateAction("PutArticlesEntres")
+             .Key("Id")
+             .LoadParams(new
+             {
+                 id = new JS("ArticlesEntrees.id")
+             }
+             )
+            )
+        .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+        .FilterRow(f => f.Visible(true))
+        .HeaderFilter(headerfilter => headerfilter.Visible(true))
+        .GroupPanel(p => p.Visible(true))
+        .AllowColumnReordering(true)
+        .AllowColumnResizing(true)
+        .OnCellPrepared("receptionCell_prepared")
+        .NoDataText("Aucune donnée à afficher")
+        .CacheEnabled(true)
+        .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+        .RemoteOperations(true)
+        .Selection(s => s.Mode(SelectionMode.Multiple))
+        .Editing(editing =>
+        {
+            editing.AllowUpdating(true);
+            editing.AllowDeleting(true);
+            editing.AllowAdding(true);
+            editing.Mode(GridEditMode.Popup)
+            .Popup(p => p.Title("Editer Demande")
+            .ShowTitle(true)
+            .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+        })
+    )
+}
+<script>
+
+        function refreshButton_click() {
+         DevExpress.ui.notify("Rafraichissement en cours!");
+            var demandesTravailGrid = $("#DemandesAchats").dxDataGrid("instance");
+         var demandesTravailDS = demandesTravailGrid.getDataSource();
+         demandesTravailGrid.beginCustomLoading("Chargement en cours...");
+         demandesTravailDS.reload();
+         demandesTravailGrid.refresh();
+         demandesTravailGrid.endCustomLoading();
+        }
+
+        function addButton_click() {
+            DevExpress.ui.notify("Ajouter une demande!");
+            window.location.href = '@Url.Action("NewReception")';
+        }
+
+        function dateDebutBox_value() {
+            var dateDebutBox = $("#FilterDateDebut").dxDateBox("instance");
+            console.log(dateDebutBox.option('value'));
+            return new Date(dateDebutBox.option('value')).toJSON();
+        }
+
+        function dateFinBox_value() {
+            var dateFinBox = $("#FilterDateFin").dxDateBox("instance");
+            console.log(dateFinBox.option('value'));
+            return new Date(dateFinBox.option('value')).toJSON();
+        }
+
+        function receptionCell_prepared(e) {
+            if (e.rowType === "data" && e.column.command === "edit") {
+                var isEditing = e.row.isEditing, $links = e.cellElement.find(".dx-link");
+                $links.text("");
+                if (isEditing) {
+                    $links.filter(".dx-link-save").addClass("dx-icon-save");
+                    $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+                } else {
+                    $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                    $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+                }
+            }
+        }
+
+        var imprimerDemandeTravail = function (e) {
+            var num = e.row.data.NumDt;
+
+               window.location.href = ' @Url.Action("DemandeTravailViewer")';
+         }
+
+        var docViewer;
+        function GetDocumentViewer(s, e) {
+            docViewer = s;
+        }
+
+        function BuildOnClick() {
+            var parameterValue = 2;
+            docViewer.GetParametersModel()["NumDt"](parameterValue);
+            docViewer.StartBuild();
+        }
+
+        function GoToLastPage(s, e) {
+            s.GoToPage(e.PageCount - 1);
+        }
+
+        function WebDocumentViewerInit(s, e) {
+            var parametersModel = s.GetParametersModel();
+            if (!parametersModel) { return; }
+            var serializeParametersOriginal = parametersModel.serializeParameters;
+            parametersModel.serializeParameters = function () {
+                var serializedParameters = serializeParametersOriginal.apply(parametersModel);
+                var reportParameter = serializedParameters.filter(function (p) { return p.Key === "MyParameterName" })[0];
+                if (reportParameter) {
+                    reportParameter.Value = "my custom parameter value";
+                }
+                return serializedParameters;
+            }
+        }
+</script>

@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="20.1.3.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="SuiviEtPlannificationMateriel" Margins="100, 94, 100, 100" PageWidth="850" PageHeight="1100" Version="20.1" DataSource="#Ref-0" Font="Arial, 9.75pt">
+  <Parameters>
+    <Item1 Ref="3" ValueInfo="0" Name="CodeMachine" Type="#Ref-2" />
+    <Item2 Ref="4" ValueInfo="0" Name="Year" Type="#Ref-2" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="5" ControlType="TopMarginBand" Name="TopMargin" />
+    <Item2 Ref="6" ControlType="BottomMarginBand" Name="BottomMargin">
+      <Controls>
+        <Item1 Ref="7" ControlType="XRLine" Name="line3" SizeF="266.0652,2.31481457" LocationFloat="211.0011,9.999993" />
+        <Item2 Ref="8" ControlType="XRPageInfo" Name="pageInfo1" PageInfo="DateTime" TextAlignment="MiddleCenter" SizeF="266.0652,23" LocationFloat="211.001114,13.3463545">
+          <StylePriority Ref="9" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="10" ControlType="XRPageInfo" Name="pageInfo2" TextFormatString="Page {0} of {1}" TextAlignment="MiddleCenter" SizeF="266.0652,23.0000038" LocationFloat="211.001114,36.34637">
+          <StylePriority Ref="11" UseTextAlignment="false" />
+        </Item3>
+      </Controls>
+    </Item2>
+    <Item3 Ref="12" ControlType="DetailBand" Name="Detail" HeightF="38.5416679">
+      <Controls>
+        <Item1 Ref="13" ControlType="XRLabel" Name="label2" Multiline="true" Text="Date " TextAlignment="MiddleLeft" SizeF="68.75,23" LocationFloat="0,10.0000067" Padding="2,2,0,0,100" Borders="Left, Top, Bottom">
+          <StylePriority Ref="14" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="15" ControlType="XRLabel" Name="label1" Multiline="true" Text="label1" TextAlignment="MiddleLeft" SizeF="587.25,22.9999847" LocationFloat="68.75,10.0000067" Padding="2,2,0,0,100" Borders="Top, Right, Bottom">
+          <DataBindings>
+            <Item1 Ref="17" Parameter="#Ref-4" PropertyName="Text" DataMember="Year" />
+          </DataBindings>
+          <StylePriority Ref="18" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+      </Controls>
+    </Item3>
+    <Item4 Ref="19" ControlType="ReportHeaderBand" Name="ReportHeader">
+      <Controls>
+        <Item1 Ref="20" ControlType="XRPictureBox" Name="xrPictureBox1" ImageSource="img,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" Sizing="ZoomImage" ImageAlignment="MiddleCenter" SizeF="95.20833,89.99999" LocationFloat="0,0" Borders="All">
+          <StylePriority Ref="21" UseBorders="false" />
+        </Item1>
+        <Item2 Ref="22" ControlType="XRLabel" Name="xrLabel15" Text="Ref : PRQ M 03 Ver 01" TextAlignment="MiddleCenter" SizeF="125.400024,89.99999" LocationFloat="527.6,0" Font="Times New Roman, 11.25pt, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="All" BorderDashStyle="Solid">
+          <StylePriority Ref="23" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="24" ControlType="XRLabel" Name="xrLabel1" Text="Plannification et suivi de la maintenance annuelle du materiel" TextAlignment="MiddleCenter" SizeF="432.391663,89.99999" LocationFloat="95.20833,0" Font="Tahoma, 17.25pt, style=Bold, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" BorderColor="Black" Borders="Left, Top, Bottom">
+          <StylePriority Ref="25" UseFont="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item3>
+      </Controls>
+    </Item4>
+    <Item5 Ref="26" ControlType="DetailReportBand" Name="DetailReport" Level="0">
+      <Bands>
+        <Item1 Ref="27" ControlType="DetailBand" Name="Detail1" HeightF="44.8055725">
+          <Controls>
+            <Item1 Ref="28" ControlType="XRLabel" Name="label19" Multiline="true" Text="Mois de la réalisationde la tâche" TextAlignment="MiddleCenter" SizeF="252.458435,21.8055725" LocationFloat="403.541565,0" Font="Arial, 9.75pt, style=Bold, charSet=0" ForeColor="White" BackColor="RoyalBlue" Padding="2,2,0,0,100" BorderColor="White" Borders="Bottom">
+              <StylePriority Ref="29" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item1>
+            <Item2 Ref="30" ControlType="XRLabel" Name="label13" Multiline="true" Text="7" TextAlignment="MiddleCenter" SizeF="21.2332764,23" LocationFloat="527.6,21.80557" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="31" UseBorders="false" UseTextAlignment="false" />
+            </Item2>
+            <Item3 Ref="32" ControlType="XRLabel" Name="label14" Multiline="true" Text="8" TextAlignment="MiddleCenter" SizeF="20.8333435,23" LocationFloat="548.833252,21.80557" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="33" UseBorders="false" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="34" ControlType="XRLabel" Name="label15" Multiline="true" Text="10" TextAlignment="MiddleCenter" SizeF="20.8333435,23" LocationFloat="590.5,21.80557" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="35" UseBorders="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="36" ControlType="XRLabel" Name="label16" Multiline="true" Text="9" TextAlignment="MiddleCenter" SizeF="20.8333435,23" LocationFloat="569.6666,21.80557" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="37" UseBorders="false" UseTextAlignment="false" />
+            </Item5>
+            <Item6 Ref="38" ControlType="XRLabel" Name="label17" Multiline="true" Text="11" TextAlignment="MiddleCenter" SizeF="20.8333435,23" LocationFloat="611.3333,21.80557" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="39" UseBorders="false" UseTextAlignment="false" />
+            </Item6>
+            <Item7 Ref="40" ControlType="XRLabel" Name="label18" Multiline="true" Text="12" TextAlignment="MiddleCenter" SizeF="23.833252,22.9999542" LocationFloat="632.166748,21.8055725" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="41" UseBorders="false" UseTextAlignment="false" />
+            </Item7>
+            <Item8 Ref="42" ControlType="XRLabel" Name="label11" Multiline="true" Text="6" TextAlignment="MiddleCenter" SizeF="19.8916321,23" LocationFloat="507.708344,21.80557" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="43" UseBorders="false" UseTextAlignment="false" />
+            </Item8>
+            <Item9 Ref="44" ControlType="XRLabel" Name="label12" Multiline="true" Text="5" TextAlignment="MiddleCenter" SizeF="20.8333435,23" LocationFloat="486.875031,21.80557" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="45" UseBorders="false" UseTextAlignment="false" />
+            </Item9>
+            <Item10 Ref="46" ControlType="XRLabel" Name="label9" Multiline="true" Text="3" TextAlignment="MiddleCenter" SizeF="20.8333435,23" LocationFloat="445.2083,21.80557" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="47" UseBorders="false" UseTextAlignment="false" />
+            </Item10>
+            <Item11 Ref="48" ControlType="XRLabel" Name="label10" Multiline="true" Text="4" TextAlignment="MiddleCenter" SizeF="20.8333435,23" LocationFloat="466.041656,21.80557" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="49" UseBorders="false" UseTextAlignment="false" />
+            </Item11>
+            <Item12 Ref="50" ControlType="XRLabel" Name="label8" Multiline="true" Text="2" TextAlignment="MiddleCenter" SizeF="20.8333435,23" LocationFloat="424.374969,21.80557" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="51" UseBorders="false" UseTextAlignment="false" />
+            </Item12>
+            <Item13 Ref="52" ControlType="XRLabel" Name="label7" Multiline="true" Text="1" TextAlignment="MiddleCenter" SizeF="20.8333435,23" LocationFloat="403.5416,21.80557" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="53" UseBorders="false" UseTextAlignment="false" />
+            </Item13>
+            <Item14 Ref="54" ControlType="XRLabel" Name="label6" Multiline="true" Text="Fréquence" TextAlignment="MiddleRight" SizeF="61.30945,44.805542" LocationFloat="342.232147,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="55" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item14>
+            <Item15 Ref="56" ControlType="XRLabel" Name="label5" Multiline="true" Text="Realisé Par" TextAlignment="MiddleCenter" SizeF="98.25484,44.805542" LocationFloat="243.97731,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" BackColor="AliceBlue" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="57" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item15>
+            <Item16 Ref="58" ControlType="XRLabel" Name="label4" Multiline="true" Text="Activité" TextAlignment="MiddleCenter" SizeF="109.532867,44.805542" LocationFloat="134.444427,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="59" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item16>
+            <Item17 Ref="60" ControlType="XRLabel" Name="label3" Multiline="true" Text="Element de l'équipement" TextAlignment="MiddleCenter" SizeF="134.444427,44.805542" LocationFloat="0,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" BackColor="AliceBlue" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="61" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item17>
+          </Controls>
+        </Item1>
+      </Bands>
+    </Item5>
+    <Item6 Ref="62" ControlType="DetailReportBand" Name="DetailReport1" Level="1" DataMember="Query" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="63" ControlType="DetailBand" Name="Detail2" HeightF="23.0920982">
+          <Controls>
+            <Item1 Ref="64" ControlType="XRCheckBox" Name="checkBox12" TextAlignment="MiddleCenter" SizeF="22.83313,23" LocationFloat="632.1669,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="65" PropertyName="CheckBoxState" DataMember="Query.M12" />
+              </DataBindings>
+              <StylePriority Ref="66" UseBorders="false" UseTextAlignment="false" />
+            </Item1>
+            <Item2 Ref="67" ControlType="XRCheckBox" Name="checkBox11" TextAlignment="MiddleCenter" SizeF="20.833313,23" LocationFloat="611.3333,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="68" PropertyName="CheckBoxState" DataMember="Query.M11" />
+              </DataBindings>
+              <StylePriority Ref="69" UseBorders="false" UseTextAlignment="false" />
+            </Item2>
+            <Item3 Ref="70" ControlType="XRCheckBox" Name="checkBox10" TextAlignment="MiddleCenter" SizeF="20.833374,23" LocationFloat="590.499939,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="71" PropertyName="CheckBoxState" DataMember="Query.M10" />
+              </DataBindings>
+              <StylePriority Ref="72" UseBorders="false" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="73" ControlType="XRCheckBox" Name="checkBox9" TextAlignment="MiddleCenter" SizeF="20.833374,23" LocationFloat="569.6666,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="74" PropertyName="CheckBoxState" DataMember="Query.M9" />
+              </DataBindings>
+              <StylePriority Ref="75" UseBorders="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="76" ControlType="XRCheckBox" Name="checkBox8" TextAlignment="MiddleCenter" SizeF="20.833313,23" LocationFloat="548.8333,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="77" PropertyName="CheckBoxState" DataMember="Query.M8" />
+              </DataBindings>
+              <StylePriority Ref="78" UseBorders="false" UseTextAlignment="false" />
+            </Item5>
+            <Item6 Ref="79" ControlType="XRCheckBox" Name="checkBox7" TextAlignment="MiddleCenter" SizeF="21.2333374,23" LocationFloat="527.6,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="80" PropertyName="CheckBoxState" DataMember="Query.M7" />
+              </DataBindings>
+              <StylePriority Ref="81" UseBorders="false" UseTextAlignment="false" />
+            </Item6>
+            <Item7 Ref="82" ControlType="XRCheckBox" Name="checkBox6" TextAlignment="MiddleCenter" SizeF="19.89154,23" LocationFloat="507.708435,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="83" PropertyName="CheckBoxState" DataMember="Query.M6" />
+              </DataBindings>
+              <StylePriority Ref="84" UseBorders="false" UseTextAlignment="false" />
+            </Item7>
+            <Item8 Ref="85" ControlType="XRCheckBox" Name="checkBox5" TextAlignment="MiddleCenter" SizeF="20.8334351,23" LocationFloat="486.875,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="86" PropertyName="CheckBoxState" DataMember="Query.M5" />
+              </DataBindings>
+              <StylePriority Ref="87" UseBorders="false" UseTextAlignment="false" />
+            </Item8>
+            <Item9 Ref="88" ControlType="XRCheckBox" Name="checkBox4" TextAlignment="MiddleCenter" SizeF="20.833374,23" LocationFloat="466.041626,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="89" PropertyName="CheckBoxState" DataMember="Query.M4" />
+              </DataBindings>
+              <StylePriority Ref="90" UseBorders="false" UseTextAlignment="false" />
+            </Item9>
+            <Item10 Ref="91" ControlType="XRCheckBox" Name="checkBox3" TextAlignment="MiddleCenter" SizeF="20.8333435,23" LocationFloat="445.208282,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="92" PropertyName="CheckBoxState" DataMember="Query.M3" />
+              </DataBindings>
+              <StylePriority Ref="93" UseBorders="false" UseTextAlignment="false" />
+            </Item10>
+            <Item11 Ref="94" ControlType="XRCheckBox" Name="checkBox2" TextAlignment="MiddleCenter" SizeF="20.833313,23" LocationFloat="424.374969,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="95" PropertyName="CheckBoxState" DataMember="Query.M2" />
+              </DataBindings>
+              <StylePriority Ref="96" UseBorders="false" UseTextAlignment="false" />
+            </Item11>
+            <Item12 Ref="97" ControlType="XRCheckBox" Name="checkBox1" TextAlignment="MiddleCenter" AnchorVertical="Top" SizeF="20.8333435,23" LocationFloat="403.541626,0" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="98" PropertyName="CheckBoxState" DataMember="Query.M1" />
+              </DataBindings>
+              <StylePriority Ref="99" UseBorders="false" UseTextAlignment="false" />
+            </Item12>
+            <Item13 Ref="100" ControlType="XRTable" Name="table1" SizeF="403.541626,23.0920982" LocationFloat="0,0">
+              <Rows>
+                <Item1 Ref="101" ControlType="XRTableRow" Name="tableRow1" Weight="249.73333885598311">
+                  <Cells>
+                    <Item1 Ref="102" ControlType="XRTableCell" Name="tableCell1" Weight="134.44442749023438" KeepTogether="true" Multiline="true" Text="label20" TextAlignment="MiddleCenter" Font="Arial, 9.75pt" BackColor="AliceBlue" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="103" PropertyName="Text" DataMember="Query.ElementMachine" />
+                      </DataBindings>
+                      <StylePriority Ref="104" UseFont="false" UseBackColor="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="105" ControlType="XRTableCell" Name="tableCell2" Weight="109.53286743164063" KeepTogether="true" Multiline="true" Text="label21" TextAlignment="MiddleCenter" Font="Arial, 9.75pt" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="106" PropertyName="Text" DataMember="Query.Activité" />
+                      </DataBindings>
+                      <StylePriority Ref="107" UseFont="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item2>
+                    <Item3 Ref="108" ControlType="XRTableCell" Name="tableCell3" Weight="98.254852294921875" KeepTogether="true" Multiline="true" Text="label22" TextAlignment="MiddleCenter" Font="Arial, 9.75pt" BackColor="AliceBlue" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="109" PropertyName="Text" DataMember="Query.Nom" />
+                      </DataBindings>
+                      <StylePriority Ref="110" UseFont="false" UseBackColor="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item3>
+                    <Item4 Ref="111" ControlType="XRTableCell" Name="tableCell5" Weight="61.309478759765625" KeepTogether="true" Multiline="true" Text="label23" TextAlignment="MiddleRight" Font="Arial, 9.75pt" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="112" PropertyName="Text" DataMember="Query.Fréquence" />
+                      </DataBindings>
+                      <StylePriority Ref="113" UseFont="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item4>
+                  </Cells>
+                </Item1>
+              </Rows>
+            </Item13>
+          </Controls>
+        </Item1>
+      </Bands>
+    </Item6>
+    <Item7 Ref="114" ControlType="DetailReportBand" Name="DetailReport2" Level="2">
+      <Bands>
+        <Item1 Ref="115" ControlType="DetailBand" Name="Detail3" HeightF="248.200989">
+          <Controls>
+            <Item1 Ref="116" ControlType="XRLabel" Name="label60" Multiline="true" TextAlignment="MiddleCenter" SizeF="210.791626,21.91301" LocationFloat="445.208374,209.186432" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Top, Right, Bottom">
+              <StylePriority Ref="117" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item1>
+            <Item2 Ref="118" ControlType="XRLabel" Name="label59" Multiline="true" Text="Visa du chef d'entretien :" TextAlignment="MiddleCenter" SizeF="196.250046,21.91301" LocationFloat="248.958328,209.186432" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Top, Bottom">
+              <StylePriority Ref="119" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item2>
+            <Item3 Ref="120" ControlType="XRLabel" Name="label57" Multiline="true" TextAlignment="MiddleCenter" SizeF="105.167053,21.9130249" LocationFloat="550.832947,176.856735" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Right, Bottom">
+              <StylePriority Ref="121" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="122" ControlType="XRLabel" Name="label58" Multiline="true" TextAlignment="MiddleCenter" SizeF="104.167023,21.9130173" LocationFloat="445.20816,176.856735" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Bottom">
+              <StylePriority Ref="123" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="124" ControlType="XRLabel" Name="label55" Multiline="true" TextAlignment="MiddleCenter" SizeF="104.167023,21.9130173" LocationFloat="445.20816,154.943726" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Bottom">
+              <StylePriority Ref="125" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item5>
+            <Item6 Ref="126" ControlType="XRLabel" Name="label56" Multiline="true" TextAlignment="MiddleCenter" SizeF="105.167053,21.91301" LocationFloat="550.832947,154.943726" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Right, Bottom">
+              <StylePriority Ref="127" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item6>
+            <Item7 Ref="128" ControlType="XRLabel" Name="label53" Multiline="true" TextAlignment="MiddleCenter" SizeF="105.167053,21.9130249" LocationFloat="550.832947,133.0307" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Right, Bottom">
+              <StylePriority Ref="129" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item7>
+            <Item8 Ref="130" ControlType="XRLabel" Name="label54" Multiline="true" TextAlignment="MiddleCenter" SizeF="104.167023,21.9130173" LocationFloat="445.20816,133.0307" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Bottom">
+              <StylePriority Ref="131" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item8>
+            <Item9 Ref="132" ControlType="XRLabel" Name="label51" Multiline="true" TextAlignment="MiddleCenter" SizeF="105.167053,21.9130173" LocationFloat="550.832947,111.117683" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Right, Bottom">
+              <StylePriority Ref="133" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item9>
+            <Item10 Ref="134" ControlType="XRLabel" Name="label52" Multiline="true" TextAlignment="MiddleCenter" SizeF="104.167023,21.9130173" LocationFloat="445.20816,111.117683" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Bottom">
+              <StylePriority Ref="135" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item10>
+            <Item11 Ref="136" ControlType="XRLabel" Name="label49" Multiline="true" TextAlignment="MiddleCenter" SizeF="104.167023,21.9130173" LocationFloat="445.20816,89.20466" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Bottom">
+              <StylePriority Ref="137" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item11>
+            <Item12 Ref="138" ControlType="XRLabel" Name="label50" Multiline="true" TextAlignment="MiddleCenter" SizeF="105.167053,21.9130249" LocationFloat="550.832947,89.20466" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Right, Bottom">
+              <StylePriority Ref="139" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item12>
+            <Item13 Ref="140" ControlType="XRLabel" Name="label48" Multiline="true" Text="Visa" TextAlignment="MiddleCenter" SizeF="105.167053,21.9130173" LocationFloat="550.832947,67.29164" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="All">
+              <StylePriority Ref="141" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item13>
+            <Item14 Ref="142" ControlType="XRLabel" Name="label47" Multiline="true" Text="Réalisé" TextAlignment="MiddleCenter" SizeF="104.167023,21.9130173" LocationFloat="445.208221,67.29164" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Top, Bottom">
+              <StylePriority Ref="143" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item14>
+            <Item15 Ref="144" ControlType="XRLabel" Name="label46" Multiline="true" Text="Propositions d'mélioration ou prévisions d'intérvention particuliére :" TextAlignment="TopLeft" SizeF="445.208374,131.478119" LocationFloat="0,67.29164" Font="Arial, 9.75pt, charSet=0" Padding="2,2,0,0,100" Borders="Left, Top, Bottom">
+              <StylePriority Ref="145" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item15>
+            <Item16 Ref="146" ControlType="XRLabel" Name="label40" Multiline="true" TextAlignment="MiddleRight" SizeF="20.83313,27.0971928" LocationFloat="611.3333,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right, Bottom">
+              <StylePriority Ref="147" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item16>
+            <Item17 Ref="148" ControlType="XRLabel" Name="label41" Multiline="true" TextAlignment="MiddleRight" SizeF="20.83313,27.0971928" LocationFloat="611.3333,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right">
+              <StylePriority Ref="149" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item17>
+            <Item18 Ref="150" ControlType="XRLabel" Name="label42" Multiline="true" TextAlignment="MiddleRight" SizeF="23.8334351,27.0971928" LocationFloat="632.166565,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="None">
+              <StylePriority Ref="151" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item18>
+            <Item19 Ref="152" ControlType="XRLabel" Name="label43" Multiline="true" TextAlignment="MiddleRight" SizeF="23.8334351,27.0971928" LocationFloat="632.166565,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="153" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item19>
+            <Item20 Ref="154" ControlType="XRLabel" Name="label44" Multiline="true" TextAlignment="MiddleRight" SizeF="20.833374,27.0971928" LocationFloat="590.499939,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right, Bottom">
+              <StylePriority Ref="155" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item20>
+            <Item21 Ref="156" ControlType="XRLabel" Name="label45" Multiline="true" TextAlignment="MiddleRight" SizeF="20.833374,27.0971928" LocationFloat="590.499939,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right">
+              <StylePriority Ref="157" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item21>
+            <Item22 Ref="158" ControlType="XRLabel" Name="label32" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="507.708435,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right, Bottom">
+              <StylePriority Ref="159" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item22>
+            <Item23 Ref="160" ControlType="XRLabel" Name="label33" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="507.708435,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right">
+              <StylePriority Ref="161" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item23>
+            <Item24 Ref="162" ControlType="XRLabel" Name="label34" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="528.5418,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right">
+              <StylePriority Ref="163" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item24>
+            <Item25 Ref="164" ControlType="XRLabel" Name="label35" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="528.5418,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right, Bottom">
+              <StylePriority Ref="165" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item25>
+            <Item26 Ref="166" ControlType="XRLabel" Name="label36" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="569.6667,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right, Bottom">
+              <StylePriority Ref="167" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item26>
+            <Item27 Ref="168" ControlType="XRLabel" Name="label37" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="569.6667,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right">
+              <StylePriority Ref="169" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item27>
+            <Item28 Ref="170" ControlType="XRLabel" Name="label38" Multiline="true" TextAlignment="MiddleRight" SizeF="20.29132,27.0971928" LocationFloat="549.3753,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right">
+              <StylePriority Ref="171" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item28>
+            <Item29 Ref="172" ControlType="XRLabel" Name="label39" Multiline="true" TextAlignment="MiddleRight" SizeF="20.29132,27.0971928" LocationFloat="549.3753,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right, Bottom">
+              <StylePriority Ref="173" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item29>
+            <Item30 Ref="174" ControlType="XRLabel" Name="label28" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="466.041748,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right, Bottom">
+              <StylePriority Ref="175" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item30>
+            <Item31 Ref="176" ControlType="XRLabel" Name="label29" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="466.041748,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right">
+              <StylePriority Ref="177" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item31>
+            <Item32 Ref="178" ControlType="XRLabel" Name="label30" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="486.874969,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right">
+              <StylePriority Ref="179" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item32>
+            <Item33 Ref="180" ControlType="XRLabel" Name="label31" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="486.874969,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right, Bottom">
+              <StylePriority Ref="181" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item33>
+            <Item34 Ref="182" ControlType="XRLabel" Name="label26" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="445.208221,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right, Bottom">
+              <StylePriority Ref="183" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item34>
+            <Item35 Ref="184" ControlType="XRLabel" Name="label27" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="445.208221,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right">
+              <StylePriority Ref="185" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item35>
+            <Item36 Ref="186" ControlType="XRLabel" Name="label24" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="424.374969,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right">
+              <StylePriority Ref="187" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item36>
+            <Item37 Ref="188" ControlType="XRLabel" Name="label25" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="424.374969,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Right, Bottom">
+              <StylePriority Ref="189" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item37>
+            <Item38 Ref="190" ControlType="XRLabel" Name="label23" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="403.541565,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Left, Right, Bottom">
+              <StylePriority Ref="191" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item38>
+            <Item39 Ref="192" ControlType="XRLabel" Name="label22" Multiline="true" TextAlignment="MiddleRight" SizeF="20.8334045,27.0971928" LocationFloat="403.541565,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Left, Right">
+              <StylePriority Ref="193" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item39>
+            <Item40 Ref="194" ControlType="XRLabel" Name="label21" Multiline="true" Text="Date" TextAlignment="MiddleLeft" SizeF="245.138809,27.0971928" LocationFloat="158.402756,27.0971928" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Left, Bottom">
+              <StylePriority Ref="195" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item40>
+            <Item41 Ref="196" ControlType="XRLabel" Name="label20" Multiline="true" Text="Visa chef de Poste" TextAlignment="MiddleLeft" SizeF="245.138809,27.0971928" LocationFloat="158.402756,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Left">
+              <StylePriority Ref="197" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+            </Item41>
+          </Controls>
+        </Item1>
+      </Bands>
+    </Item7>
+  </Bands>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v20.1" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9IktiZlN0ZWVsQ29ubmVjdGlvbiIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz48UXVlcnkgVHlwZT0iQ3VzdG9tU3FsUXVlcnkiIE5hbWU9IlF1ZXJ5Ij48UGFyYW1ldGVyIE5hbWU9IkNvZGVNYWNoaW5lIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5JbnQzMikoP0NvZGVNYWNoaW5lKTwvUGFyYW1ldGVyPjxQYXJhbWV0ZXIgTmFtZT0iWWVhciIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uSW50MzIpKD9ZZWFyKTwvUGFyYW1ldGVyPjxTcWw+U0VMRUNUICAgICAgICANCmRiby5NZXRoX1BsYW5uaW5nRXRTdWl2aU1hdGVyaWVsLkVsZW1lbnRNYWNoaW5lLCANCmRiby5NZXRoX1BsYW5uaW5nRXRTdWl2aU1hdGVyaWVsLkFjdGl2aXTDqSwNCmRiby5NZXRoX1BsYW5uaW5nRXRTdWl2aU1hdGVyaWVsLkZyw6lxdWVuY2UsIA0KZGJvLlJIX0xpc3RlRGVzRW1wbG95ZXMuTm9tLCANCmRiby5SSF9MaXN0ZURlc0VtcGxveWVzLlByZW5vbSwNCg0KZGJvLk1ldGhfUGxhbm5pbmdFdFN1aXZpTWF0ZXJpZWwuTTEsIA0KZGJvLk1ldGhfUGxhbm5pbmdFdFN1aXZpTWF0ZXJpZWwuTTIsIGRiby5NZXRoX1BsYW5uaW5nRXRTdWl2aU1hdGVyaWVsLk0zLCBkYm8uTWV0aF9QbGFubmluZ0V0U3VpdmlNYXRlcmllbC5NNCwgDQpkYm8uTWV0aF9QbGFubmluZ0V0U3VpdmlNYXRlcmllbC5NNSwgZGJvLk1ldGhfUGxhbm5pbmdFdFN1aXZpTWF0ZXJpZWwuTTYsIA0KZGJvLk1ldGhfUGxhbm5pbmdFdFN1aXZpTWF0ZXJpZWwuTTcsIGRiby5NZXRoX1BsYW5uaW5nRXRTdWl2aU1hdGVyaWVsLk04LCBkYm8uTWV0aF9QbGFubmluZ0V0U3VpdmlNYXRlcmllbC5NOSwgDQpkYm8uTWV0aF9QbGFubmluZ0V0U3VpdmlNYXRlcmllbC5NMTAsIGRiby5NZXRoX1BsYW5uaW5nRXRTdWl2aU1hdGVyaWVsLk0xMSwgDQpkYm8uTWV0aF9QbGFubmluZ0V0U3VpdmlNYXRlcmllbC5NMTINCg0KRlJPTSAgICAgICAgICAgIA0KZGJvLk1ldGhfUGxhbm5pbmdFdFN1aXZpTWF0ZXJpZWwgTEVGVCBKT0lODQpkYm8uT3JkcmVUcmF2YWlsIE9OIGRiby5NZXRoX1BsYW5uaW5nRXRTdWl2aU1hdGVyaWVsLk51bU90ID0gDQpjYXNlIHdoZW4NCmRiby5NZXRoX1BsYW5uaW5nRXRTdWl2aU1hdGVyaWVsLk51bU90ICE9IDAgdGhlbiBkYm8uT3JkcmVUcmF2YWlsLk51bU9UIA0KZW5kDQoNCmxlZnQgam9pbiBSYXBwb3J0SW50ZXJ2ZW50aW9uIG9uIFJhcHBvcnRJbnRlcnZlbnRpb24uTnVtT3QgPSANCmNhc2Ugd2hlbg0KTWV0aF9QbGFubmluZ0V0U3VpdmlNYXRlcmllbC5OdW1PdCBpcyBub3QgbnVsbCB0aGVuIE9yZHJlVHJhdmFpbC5OdW1PdCANCmVuZA0KDQpsZWZ0IEpPSU4gZGJvLkFTU19PVF9JbnRlcnZlbmFudHMgIE9OIGRiby5BU1NfT1RfSW50ZXJ2ZW5hbnRzLk51bUludGVydmVudGlvbj0gDQpjYXNlIHdoZW4NClJhcHBvcnRJbnRlcnZlbnRpb24uTnVtSW50ZXJ2ZW50aW9uIGlzIG5vdCBudWxsIHRoZW4gUmFwcG9ydEludGVydmVudGlvbi5OdW1JbnRlcnZlbnRpb24gDQplbmQNCg0KbGVmdCBKT0lOIFJIX0xpc3RlRGVzRW1wbG95ZXMgT04gZGJvLlJIX0xpc3RlRGVzRW1wbG95ZXMuSWQ9IA0KY2FzZSB3aGVuDQpBU1NfT1RfSW50ZXJ2ZW5hbnRzLkNvZGVJbnRlcnZlbmFudCAgaXMgbm90IG51bGwgdGhlbiBBU1NfT1RfSW50ZXJ2ZW5hbnRzLkNvZGVJbnRlcnZlbmFudCANCmVuZA0Kd2hlcmUgTWV0aF9QbGFubmluZ0V0U3VpdmlNYXRlcmllbC5Db2RlTWFjaGluZSA9IEBDb2RlTWFjaGluZSBhbmQgIE1ldGhfUGxhbm5pbmdFdFN1aXZpTWF0ZXJpZWwuWWVhciA9IEBZZWFyPC9TcWw+PC9RdWVyeT48UmVzdWx0U2NoZW1hPjxEYXRhU2V0IE5hbWU9InNxbERhdGFTb3VyY2UxIj48VmlldyBOYW1lPSJRdWVyeSI+PEZpZWxkIE5hbWU9IkVsZW1lbnRNYWNoaW5lIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IkFjdGl2aXTDqSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJGcsOpcXVlbmNlIiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0iTm9tIiBUeXBlPSJTdHJpbmciIC8+PEZpZWxkIE5hbWU9IlByZW5vbSIgVHlwZT0iU3RyaW5nIiAvPjxGaWVsZCBOYW1lPSJNMSIgVHlwZT0iQm9vbGVhbiIgLz48RmllbGQgTmFtZT0iTTIiIFR5cGU9IkJvb2xlYW4iIC8+PEZpZWxkIE5hbWU9Ik0zIiBUeXBlPSJCb29sZWFuIiAvPjxGaWVsZCBOYW1lPSJNNCIgVHlwZT0iQm9vbGVhbiIgLz48RmllbGQgTmFtZT0iTTUiIFR5cGU9IkJvb2xlYW4iIC8+PEZpZWxkIE5hbWU9Ik02IiBUeXBlPSJCb29sZWFuIiAvPjxGaWVsZCBOYW1lPSJNNyIgVHlwZT0iQm9vbGVhbiIgLz48RmllbGQgTmFtZT0iTTgiIFR5cGU9IkJvb2xlYW4iIC8+PEZpZWxkIE5hbWU9Ik05IiBUeXBlPSJCb29sZWFuIiAvPjxGaWVsZCBOYW1lPSJNMTAiIFR5cGU9IkJvb2xlYW4iIC8+PEZpZWxkIE5hbWU9Ik0xMSIgVHlwZT0iQm9vbGVhbiIgLz48RmllbGQgTmFtZT0iTTEyIiBUeXBlPSJCb29sZWFuIiAvPjwvVmlldz48L0RhdGFTZXQ+PC9SZXN1bHRTY2hlbWE+PENvbm5lY3Rpb25PcHRpb25zIENsb3NlQ29ubmVjdGlvbj0idHJ1ZSIgLz48L1NxbERhdGFTb3VyY2U+" />
+  </ComponentStorage>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.1" Ref="2" Content="System.Int32" Type="System.Type" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

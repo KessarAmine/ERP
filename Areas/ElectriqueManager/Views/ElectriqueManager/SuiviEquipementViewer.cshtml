@@ -1,0 +1,22 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers;
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Suivi Machine ";
+}
+<title>@ViewData["Title"]</title>
+@{FicheSuiviMachine raport = new FicheSuiviMachine();
+    raport.Parameters["ServiceCurrent"].Value = XpertHelper.ServiceCurrent;
+    raport.Parameters["CodeMachine"].Value = XpertHelper.CodeMachineReport;
+    raport.Parameters["Datedebut"].Value = DateTime.Now;
+    raport.Parameters["Datefin"].Value = DateTime.Now;
+    raport.Name = "FicheSuiviMachine_N°" + XpertHelper.CodeMachineReport;
+    raport.RequestParameters = false;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

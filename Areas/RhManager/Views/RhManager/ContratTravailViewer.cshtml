@@ -1,0 +1,20 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Contrat Travail N° :" + XpertHelper.RhNumContrat;
+}
+<title>@ViewData["Title"]</title>
+@{
+    ContratTravail raport = new ContratTravail();
+    raport.Parameters["NumContrat"].Value = XpertHelper.RhNumContrat;
+    raport.Name = "Contrat Travail N°" + XpertHelper.RhNumContrat;
+    raport.RequestParameters = false;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

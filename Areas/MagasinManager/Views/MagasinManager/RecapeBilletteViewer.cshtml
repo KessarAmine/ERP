@@ -1,0 +1,20 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers;
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Recape Billette";
+}
+<title>@ViewData["Title"]</title>
+@{RecapeBillette raport = new RecapeBillette();
+    raport.Parameters["DateDebut"].Value = XpertHelper.NumDateDebutRecapeBilletteXtra;
+    raport.Parameters["DateFin"].Value = XpertHelper.NumDateFinRecapeBilletteXtra;
+    raport.Name = "Recape Billette"+ XpertHelper.NumDateDebutRecapeBilletteXtra;
+    raport.RequestParameters = false;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

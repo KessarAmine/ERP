@@ -1,0 +1,966 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+
+@{
+    ViewData["Title"] = "Méthode-Ordres Travail Envoyés";
+    Layout = "~/Views/Shared/_LayoutMethodeManager.cshtml";
+}
+@(Html.DevExtreme().Toolbar()
+    .Items(items =>
+    {
+        items.Add()
+           .Widget(w => w
+           .Button()
+           .Icon("refresh")
+           .OnClick("refreshButton_click"))
+       .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+       .Location(ToolbarItemLocation.Before);
+
+        items.Add()
+            .Widget(w => w.DateBox().Type(DateBoxType.Date).ApplyButtonText("Appliquer").Value(new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1)).DisplayFormat("yyyy-MM-dd").ID("FilterDateDebut"))
+            .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+            .Location(ToolbarItemLocation.Before);
+
+        items.Add()
+            .Widget(w => w.DateBox().Type(DateBoxType.Date).ApplyButtonText("Appliquer").Value(DateTime.Now.Date).DisplayFormat("yyyy-MM-dd").ID("FilterDateFin"))
+            .LocateInMenu(ToolbarItemLocateInMenuMode.Auto)
+            .Location(ToolbarItemLocation.Before);
+    }
+    )
+)
+@(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.OrdreTravail>()
+        .DataSource(ds => ds.Mvc()
+        .Controller("OrdreTravails")
+        .LoadAction("GetSent")
+        .InsertAction("PostMethode")
+        .UpdateAction("Put")
+        .DeleteAction("Delete")
+        .Key("NumOt")
+        .LoadParams(new { dateDebut = new JS("dateDebutBox_value"), dateFin = new JS("dateFinBox_value"), codeDemandeur = XpertHelper.CodeMethode })
+        )
+        .Height("95%")
+        .RemoteOperations(true)
+        .ID("demandesTravailGrid")
+        .NoDataText("Aucune donnée à afficher")
+        .CacheEnabled(true)
+        .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+            .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+
+        .Columns(columns => {
+    columns.AddFor(m => m.NumDt).AllowEditing(false);
+
+    columns.AddFor(m => m.DateOt)
+    .DataType(GridColumnDataType.DateTime)
+    .Format("yyyy-MM-dd HH:mm")
+    .HeaderFilter(headerfilter => headerfilter.GroupInterval(HeaderFilterGroupInterval.Month));
+
+    columns.AddFor(m => m.HeureInstallation).Format("yyyy-MM-dd HH:mm")
+    .DataType(GridColumnDataType.DateTime)
+    .HeaderFilter(headerfilter => headerfilter.GroupInterval(HeaderFilterGroupInterval.Month));
+
+    columns.AddFor(m => m.CodeMaintenance).Lookup(lookup => lookup
+    .DataSource(ds => ds.WebApi().Controller("OrdreTravails").LoadAction("TypeMaintenanceLookup").Key("Value"))
+    .ValueExpr("Value")
+    .DisplayExpr("Text")
+    .AllowClearing(true)
+    );
+    columns.AddFor(m => m.CodeMachine).Caption("Installation")
+    .Lookup(lookup => lookup
+    .DataSource(ds => ds.WebApi().Controller("OrdreTravails").LoadAction("MachinesLookup").Key("Value"))
+    .AllowClearing(true)
+    .ValueExpr("Value")
+    .DisplayExpr("Text")
+    );
+    columns.AddFor(m => m.NumEquipement).Caption("Equipement")
+    .Lookup(lookup => lookup
+    .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("EquipementsLookup").Key("Value"))
+    .AllowClearing(true)
+    .ValueExpr("Value")
+    .DisplayExpr("Text")
+    ).EditCellTemplate(@<text>
+    @Html.Partial("DxDropDownBoxEquipements")
+    </text>).AllowGrouping(true);
+    columns.Add()
+    .Type(GridCommandColumnType.Buttons)
+    .Width(110)
+    .Buttons(b => {
+    b.Add().Name(GridColumnButtonName.Edit);
+    b.Add().Name(GridColumnButtonName.Delete);
+    b.Add()
+        .Hint("Imprimer")
+        .OnClick(@<text>imprimerOrdreTravail</text>)
+                           .Icon("print");
+            });
+
+
+    })
+
+      .MasterDetail(md => md
+        .Enabled(true)
+        .Template(new TemplateName("RapportInterventionDetails"))
+    )
+    .Scrolling(scrolling => scrolling
+    .ScrollByContent(true)
+    .ShowScrollbar(ShowScrollbarMode.Always)
+    .Mode(GridScrollingMode.Virtual))
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(true);
+       editing.AllowDeleting(true);
+       editing.AllowAdding(true);
+       editing.Mode(GridEditMode.Form);
+   })
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple)
+)
+)
+
+@using (Html.DevExtreme().NamedTemplate("RapportInterventionDetails"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Traveaux")
+                .Template(new TemplateName("TachesGrid"))
+                .Option("TachesGrid", new { id = new JS("data.NumOt") });
+            items.Add()
+                .Title("Outillage")
+                .Template(new TemplateName("OutillageGrid"))
+                .Option("OutillageGrid", new { id = new JS("data.NumOt") });
+            items.Add()
+                .Title("Rapport Intervention")
+                .Template(new TemplateName("RapportInterventionGrid"))
+                .Option("masterGridData", new { id = new JS("data.NumOt") });
+        })
+        )
+}
+@using (Html.DevExtreme().NamedTemplate("TachesGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.AssOtTraveaux>()
+            .DataSource(ds => ds.Mvc()
+            .Controller("AssOtTraveaux")
+            .LoadAction("Get")
+            .InsertAction("Post")
+            .DeleteAction("Delete")
+            .Key("Id")
+            .LoadParams(new
+            {
+                id = new JS("TachesGrid.id")
+            }
+            )
+            )
+            .RemoteOperations(true)
+            .NoDataText("Aucune donnée à afficher")
+            .CacheEnabled(true)
+            .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+            .Columns(columns => {
+            columns.AddFor(m => m.CodeEquipement).Width(350).Caption("Equipement")
+            .Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("EquipementsLookup").Key("Value"))
+            .AllowClearing(true)
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            ).EditCellTemplate(@<text>
+            @Html.Partial("DxDropDownBoxEquipements")
+            </text>).AllowGrouping(true);
+            columns.AddFor(m => m.CodeMachine).Caption("Machine")
+            .Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("MachinesLookup").Key("Value"))
+            .AllowClearing(true)
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            );
+            columns.AddFor(m => m.Qte).Width(50);
+            columns.AddFor(m => m.TypeTraveaux).Caption("Travail")
+            .Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("TypeTraveauxLookup").Key("Value"))
+            .AllowClearing(true)
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            );
+            columns.AddFor(m => m.Autres);
+            })
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(false);
+       editing.AllowDeleting(true);
+       editing.AllowAdding(true); editing.Mode(GridEditMode.Row);
+   })
+
+)
+}
+@using (Html.DevExtreme().NamedTemplate("RapportInterventionGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.RapportIntervention>()
+        .OnToolbarPreparing("toolbar_preparing_Rapport")
+        .ShowBorders(true)
+        .LoadPanel(l => l.Enabled(false))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.DateIntervention).Format("yyyy-MM-dd").DataType(GridColumnDataType.DateTime);
+            columns.AddFor(m => m.DebutIntervention).Format("yyyy-MM-dd HH:mm").DataType(GridColumnDataType.DateTime);
+            columns.AddFor(m => m.DureeIntervention);
+            columns.AddFor(m => m.CompteRendu);
+            columns.AddFor(m => m.Observation);
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b =>
+                {
+                    b.Add().Name(GridColumnButtonName.Edit);
+                    b.Add().Name(GridColumnButtonName.Delete);
+                });
+        })
+         .DataSource(ds => ds.Mvc()
+             .Controller("RapportInterventionsMethode")
+             .LoadAction("Get")
+             .UpdateAction("Put")
+             .DeleteAction("Delete")
+             .Key("NumIntervention")
+             .LoadParams(new
+             {
+                 id = new JS("masterGridData.id")
+             }
+             )
+            )
+         .Editing(editing =>
+         {
+             editing.AllowUpdating(true);
+             editing.AllowDeleting(true);
+             editing.AllowAdding(false);
+             editing.Mode(GridEditMode.Row);
+         })
+        .MasterDetail(md => md
+        .Enabled(true)
+        .Template(new TemplateName("InterventionDetails"))
+    )
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("InterventionDetails"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Les intervenants")
+                .Template(new TemplateName("IntervenantsGrid"))
+                .Option("IntervenantsGrid", new { id = new JS("data.NumIntervention") });
+            items.Add()
+                .Title("Liste Conommables")
+                .Template(new TemplateName("ConsomablesGrid"))
+                .Option("ConsomablesGrid", new { id = new JS("data.NumIntervention") });
+            items.Add()
+                .Title("Liste piece de rechange")
+                .Template(new TemplateName("PdrGrid"))
+                .Option("PdrGrid", new { id = new JS("data.NumIntervention") });
+        })
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("PdrGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.AssOtPdr>()
+        .DataSource(ds => ds.Mvc()
+        .Controller("AssOtPdr")
+        .LoadAction("Get")
+        .InsertAction("Post")
+        .UpdateAction("Put")
+        .DeleteAction("Delete")
+        .Key("Id")
+        .LoadParams(new { id = new JS("PdrGrid.id") } ))
+        .RemoteOperations(true)
+        .NoDataText("Aucune donnée à afficher")
+        .CacheEnabled(true)
+        .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+        .Columns(columns => {
+
+            columns.AddFor(m => m.CodePdr).Caption("Pdr").Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi().Controller("AssOtPdr").LoadAction("StkPdrLookup").Key("Value"))
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            .AllowClearing(true)
+            );
+            columns.AddFor(m => m.Qte);
+            columns.AddFor(m => m.PrixUnitaire).AllowEditing(false);
+            columns.AddFor(m => m.Montant).AllowEditing(false);
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b => {
+                    b.Add().Name(GridColumnButtonName.Edit);
+                    b.Add().Name(GridColumnButtonName.Delete);
+                });
+
+
+        })
+        .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+        .Summary(s => s.TotalItems(items =>
+        {
+            items.AddFor(m => m.Qte)
+                .SummaryType(SummaryType.Sum)
+                .ShowInColumn("Qte")
+                .DisplayFormat("Total : {0}");
+            items.AddFor(m => m.Montant)
+                .SummaryType(SummaryType.Sum)
+                .ShowInColumn("Montant")
+                .DisplayFormat("Total : {0}");
+        }))
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(true);
+       editing.AllowDeleting(true);
+       editing.AllowAdding(true);
+       editing.Mode(GridEditMode.Row);
+   })
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+   )
+}
+@using (Html.DevExtreme().NamedTemplate("ConsomablesGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.AssOtConsommable>()
+        .DataSource(ds => ds.Mvc()
+        .Controller("AssOtConsommable")
+        .LoadAction("Get")
+        .InsertAction("Post")
+        .UpdateAction("Put")
+        .DeleteAction("Delete")
+        .Key("Id")
+        .LoadParams(new { id = new JS("ConsomablesGrid.id") } ))
+        .RemoteOperations(true)
+        .NoDataText("Aucune donnée à afficher")
+        .CacheEnabled(true)
+        .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+        .Columns(columns => {
+
+            columns.AddFor(m => m.CodeConsommable).Caption("Consomable").Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi().Controller("AssOtConsommable").LoadAction("StkPdrLookup").Key("Value"))
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            .AllowClearing(true)
+            );
+            columns.AddFor(m => m.Qte);
+            columns.AddFor(m => m.PrixUnitaire).AllowEditing(false);
+            columns.AddFor(m => m.Montant).AllowEditing(false);
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b => {
+                    b.Add().Name(GridColumnButtonName.Edit);
+                    b.Add().Name(GridColumnButtonName.Delete);
+                });
+        })
+        .Summary(s => s.TotalItems(items =>
+        {
+            items.AddFor(m => m.Qte)
+                .SummaryType(SummaryType.Sum)
+                .ShowInColumn("Qte")
+                .DisplayFormat("Total : {0}");
+            items.AddFor(m => m.Montant)
+                .SummaryType(SummaryType.Sum)
+                .ShowInColumn("Montant")
+                .DisplayFormat("Total : {0}");
+        }))
+        .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(true);
+       editing.AllowDeleting(true);
+       editing.AllowAdding(true);
+       editing.Mode(GridEditMode.Row);
+   })
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+   )
+}
+@using (Html.DevExtreme().NamedTemplate("IntervenantsGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.AssOtIntervenants>()
+        .DataSource(ds => ds.Mvc()
+        .Controller("AssOtIntervenants")
+        .LoadAction("Get")
+        .InsertAction("Post")
+        .UpdateAction("Put")
+        .DeleteAction("Delete")
+        .Key("Id")
+        .LoadParams(new { id = new JS("IntervenantsGrid.id") } ))
+        .RemoteOperations(true)
+        .NoDataText("Aucune donnée à afficher")
+        .CacheEnabled(true)
+        .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+        .Columns(columns => {
+
+        columns.AddFor(m => m.CodeIntervenant)
+        .Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("GestionPersonnelsMethode").LoadAction("NomLookup").Key("Value"))
+        .AllowClearing(true)
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        )
+        .EditCellTemplate(@<text>
+        @Html.Partial("DxDropDownBox")
+        </text>)
+        .AllowGrouping(true);
+            columns.AddFor(m => m.CodeMachine).Caption("Machine").Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi().Controller("AssOtIntervenants").LoadAction("MachinesLookup").Key("Value"))
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            .AllowClearing(true)
+                );
+        columns.AddFor(m => m.CodeEquipement).Caption("Equipement")
+        .Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("EquipementsLookup").Key("Value"))
+        .AllowClearing(true)
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        ).EditCellTemplate(@<text>
+        @Html.Partial("DxDropDownBoxEquipements")
+    </text>).AllowGrouping(true);
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b => {
+                    b.Add().Name(GridColumnButtonName.Edit);
+                    b.Add().Name(GridColumnButtonName.Delete);
+                });
+
+
+        })
+        .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(true);
+       editing.AllowDeleting(true);
+       editing.AllowAdding(true);
+       editing.Mode(GridEditMode.Form);
+   })
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+   )
+}
+@using (Html.DevExtreme().NamedTemplate("OutillageGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.AssOtOutils>()
+            .DataSource(ds => ds.Mvc()
+            .Controller("AssOtOutils")
+            .LoadAction("Get")
+            .InsertAction("Post")
+            .UpdateAction("Put")
+            .DeleteAction("Delete")
+            .Key("Id")
+            .LoadParams(new
+            {
+                id = new JS("OutillageGrid.id")
+            }
+            )
+            )
+            .RemoteOperations(true)
+            .NoDataText("Aucune donnée à afficher")
+            .CacheEnabled(true)
+            .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+            .Columns(columns => {
+                columns.AddFor(m => m.CodeOutils).Caption("PDR").Lookup(lookup => lookup
+                .DataSource(ds => ds.WebApi().Controller("AssOtOutils").LoadAction("OutilsLookup").Key("Value"))
+                .ValueExpr("Value")
+                .DisplayExpr("Text")
+                .AllowClearing(true)
+                 );
+            })
+   .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+   .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+   .GroupPanel(p => p.Visible(true))
+   .AllowColumnReordering(true)
+   .AllowColumnResizing(true)
+   .OnCellPrepared("receptionCell_prepared")
+   .Selection(s => s.Mode(SelectionMode.Multiple))
+   .Editing(editing =>
+   {
+       editing.AllowUpdating(true);
+       editing.AllowDeleting(true);
+       editing.AllowAdding(true);
+   })
+
+)
+}
+@using (Html.DevExtreme().NamedTemplate("EditerOrdre"))
+{
+    @using (Html.BeginForm("Post_Ot_From_Ot_Sent_With_Form_Methodes", "AssOtTraveaux", FormMethod.Post))
+    {
+        @(Html.DevExtreme().Form<EditerOrdreTravailModel>()
+        .ShowValidationSummary(true)
+        .Items(items =>
+        {
+            items.AddGroup()
+                    .ColCount(2)
+                    .Items(groupItems =>
+                    {
+                        groupItems.AddGroup().Items(secondGroupItems => {
+                            secondGroupItems.AddSimpleFor(m => m.CodeMaintenance).Editor(e => e.Lookup()
+                            .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("TypeMaintenanceErrorLookup").Key("Value"))
+                            .ValueExpr("Value")
+                            .DisplayExpr("Text")
+                            .ShowClearButton(true)
+                            );
+                            secondGroupItems.AddSimpleFor(m => m.DateOt).Editor(e => e.DateBox()
+                            .DateSerializationFormat("yyyy-MM-dd HH:mm")
+                            .Type(DateBoxType.DateTime));
+                        });
+                        groupItems.AddGroup().Items(secondGroupItems =>
+                        {
+                            secondGroupItems.AddSimpleFor(m => m.NumEquipement).Editor(e => e.DropDownBox()
+                                    .ValueExpr("Id")
+                                    .DisplayExpr("Equipement")
+                                    .DataSource(d => d.Mvc()
+                                    .Controller("Equipements")
+                                    .LoadAction("GetEqp")
+                                    .LoadMode(DataSourceLoadMode.Raw)
+                                    .Key("Id"))
+                                    .Placeholder("Select a value...")
+                                    .ShowClearButton(true)
+                                    .OnValueChanged(@"function(args) { gridBox_valueChanged(args, setValue); }")
+                                    .ContentTemplate(@<text>
+                                        @(Html.DevExtreme().DataGrid()
+                                                .ID("embedded-datagridMultipleIdEmployee")
+                                                .DataSource(new JS(@"component.getDataSource()"))
+                                                .Columns(columns =>
+                                                {
+                                                    columns.Add().DataField("CodeInstallation")
+                                                    .Lookup(lookup => lookup
+                                                        .DataSource(ds => ds.Mvc().Controller("DemandeTravails").LoadAction("MachinesLookup").Key("Value"))
+                                                        .AllowClearing(true)
+                                                        .ValueExpr("Value")
+                                                        .DisplayExpr("Text")
+                                                    );
+                                                    columns.Add().DataField("Equipement");
+                                                })
+                                                .HoverStateEnabled(true)
+                                                .Paging(p => p.PageSize(10))
+                                                .FilterRow(f => f.Visible(true))
+                                                .Scrolling(s => s.Mode(GridScrollingMode.Infinite))
+                                                .Height(345)
+                                                .Selection(s => s.Mode(SelectionMode.Single))
+                                                .SelectedRowKeys(new JS("component.option('value')"))
+                                                .OnSelectionChanged(@"function(args) { onSelectionChanged(args, component); }")
+                                        )
+                                        @(Html.DevExtreme().Button()
+                                                 .ElementAttr(new { style = "margin-top:10px;float:right" })
+                                                 .Text("Close")
+                                                 .OnClick(@"function(args) { onCloseBtnClick(args, component); }"))
+                                    </text>)
+                             );
+                            secondGroupItems.AddSimpleFor(m => m.HeureInstallation).Editor(e => e.DateBox()
+                            .DateSerializationFormat("yyyy-MM-dd HH:mm")
+                            .Type(DateBoxType.DateTime));
+                        });
+                    });
+            items.AddButton()
+            .HorizontalAlignment(HorizontalAlignment.Right)
+            .ButtonOptions(b => b.Text("Enregistrer")
+                .Type(ButtonType.Success)
+                .UseSubmitBehavior(true)
+            );
+        })
+        )
+        @(Html.DevExtreme().TabPanel()
+        .ID("TravauxTab")
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Travaux")
+                .Template(new TemplateName("TachesOtAddGrid"));
+            items.Add()
+                .Title("Outillage")
+                .Template(new TemplateName("OutillageGrid"));
+        })
+        )
+
+    }
+}
+@using (Html.DevExtreme().NamedTemplate("TachesOtAddGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.TempAssOtTravaux>()
+            .DataSource(ds => ds.Mvc()
+            .Controller("TempAssOtTravaux")
+            .LoadAction("Get")
+            .InsertAction("Post")
+            .UpdateAction("Put")
+            .DeleteAction("Delete")
+            .Key("Id"))
+            .RemoteOperations(true)
+            .NoDataText("Aucune donnée à afficher")
+            .CacheEnabled(true)
+            .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+            .Columns(columns => {
+            columns.AddFor(m => m.CodeEquipement).Width(250).Caption("Equipement")
+            .Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("EquipementsLookup").Key("Value"))
+            .AllowClearing(true)
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            ).EditCellTemplate(@<text>
+            @Html.Partial("DxDropDownBoxEquipements")
+            </text>).AllowGrouping(true);
+            columns.AddFor(m => m.CodeMachine).Caption("Machine")
+            .Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("MachinesLookup").Key("Value"))
+            .AllowClearing(true)
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            );
+            columns.AddFor(m => m.Qte);
+            columns.AddFor(m => m.TypeTraveaux).Caption("Travail")
+            .Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("TypeTraveauxLookup").Key("Value"))
+            .AllowClearing(true)
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            );
+            columns.AddFor(m => m.Autres);
+            })
+            .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+            .FilterRow(f => f.Visible(true))
+            .HeaderFilter(headerfilter => headerfilter.Visible(true))
+            .GroupPanel(p => p.Visible(true))
+            .AllowColumnReordering(true)
+            .AllowColumnResizing(true)
+            .OnCellPrepared("receptionCell_prepared")
+            .Selection(s => s.Mode(SelectionMode.Multiple))
+            .Editing(editing =>
+            {
+            editing.AllowUpdating(true);
+            editing.AllowDeleting(true);
+            editing.AllowAdding(true);
+            editing.Mode(GridEditMode.Row);
+            })
+            )
+}
+@using (Html.DevExtreme().NamedTemplate("EditerRapport"))
+{
+    @using (Html.BeginForm("Post_Rapport_From_Ot_Sent_With_Form_Methodes", "AssOtIntervenants", FormMethod.Post))
+    {
+        @(Html.DevExtreme().Form<AjouterRapportInterventionModel>()
+        .ShowValidationSummary(true)
+        .Items(items =>
+        {
+            items.AddGroup()
+                    .ColCount(2)
+                    .Items(groupItems =>
+                    {
+                        groupItems.AddGroup().Items(secondGroupItems => {
+                            secondGroupItems.AddSimpleFor(m => m.DateIntervention).Editor(e => e.DateBox()
+                            .DateSerializationFormat("yyyy-MM-dd HH:mm")
+                            .Type(DateBoxType.DateTime));
+                            secondGroupItems.AddSimpleFor(m => m.CompteRendu);
+                        });
+                        groupItems.AddGroup().Items(secondGroupItems =>
+                        {
+                            secondGroupItems.AddSimpleFor(m => m.DureeIntervention);
+                            secondGroupItems.AddSimpleFor(m => m.Observation);
+                        });
+                    });
+            items.AddButton()
+            .HorizontalAlignment(HorizontalAlignment.Right)
+            .ButtonOptions(b => b.Text("Enregistrer")
+                .Type(ButtonType.Success)
+                .UseSubmitBehavior(true)
+            );
+        })
+        )
+        @(Html.DevExtreme().TabPanel()
+        .ID("TravauxTab")
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Intervenants")
+                .Template(new TemplateName("IntervenantsOtAddGrid"));
+            items.Add()
+                .Title("Consommables")
+                .Template(new TemplateName("ConsommablesOtAddGrid"));
+            items.Add()
+                .Title("Piéces de rechange")
+                .Template(new TemplateName("PdrOtAddGrid"));
+        })
+        )
+
+    }
+}
+@using (Html.DevExtreme().NamedTemplate("IntervenantsOtAddGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.TempAssOtIntervenants>()
+            .DataSource(ds => ds.Mvc()
+            .Controller("TempAssOtIntervenants")
+            .LoadAction("Get")
+            .InsertAction("Post")
+            .UpdateAction("Put")
+            .DeleteAction("Delete")
+            .Key("Id"))
+            .RemoteOperations(true)
+            .NoDataText("Aucune donnée à afficher")
+            .CacheEnabled(true)
+            .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+            .Columns(columns => {
+            columns.AddFor(m => m.CodeIntervenant)
+                .Lookup(lookup => lookup
+                .DataSource(ds => ds.WebApi().Controller("GestionPersonnelsMethode").LoadAction("NomLookup").Key("Value"))
+                .AllowClearing(true)
+                .ValueExpr("Value")
+                .DisplayExpr("Text")
+                )
+                .EditCellTemplate(@<text>
+                @Html.Partial("DxDropDownBox")
+                </text>)
+                .AllowGrouping(true);
+            columns.AddFor(m => m.CodeEquipement).Width(250).Caption("Equipement")
+            .Lookup(lookup => lookup
+            .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("EquipementsLookup").Key("Value"))
+            .AllowClearing(true)
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+            ).EditCellTemplate(@<text>
+            @Html.Partial("DxDropDownBoxEquipements")
+            </text>).AllowGrouping(true);
+                columns.AddFor(m => m.CodeMachine).Caption("Machine")
+                    .Lookup(lookup => lookup
+                    .DataSource(ds => ds.WebApi().Controller("AssOtTraveaux").LoadAction("MachinesLookup").Key("Value"))
+                    .AllowClearing(true)
+                    .ValueExpr("Value")
+                    .DisplayExpr("Text")
+                    );
+                columns.AddFor(m => m.DureeInervention);
+
+            })
+            .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+            .FilterRow(f => f.Visible(true))
+            .HeaderFilter(headerfilter => headerfilter.Visible(true))
+            .GroupPanel(p => p.Visible(true))
+            .AllowColumnReordering(true)
+            .AllowColumnResizing(true)
+            .OnCellPrepared("receptionCell_prepared")
+            .Selection(s => s.Mode(SelectionMode.Multiple))
+            .Editing(editing =>
+            {
+                editing.AllowUpdating(true);
+                editing.AllowDeleting(true);
+                editing.AllowAdding(true);
+                editing.Mode(GridEditMode.Row);
+            })
+            )
+}
+@using (Html.DevExtreme().NamedTemplate("ConsommablesOtAddGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.TempAssOtConsommable>()
+            .DataSource(ds => ds.Mvc()
+            .Controller("TempAssOtConsomables")
+            .LoadAction("Get")
+            .InsertAction("Post")
+            .UpdateAction("Put")
+            .DeleteAction("Delete")
+            .Key("Id"))
+            .RemoteOperations(true)
+            .NoDataText("Aucune donnée à afficher")
+            .CacheEnabled(true)
+            .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+            .Columns(columns => {
+                columns.AddFor(m => m.CodeConsommable).Caption("Désignation Consommable")
+                    .Lookup(lookup => lookup
+                    .DataSource(ds => ds.WebApi().Controller("TempAssOtConsomables").LoadAction("ConsommableLookup").Key("Value"))
+                    .AllowClearing(true)
+                    .ValueExpr("Value")
+                    .DisplayExpr("Text")
+                    );
+            })
+            .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+            .FilterRow(f => f.Visible(true))
+            .HeaderFilter(headerfilter => headerfilter.Visible(true))
+            .GroupPanel(p => p.Visible(true))
+            .AllowColumnReordering(true)
+            .AllowColumnResizing(true)
+            .OnCellPrepared("receptionCell_prepared")
+            .Selection(s => s.Mode(SelectionMode.Multiple))
+            .Editing(editing =>
+            {
+                editing.AllowUpdating(true);
+                editing.AllowDeleting(true);
+                editing.AllowAdding(true);
+                editing.Mode(GridEditMode.Row);
+            })
+            )
+}
+@using (Html.DevExtreme().NamedTemplate("PdrOtAddGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.TempAssOtPdr>()
+            .DataSource(ds => ds.Mvc()
+            .Controller("TempAssOtPdr")
+            .LoadAction("Get")
+            .InsertAction("Post")
+            .UpdateAction("Put")
+            .DeleteAction("Delete")
+            .Key("Id"))
+            .RemoteOperations(true)
+            .NoDataText("Aucune donnée à afficher")
+            .CacheEnabled(true)
+            .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+            .Columns(columns => {
+                columns.AddFor(m => m.CodePdr).Caption("Piece de rechange")
+                    .Lookup(lookup => lookup
+                    .DataSource(ds => ds.WebApi().Controller("TempAssOtPdr").LoadAction("PdrLookup").Key("Value"))
+                    .AllowClearing(true)
+                    .ValueExpr("Value")
+                    .DisplayExpr("Text")
+                    );
+            })
+            .Export(e => e.Enabled(true).AllowExportSelectedData(true))
+            .FilterRow(f => f.Visible(true))
+            .HeaderFilter(headerfilter => headerfilter.Visible(true))
+            .GroupPanel(p => p.Visible(true))
+            .AllowColumnReordering(true)
+            .AllowColumnResizing(true)
+            .OnCellPrepared("receptionCell_prepared")
+            .Selection(s => s.Mode(SelectionMode.Multiple))
+            .Editing(editing =>
+            {
+                editing.AllowUpdating(true);
+                editing.AllowDeleting(true);
+                editing.AllowAdding(true);
+                editing.Mode(GridEditMode.Row);
+            })
+            )
+}
+@(Html.DevExtreme().Popup()
+.ID("AddOt-popup")
+.ShowTitle(true)
+.Title("Ajouter un Ordre de travail")
+.Visible(false)
+.DragEnabled(false)
+.CloseOnOutsideClick(true)
+)
+<script>
+    function toolbar_preparing_Rapport(e) {
+        var dataGrid = e.component;
+
+        e.toolbarOptions.items.unshift({
+            location: "after",
+            widget: "dxButton",
+            options: {
+                icon: "plus",
+                width: 34,
+                onClick: function (e) {
+                    var popup = $("#AddOt-popup").dxPopup("instance");
+                    popup.option("contentTemplate", $("#EditerRapport"));
+                    popup.show();
+                }
+            }
+        });
+    }
+    function refreshButton_click() {
+        DevExpress.ui.notify("Rafraichissement en cours!");
+        var demandesTravailGrid = $("#demandesTravailGrid").dxDataGrid("instance");
+        var demandesTravailDS = demandesTravailGrid.getDataSource();
+        demandesTravailGrid.beginCustomLoading("Chargement en cours...");
+        demandesTravailDS.reload();
+        demandesTravailGrid.refresh();
+        demandesTravailGrid.endCustomLoading();
+    }
+    function addButton_click() {
+        DevExpress.ui.notify("Ajouter une demande!");
+        window.location.href = '@Url.Action("NewReception")';
+    }
+    function dateDebutBox_value() {
+        var dateDebutBox = $("#FilterDateDebut").dxDateBox("instance");
+        console.log(dateDebutBox.option('value'));
+        return new Date(dateDebutBox.option('value')).toJSON();
+    }
+    function dateFinBox_value() {
+        var dateFinBox = $("#FilterDateFin").dxDateBox("instance");
+        console.log(dateFinBox.option('value'));
+        return new Date(dateFinBox.option('value')).toJSON();
+    }
+    function receptionCell_prepared(e) {
+        if (e.rowType === "data" && e.column.command === "edit") {
+            var isEditing = e.row.isEditing, $links = e.cellElement.find(".dx-link");
+            $links.text("");
+            if (isEditing) {
+                $links.filter(".dx-link-save").addClass("dx-icon-save");
+                $links.filter(".dx-link-cancel").addClass("dx-icon-revert");
+            } else {
+                $links.filter(".dx-link-edit").addClass("dx-icon-edit");
+                $links.filter(".dx-link-delete").addClass("dx-icon-trash");
+            }
+        }
+    }
+    function toolbar_preparing_OT(e) {
+        var dataGrid = e.component;
+
+        e.toolbarOptions.items.unshift({
+            location: "after",
+            widget: "dxButton",
+            options: {
+                icon: "plus",
+                width: 34,
+                onClick: function (e) {
+                    var popup = $("#AddOt-popup").dxPopup("instance");
+                    popup.option("contentTemplate", $("#EditerOrdre"));
+                    popup.show();
+                }
+            }
+        });
+    }
+    var imprimerOrdreTravail = function (e) {
+    var num = e.row.data.NumOt;
+    window.open( ' @Url.Action("OrdreTravailViewer", "MethodeManager")?id='+num, '_blank').focus();
+    }
+    function WebDocumentViewerInit(s, e) {
+        var parametersModel = s.GetParametersModel();
+        if (!parametersModel) { return; }
+        var serializeParametersOriginal = parametersModel.serializeParameters;
+        parametersModel.serializeParameters = function () {
+            var serializedParameters = serializeParametersOriginal.apply(parametersModel);
+            var reportParameter = serializedParameters.filter(function (p) { return p.Key === "MyParameterName" })[0];
+            if (reportParameter) {
+                reportParameter.Value = "my custom parameter value";
+            }
+            return serializedParameters;
+        }
+    }
+</script>

@@ -1,0 +1,297 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@{
+    ViewData["Title"] = "Mécanique-Dossier Machine";
+    Layout = "~/Views/Shared/_LayoutMecaniqueManager.cshtml";
+}
+
+@(Html.DevExtreme().TabPanel()
+        .Height("100%")
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Installations")
+                .Template(new TemplateName("InstallationsnTemplate"));
+
+            items.Add()
+                .Title("Equipements")
+                .Template(new TemplateName("EquipementsTemplate"));
+            items.Add()
+                .Title("Hierarchie des zones")
+                .Template(new TemplateName("HierarchieTemplate"));
+        })
+        )
+@using (Html.DevExtreme().NamedTemplate("InstallationsnTemplate"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.Machines>()
+        .Height("95%")
+        .RemoteOperations(true)
+        .Scrolling(scrolling => scrolling
+        .ScrollByContent(true)
+        .ShowScrollbar(ShowScrollbarMode.Always)
+        .Mode(GridScrollingMode.Virtual))
+        .LoadPanel(l => l.Enabled(true))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.NomMachine);
+            columns.AddFor(m => m.SeuilAlerteAnoamlie);
+            columns.AddFor(m => m.NumGroupe).Caption("Groupe Machine")
+            .Lookup(lookup => lookup
+               .DataSource(ds => ds.Mvc().Controller("Machines").LoadAction("GroupeMachinesLookup").Key("Value"))
+               .AllowClearing(true)
+               .ValueExpr("Value")
+               .DisplayExpr("Text")
+            );
+
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b =>
+                {
+                    b.Add().Name(GridColumnButtonName.Edit);
+                    b.Add().Name(GridColumnButtonName.Delete);
+                    b.Add()
+                        .Hint("Fiche de suivi equipement")
+                        .OnClick(@<text>FicheSuiviEquipement</text>)
+                        .Icon("print");
+                    b.Add()
+                        .Hint("Fiche de Plannification equipement")
+                        .OnClick(@<text>FichePlannificationEquipement</text>)
+                        .Icon("print");
+                });
+        })
+         .DataSource(ds => ds.Mvc()
+             .Controller("Machines")
+             .LoadAction("Get")
+             .Key("NumMachine")
+            )
+               .MasterDetail(md => md
+               .Enabled(true)
+               .Template(new TemplateName("MachineDetails"))
+            )
+         .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+         .NoDataText("Aucune donnée à afficher")
+         .FilterRow(f => f.Visible(true))
+        .HeaderFilter(headerfilter => headerfilter.Visible(true))
+        .GroupPanel(p => p.Visible(true))
+        .AllowColumnReordering(true)
+        .AllowColumnResizing(true)
+         .Editing(editing =>
+         {
+             editing.AllowUpdating(false);
+             editing.AllowDeleting(false);
+             editing.AllowAdding(false);
+             editing.Mode(GridEditMode.Popup)
+              .Popup(p => p.Title("Editer Machine")
+              .ShowTitle(true)
+              .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+         })
+
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("EquipementsTemplate"))
+{
+
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.Equipements>()
+        .ShowBorders(true)
+        .LoadPanel(l => l.Enabled(true))
+        .Height("95%")
+        .Scrolling(scrolling => scrolling.Mode(GridScrollingMode.Virtual))
+        .Columns(columns =>
+        {
+            columns.AddFor(m => m.Nom);
+            columns.AddFor(m => m.Designation);
+            columns.AddFor(m => m.ValeurUnitaire);
+            columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b =>
+                {
+                    b.Add().Name(GridColumnButtonName.Edit);
+                    b.Add().Name(GridColumnButtonName.Delete);
+                });
+        })
+         .DataSource(ds => ds.Mvc()
+             .Controller("Equipements")
+             .LoadAction("Get")
+             .Key("NumEquipement")
+            )
+          .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+         .NoDataText("Aucune donnée à afficher")
+         .FilterRow(f => f.Visible(true))
+        .HeaderFilter(headerfilter => headerfilter.Visible(true))
+        .GroupPanel(p => p.Visible(true))
+        .AllowColumnReordering(true)
+        .AllowColumnResizing(true)
+         .Editing(editing =>
+         {
+             editing.AllowUpdating(false);
+             editing.AllowDeleting(false);
+             editing.AllowAdding(false);
+             editing.Mode(GridEditMode.Popup)
+              .Popup(p => p.Title("Editer Equipement")
+              .ShowTitle(true)
+              .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+         })
+
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("MachineDetails"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Details de la machine")
+                .Template(new TemplateName("EquipementsGrid"))
+                .Option("masterGridData", new { id = new JS("data.NumMachine")
+                }
+                );
+            items.Add()
+                .Title("Fiche de Suivi")
+                .Template(new TemplateName("SuiviMachineGrid"))
+                .Option("masterGridData", new { ids = new JS("data.NumMachine") }
+                );
+        })
+        )
+}
+@using (Html.DevExtreme().NamedTemplate("EquipementsGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.MachineEquioement>()
+    .ShowBorders(true)
+    .Columns(columns =>
+    {
+        columns.AddFor(m => m.NumEquipement).Caption("Nom Equipement").Lookup(lookup => lookup
+               .DataSource(ds => ds.Mvc().Controller("Machines").LoadAction("EquipementsLookup").Key("Value"))
+               .AllowClearing(true)
+               .ValueExpr("Value")
+               .DisplayExpr("Text")
+            );
+        columns.AddFor(m => m.NumEquipement).Caption("Réference Equipement").Lookup(lookup => lookup
+               .DataSource(ds => ds.Mvc().Controller("Machines").LoadAction("ReferenceLookup").Key("Value"))
+               .AllowClearing(true)
+               .ValueExpr("Value")
+               .DisplayExpr("Text")
+            ).AllowEditing(false);
+
+        columns.AddFor(m => m.NumComposition).Caption("Composition").GroupIndex(0)
+            .Lookup(lookup => lookup
+                .DataSource(ds => ds.Mvc().Controller("Machines").LoadAction("CompositionsLookup").Key("Value"))
+                .AllowClearing(true)
+                .ValueExpr("Value")
+                .DisplayExpr("Text"));
+        columns.AddFor(m => m.Qte);
+
+        columns.Add()
+            .Type(GridCommandColumnType.Buttons)
+            .Width(110)
+            .Buttons(b =>
+            {
+                b.Add().Name(GridColumnButtonName.Edit);
+                b.Add().Name(GridColumnButtonName.Delete);
+            });
+    })
+        .Summary(s => s.TotalItems(items =>
+        {
+            items.AddFor(m => m.NumEquipement)
+                .SummaryType(SummaryType.Count)
+                .ShowInColumn("NumEquipement")
+                .DisplayFormat("Nombre d'équipements: {0}") ;
+            items.AddFor(m => m.Qte)
+                .SummaryType(SummaryType.Sum)
+                .ShowInColumn("Qte")
+                .DisplayFormat("Total : {0}");
+        }))
+
+         .DataSource(ds => ds.WebApi()
+             .Controller("MachineEquioements")
+             .LoadAction("Get")
+             .Key("Id")
+             .LoadParams(new
+             {
+                 id = new JS("masterGridData.id")
+             }
+             )
+             )
+         .Editing(editing =>
+         {
+             editing.AllowUpdating(false);
+             editing.AllowDeleting(false);
+             editing.AllowAdding(false);
+             editing.Mode(GridEditMode.Popup)
+              .Popup(p => p.Title("Editer Equipement de la machine")
+              .ShowTitle(true)
+              .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+         })
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("SuiviMachineGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Models.FicheSuiviMachine>()
+    .ShowBorders(true)
+    .LoadPanel(l => l.Enabled(false))
+    .Columns(columns =>
+    {
+        columns.AddFor(m => m.Datentervention).Format("yyyy-MM-dd")
+        .HeaderFilter(headerfilter => headerfilter.GroupInterval(HeaderFilterGroupInterval.Month)).Caption("Date");
+        columns.AddFor(m => m.NumOt).Caption("N° OT");
+        columns.AddFor(m => m.NumDt).Caption("N° DT");
+        columns.AddFor(m => m.TypeMaintenance).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("OrdreTravails").LoadAction("TypeMaintenanceLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+        columns.AddFor(m => m.CodeDemandeur).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("OrdreTravails").LoadAction("StructureLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true)
+        );
+        columns.AddFor(m => m.ActionDetaile).Caption("Action détailée");
+    })
+    .FilterRow(f => f.Visible(true))
+   .HeaderFilter(headerfilter => headerfilter.Visible(true))
+    .DataSource(ds => ds.Mvc()
+        .Controller("MachineEquioements")
+        .LoadAction("GetSuiviNew")
+        .LoadParams(new
+        {
+            id = new JS("masterGridData.ids")
+        }
+        )
+    )
+    .GroupPanel(p => p.Visible(true))
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("HierarchieTemplate"))
+{
+    @(Html.DevExtreme().ScrollView()
+        .ID("scrollview")
+        .Direction(ScrollDirection.Both)
+        .ScrollByContent(true)
+        .ScrollByThumb(true)
+        .ShowScrollbar(ShowScrollbarMode.OnScroll)
+        .BounceEnabled(true)
+        .Content(@<text>
+        @(Html.Partial("MachineZones"))
+        </text>)
+    )
+}
+
+<script>
+    function FicheSuiviEquipement(e) {
+        var CodeMachineReport = e.row.data.NumMachine;
+        window.open(' @Url.Action("SuiviEquipementViewer", "MecaniqueManager")?CodeMachineReport=' + CodeMachineReport, '_blank').focus();
+
+    }
+    function FichePlannificationEquipement(e) {
+        var CodeMachineReport = e.row.data.NumMachine;
+        window.open(' @Url.Action("PlanningEquipementViewer", "MecaniqueManager")?CodeMachineReport=' + CodeMachineReport, '_blank').focus();
+    }
+</script>

@@ -1,0 +1,288 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="20.1.3.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="SuiviArrets" Margins="100, 96, 100, 100" PageWidth="850" PageHeight="1100" Version="20.1" DataSource="#Ref-0" Font="Arial, 9.75pt">
+  <Parameters>
+    <Item1 Ref="3" ValueInfo="2020-11-08" AllowNull="true" Name="DateDebut" Type="#Ref-2" />
+    <Item2 Ref="4" ValueInfo="2020-11-23" AllowNull="true" Name="DateFin" Type="#Ref-2" />
+  </Parameters>
+  <CalculatedFields>
+    <Item1 Ref="5" Name="HIC" Expression="Sum([HI])" DataMember="Query" />
+    <Item2 Ref="6" Name="DGC" Expression="Sum([DG])" DataMember="Query" />
+    <Item3 Ref="7" Name="SonalgazC" Expression="Sum([Sonalgaz])" DataMember="Query" />
+    <Item4 Ref="8" Name="KKC" Expression="Sum([KK])" DataMember="Query" />
+    <Item5 Ref="9" Name="MBC" Expression="Sum([MB])" DataMember="Query" />
+    <Item6 Ref="10" Name="TFC" Expression="Sum([TF])" DataMember="Query" />
+    <Item7 Ref="11" Name="PSC" Expression="Sum([PS])" DataMember="Query" />
+    <Item8 Ref="12" Name="HHC" Expression="Sum([HH])" DataMember="Query" />
+    <Item9 Ref="13" Name="EBC" Expression="Sum([EB])" DataMember="Query" />
+    <Item10 Ref="14" Name="TTjournee" Expression="[DG] + [EB] + [HH] + [HI] + [KK] + [MB] + [PS] + [Sonalgaz] + [TF]" DataMember="Query" />
+    <Item11 Ref="15" Name="MinutesTotal" Expression="Sum([TTjournee])" DataMember="Query" />
+    <Item12 Ref="16" Name="TonnagePerdu" Expression="[MinutesTotal] * 0.53" DataMember="Query" />
+    <Item13 Ref="17" Name="HeuresPerdues" Expression="[MinutesTotal] / 60" DataMember="Query" />
+  </CalculatedFields>
+  <Bands>
+    <Item1 Ref="18" ControlType="TopMarginBand" Name="TopMargin" />
+    <Item2 Ref="19" ControlType="BottomMarginBand" Name="BottomMargin">
+      <Controls>
+        <Item1 Ref="20" ControlType="XRPageInfo" Name="pageInfo1" PageInfo="DateTime" SizeF="313,23" LocationFloat="6,6" StyleName="PageInfo" />
+        <Item2 Ref="21" ControlType="XRPageInfo" Name="pageInfo2" TextFormatString="Page {0} of {1}" TextAlignment="TopRight" SizeF="313,23" LocationFloat="331,6" StyleName="PageInfo" />
+      </Controls>
+    </Item2>
+    <Item3 Ref="22" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="74.20343">
+      <Controls>
+        <Item1 Ref="23" ControlType="XRPictureBox" Name="xrPictureBox1" ImageSource="img,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" Sizing="StretchImage" ImageAlignment="MiddleCenter" SizeF="113.541656,58.20342" LocationFloat="0,6.00000238" Borders="Bottom">
+          <StylePriority Ref="24" UseBorders="false" />
+        </Item1>
+        <Item2 Ref="25" ControlType="XRLabel" Name="label21" TextFormatString="{0:MMMM yyyy}" TextAlignment="MiddleCenter" SizeF="179.999634,32.9534225" LocationFloat="474.000183,31.25" StyleName="Title" Font="Arial, 14.25pt, charSet=0" Borders="Bottom">
+          <DataBindings>
+            <Item1 Ref="27" Parameter="#Ref-3" PropertyName="Text" DataMember="DateDebut" />
+          </DataBindings>
+          <StylePriority Ref="28" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="29" ControlType="XRLabel" Name="label20" Text="Mois :" TextAlignment="MiddleCenter" SizeF="179.999634,25.2500057" LocationFloat="474.000183,5.99999428" StyleName="Title" Font="Arial, 14.25pt, charSet=0">
+          <StylePriority Ref="30" UseFont="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="31" ControlType="XRLabel" Name="label1" Text="Suuivi des arrets" TextAlignment="MiddleCenter" SizeF="360.4585,58.20342" LocationFloat="113.541672,6.00000238" StyleName="Title" Font="Arial, 21.75pt, style=Bold, charSet=0" Borders="Bottom">
+          <StylePriority Ref="32" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item4>
+      </Controls>
+    </Item3>
+    <Item4 Ref="33" ControlType="DetailBand" Name="Detail" FillEmptySpace="true" HeightF="0" />
+    <Item5 Ref="34" ControlType="DetailReportBand" Name="DetailReport" Level="0" DataMember="Query" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="35" ControlType="DetailBand" Name="Detail1" HeightF="48">
+          <Controls>
+            <Item1 Ref="36" ControlType="XRLabel" Name="label15" TextFormatString="{0} minutes" Multiline="true" Text="label15" TextAlignment="MiddleCenter" SizeF="509.61676,23" LocationFloat="144.383362,25" Font="Arial Narrow, 9.75pt, style=Bold, Italic, charSet=0" BackColor="MistyRose" Padding="2,2,0,0,100" Borders="Bottom">
+              <DataBindings>
+                <Item1 Ref="37" PropertyName="Text" DataMember="Query.TTjournee" />
+              </DataBindings>
+              <StylePriority Ref="38" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item1>
+            <Item2 Ref="39" ControlType="XRLabel" Name="label14" Multiline="true" Text="Total de la journee" TextAlignment="MiddleCenter" SizeF="144.383362,23" LocationFloat="0,25" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" BackColor="MistyRose" Padding="2,2,0,0,100" Borders="Bottom">
+              <StylePriority Ref="40" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+            </Item2>
+            <Item3 Ref="41" ControlType="XRTable" Name="table1" SizeF="654.0001,25" LocationFloat="0,0">
+              <Rows>
+                <Item1 Ref="42" ControlType="XRTableRow" Name="tableRow1" Weight="11.5">
+                  <Cells>
+                    <Item1 Ref="43" ControlType="XRTableCell" Name="tableCell1" Weight="79.483345031738281" TextFormatString="{0:d}" Multiline="true" Text="tableCell1" TextAlignment="MiddleCenter" Font="Arial, 9.75pt" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="44" PropertyName="Text" DataMember="Query.DateArret" />
+                      </DataBindings>
+                      <StylePriority Ref="45" UseFont="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="46" ControlType="XRTableCell" Name="tableCell2" Weight="64.899986267089844" TextFormatString="{0}mn" Multiline="true" Text="tableCell2" TextAlignment="MiddleRight" Font="Arial, 9.75pt" BackColor="Azure" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="47" PropertyName="Text" DataMember="Query.HI" />
+                      </DataBindings>
+                      <StylePriority Ref="48" UseFont="false" UseBackColor="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item2>
+                    <Item3 Ref="49" ControlType="XRTableCell" Name="tableCell3" Weight="50.316650390625" TextFormatString="{0}mn" Multiline="true" Text="tableCell3" TextAlignment="MiddleRight" Font="Arial, 9.75pt" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="50" PropertyName="Text" DataMember="Query.HH" />
+                      </DataBindings>
+                      <StylePriority Ref="51" UseFont="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item3>
+                    <Item4 Ref="52" ControlType="XRTableCell" Name="tableCell4" Weight="64.899993896484375" TextFormatString="{0}mn" Multiline="true" Text="tableCell4" TextAlignment="MiddleRight" Font="Arial, 9.75pt" BackColor="Azure" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="53" PropertyName="Text" DataMember="Query.PS" />
+                      </DataBindings>
+                      <StylePriority Ref="54" UseFont="false" UseBackColor="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item4>
+                    <Item5 Ref="55" ControlType="XRTableCell" Name="tableCell5" Weight="64.899993896484375" TextFormatString="{0}mn" Multiline="true" Text="tableCell5" TextAlignment="MiddleRight" Font="Arial, 9.75pt" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="56" PropertyName="Text" DataMember="Query.TF" />
+                      </DataBindings>
+                      <StylePriority Ref="57" UseFont="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item5>
+                    <Item6 Ref="58" ControlType="XRTableCell" Name="tableCell6" Weight="64.899993896484375" TextFormatString="{0}mn" Multiline="true" Text="tableCell6" TextAlignment="MiddleRight" Font="Arial, 9.75pt" BackColor="Azure" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="59" PropertyName="Text" DataMember="Query.EB" />
+                      </DataBindings>
+                      <StylePriority Ref="60" UseFont="false" UseBackColor="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item6>
+                    <Item7 Ref="61" ControlType="XRTableCell" Name="tableCell7" Weight="64.899993896484375" TextFormatString="{0}mn" Multiline="true" Text="tableCell7" TextAlignment="MiddleRight" Font="Arial, 9.75pt" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="62" PropertyName="Text" DataMember="Query.MB" />
+                      </DataBindings>
+                      <StylePriority Ref="63" UseFont="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item7>
+                    <Item8 Ref="64" ControlType="XRTableCell" Name="tableCell8" Weight="64.900177001953125" TextFormatString="{0}mn" Multiline="true" Text="tableCell8" TextAlignment="MiddleRight" Font="Arial, 9.75pt" BackColor="Azure" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="65" PropertyName="Text" DataMember="Query.KK" />
+                      </DataBindings>
+                      <StylePriority Ref="66" UseFont="false" UseBackColor="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item8>
+                    <Item9 Ref="67" ControlType="XRTableCell" Name="tableCell9" Weight="66.89984130859375" TextFormatString="{0}mn" Multiline="true" Text="label31" TextAlignment="MiddleCenter" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="68" PropertyName="Text" DataMember="Query.Sonalgaz" />
+                      </DataBindings>
+                      <StylePriority Ref="69" UseBorders="false" UseTextAlignment="false" />
+                    </Item9>
+                    <Item10 Ref="70" ControlType="XRTableCell" Name="tableCell10" Weight="64.9000244140625" TextFormatString="{0}mn" Multiline="true" Text="tableCell10" TextAlignment="MiddleRight" Font="Arial, 9.75pt" BackColor="Azure" Padding="2,2,0,0,100" Borders="Bottom">
+                      <DataBindings>
+                        <Item1 Ref="71" PropertyName="Text" DataMember="Query.DG" />
+                      </DataBindings>
+                      <StylePriority Ref="72" UseFont="false" UseBackColor="false" UsePadding="false" UseBorders="false" UseTextAlignment="false" />
+                    </Item10>
+                  </Cells>
+                </Item1>
+              </Rows>
+            </Item3>
+          </Controls>
+        </Item1>
+      </Bands>
+    </Item5>
+    <Item6 Ref="73" ControlType="DetailReportBand" Name="DetailReport1" Level="1" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="74" ControlType="DetailBand" Name="Detail2" HeightF="25.0000458">
+          <Controls>
+            <Item1 Ref="75" ControlType="XRLabel" Name="label29" TextFormatString="{0} mn" Multiline="true" Text="label29" TextAlignment="MiddleCenter" SizeF="67.20813,25" LocationFloat="521.592957,0" Padding="2,2,0,0,100">
+              <DataBindings>
+                <Item1 Ref="76" PropertyName="Text" DataMember="Query.SonalgazC" />
+              </DataBindings>
+              <StylePriority Ref="77" UseTextAlignment="false" />
+            </Item1>
+            <Item2 Ref="78" ControlType="XRLabel" Name="label2" TextFormatString="{0}mn" Multiline="true" TextAlignment="MiddleRight" SizeF="64.90001,25.0000324" LocationFloat="79.48335,0" BackColor="Azure" Padding="2,2,0,0,100">
+              <DataBindings>
+                <Item1 Ref="79" PropertyName="Text" DataMember="Query.HIC" />
+              </DataBindings>
+              <StylePriority Ref="80" UseBackColor="false" UseTextAlignment="false" />
+            </Item2>
+            <Item3 Ref="81" ControlType="XRLabel" Name="label3" Multiline="true" Text="Sommes" TextAlignment="MiddleCenter" SizeF="79.48335,25.0000324" LocationFloat="0,0" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100">
+              <StylePriority Ref="82" UseFont="false" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="83" ControlType="XRLabel" Name="label22" TextFormatString="{0}mn" Multiline="true" Text="tableCell11" TextAlignment="MiddleRight" SizeF="50.31665,25" LocationFloat="144.383362,0" Font="Arial, 9.75pt" Padding="2,2,0,0,100">
+              <DataBindings>
+                <Item1 Ref="84" PropertyName="Text" DataMember="Query.HHC" />
+              </DataBindings>
+              <StylePriority Ref="85" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="86" ControlType="XRLabel" Name="label23" TextFormatString="{0}mn" Multiline="true" Text="tableCell12" TextAlignment="MiddleRight" SizeF="64.8999939,25" LocationFloat="194.700012,0" Font="Arial, 9.75pt" BackColor="Azure" Padding="2,2,0,0,100">
+              <DataBindings>
+                <Item1 Ref="87" PropertyName="Text" DataMember="Query.PSC" />
+              </DataBindings>
+              <StylePriority Ref="88" UseFont="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+            </Item5>
+            <Item6 Ref="89" ControlType="XRLabel" Name="label24" TextFormatString="{0}mn" Multiline="true" Text="tableCell13" TextAlignment="MiddleRight" SizeF="64.9000244,25" LocationFloat="259.6,0" Font="Arial, 9.75pt" Padding="2,2,0,0,100">
+              <DataBindings>
+                <Item1 Ref="90" PropertyName="Text" DataMember="Query.TFC" />
+              </DataBindings>
+              <StylePriority Ref="91" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+            </Item6>
+            <Item7 Ref="92" ControlType="XRLabel" Name="label25" TextFormatString="{0}mn" Multiline="true" Text="tableCell14" TextAlignment="MiddleRight" SizeF="64.89993,25" LocationFloat="324.500031,0" Font="Arial, 9.75pt" BackColor="Azure" Padding="2,2,0,0,100">
+              <DataBindings>
+                <Item1 Ref="93" PropertyName="Text" DataMember="Query.EBC" />
+              </DataBindings>
+              <StylePriority Ref="94" UseFont="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+            </Item7>
+            <Item8 Ref="95" ControlType="XRLabel" Name="label26" TextFormatString="{0}mn" Multiline="true" Text="tableCell15" TextAlignment="MiddleRight" SizeF="64.9000244,25" LocationFloat="389.399963,0" Font="Arial, 9.75pt" Padding="2,2,0,0,100">
+              <DataBindings>
+                <Item1 Ref="96" PropertyName="Text" DataMember="Query.MBC" />
+              </DataBindings>
+              <StylePriority Ref="97" UseFont="false" UsePadding="false" UseTextAlignment="false" />
+            </Item8>
+            <Item9 Ref="98" ControlType="XRLabel" Name="label27" TextFormatString="{0}mn" Multiline="true" Text="tableCell16" TextAlignment="MiddleRight" SizeF="67.29297,25" LocationFloat="454.3,0" Font="Arial, 9.75pt" BackColor="Azure" Padding="2,2,0,0,100">
+              <DataBindings>
+                <Item1 Ref="99" PropertyName="Text" DataMember="Query.KKC" />
+              </DataBindings>
+              <StylePriority Ref="100" UseFont="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+            </Item9>
+            <Item10 Ref="101" ControlType="XRLabel" Name="label28" TextFormatString="{0}mn" Multiline="true" Text="tableCell18" TextAlignment="MiddleRight" SizeF="65.19873,25" LocationFloat="588.8011,0" Font="Arial, 9.75pt" BackColor="Azure" Padding="2,2,0,0,100">
+              <DataBindings>
+                <Item1 Ref="102" PropertyName="Text" DataMember="Query.DGC" />
+              </DataBindings>
+              <StylePriority Ref="103" UseFont="false" UseBackColor="false" UsePadding="false" UseTextAlignment="false" />
+            </Item10>
+          </Controls>
+        </Item1>
+      </Bands>
+    </Item6>
+    <Item7 Ref="104" ControlType="GroupHeaderBand" Name="GroupHeader1" HeightF="41.4583359">
+      <Controls>
+        <Item1 Ref="105" ControlType="XRLabel" Name="label11" Multiline="true" Text="DG" TextAlignment="MiddleCenter" SizeF="69.9000244,23.0000019" LocationFloat="584.1001,18.458334" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Azure" Padding="2,2,0,0,100" Borders="Bottom">
+          <StylePriority Ref="106" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="107" ControlType="XRLabel" Name="label12" Multiline="true" Text="Sonalgaz" TextAlignment="MiddleCenter" SizeF="64.90001,23.0000019" LocationFloat="519.2001,18.458334" Font="Arial, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Bottom">
+          <StylePriority Ref="108" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="109" ControlType="XRLabel" Name="label13" Multiline="true" Text="KK" TextAlignment="MiddleCenter" SizeF="64.90001,23.0000019" LocationFloat="454.300171,18.458334" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Azure" Padding="2,2,0,0,100" Borders="Bottom">
+          <StylePriority Ref="110" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item3>
+        <Item4 Ref="111" ControlType="XRLabel" Name="label9" Multiline="true" Text="MB" TextAlignment="MiddleCenter" SizeF="64.90001,23.0000019" LocationFloat="389.399963,18.458334" Font="Arial, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Bottom">
+          <StylePriority Ref="112" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item4>
+        <Item5 Ref="113" ControlType="XRLabel" Name="label10" Multiline="true" Text="EB" TextAlignment="MiddleCenter" SizeF="64.90001,23.0000019" LocationFloat="324.499969,18.458334" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Azure" Padding="2,2,0,0,100" Borders="Bottom">
+          <StylePriority Ref="114" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item5>
+        <Item6 Ref="115" ControlType="XRLabel" Name="label7" Multiline="true" Text="TF" TextAlignment="MiddleCenter" SizeF="64.90001,23.0000019" LocationFloat="259.600067,18.458334" Font="Arial, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Bottom">
+          <StylePriority Ref="116" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item6>
+        <Item7 Ref="117" ControlType="XRLabel" Name="label8" Multiline="true" Text="PS" TextAlignment="MiddleCenter" SizeF="64.90001,23.0000019" LocationFloat="194.699982,18.458334" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Azure" Padding="2,2,0,0,100" Borders="Bottom">
+          <StylePriority Ref="118" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item7>
+        <Item8 Ref="119" ControlType="XRLabel" Name="label6" Multiline="true" Text="HH" TextAlignment="MiddleCenter" SizeF="50.31662,23.0000019" LocationFloat="144.383362,18.458334" Font="Arial, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Bottom">
+          <StylePriority Ref="120" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item8>
+        <Item9 Ref="121" ControlType="XRLabel" Name="label5" Multiline="true" Text="HI" TextAlignment="MiddleCenter" SizeF="64.90001,23.0000019" LocationFloat="79.48335,18.458334" Font="Arial, 9.75pt, style=Bold, charSet=0" BackColor="Azure" Padding="2,2,0,0,100" Borders="Bottom">
+          <StylePriority Ref="122" UseFont="false" UseBackColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item9>
+        <Item10 Ref="123" ControlType="XRLabel" Name="label4" Multiline="true" Text="Date arret" TextAlignment="MiddleCenter" SizeF="79.48335,23.0000019" LocationFloat="0,18.458334" Font="Arial, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,100" Borders="Bottom">
+          <StylePriority Ref="124" UseFont="false" UseBorders="false" UseTextAlignment="false" />
+        </Item10>
+      </Controls>
+    </Item7>
+    <Item8 Ref="125" ControlType="DetailReportBand" Name="DetailReport2" Level="2">
+      <Bands>
+        <Item1 Ref="126" ControlType="DetailBand" Name="Detail3" HeightF="113.0098">
+          <Controls>
+            <Item1 Ref="127" ControlType="XRPanel" Name="panel1" SizeF="419.416718,82.4167252" LocationFloat="113.541664,10.0000067" BackColor="PeachPuff">
+              <Controls>
+                <Item1 Ref="128" ControlType="XRLabel" Name="label30" TextFormatString="{0:#.00}" Multiline="true" Text="label30" TextAlignment="MiddleCenter" SizeF="121.2583,23" LocationFloat="140.9963,49.4167328" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" ForeColor="Maroon" Padding="2,2,0,0,100">
+                  <DataBindings>
+                    <Item1 Ref="129" PropertyName="Text" DataMember="Query.HeuresPerdues" />
+                  </DataBindings>
+                  <StylePriority Ref="130" UseFont="false" UseForeColor="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="131" ControlType="XRLabel" Name="label31" Multiline="true" Text="Heures perdu" TextAlignment="MiddleCenter" SizeF="121.2583,23.0000019" LocationFloat="140.9963,10.0000067" Font="Arial, 9pt, style=Bold, Italic, charSet=0" ForeColor="Black" BackColor="Transparent" Padding="2,2,0,0,100" BorderColor="Transparent">
+                  <StylePriority Ref="132" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="133" ControlType="XRLabel" Name="label19" Multiline="true" Text="label19" TextAlignment="MiddleCenter" SizeF="109.800095,23" LocationFloat="9.99996948,49.4167328" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" ForeColor="Maroon" Padding="2,2,0,0,100">
+                  <DataBindings>
+                    <Item1 Ref="134" PropertyName="Text" DataMember="Query.MinutesTotal" />
+                  </DataBindings>
+                  <StylePriority Ref="135" UseFont="false" UseForeColor="false" UseTextAlignment="false" />
+                </Item3>
+                <Item4 Ref="136" ControlType="XRLabel" Name="label17" TextFormatString="{0:#.00}" Multiline="true" Text="label17" TextAlignment="MiddleCenter" SizeF="109.799942,23" LocationFloat="295.858643,49.4167328" Font="Arial Narrow, 9.75pt, style=Bold, charSet=0" ForeColor="Maroon" Padding="2,2,0,0,100">
+                  <DataBindings>
+                    <Item1 Ref="137" PropertyName="Text" DataMember="Query.TonnagePerdu" />
+                  </DataBindings>
+                  <StylePriority Ref="138" UseFont="false" UseForeColor="false" UseTextAlignment="false" />
+                </Item4>
+                <Item5 Ref="139" ControlType="XRLabel" Name="label18" Multiline="true" Text="Tonnage perdu" TextAlignment="MiddleCenter" SizeF="109.799988,23.0000038" LocationFloat="295.858643,10.0000067" Font="Arial, 9pt, style=Bold, Italic, charSet=0" ForeColor="Black" BackColor="Transparent" Padding="2,2,0,0,100" BorderColor="Transparent">
+                  <StylePriority Ref="140" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseTextAlignment="false" />
+                </Item5>
+                <Item6 Ref="141" ControlType="XRLabel" Name="label16" Multiline="true" Text="Total des arrets" TextAlignment="MiddleCenter" SizeF="109.799988,23.0000038" LocationFloat="10,10.0000057" Font="Arial, 9pt, style=Bold, Italic, charSet=0" ForeColor="Black" BackColor="Transparent" Padding="2,2,0,0,100" BorderColor="Transparent">
+                  <StylePriority Ref="142" UseFont="false" UseForeColor="false" UseBackColor="false" UseBorderColor="false" UseTextAlignment="false" />
+                </Item6>
+              </Controls>
+              <StylePriority Ref="143" UseBackColor="false" />
+            </Item1>
+          </Controls>
+        </Item1>
+      </Bands>
+    </Item8>
+  </Bands>
+  <StyleSheet>
+    <Item1 Ref="144" Name="Title" BorderStyle="Inset" Font="Arial, 14.25pt" ForeColor="255,64,70,80" BackColor="Transparent" BorderColor="Black" Sides="None" StringFormat="Near;Near;0;None;Character;Default" BorderWidthSerializable="1" />
+    <Item2 Ref="145" Name="DetailCaption1" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt, style=Bold" ForeColor="White" BackColor="255,93,98,110" BorderColor="White" Sides="Left" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="2" />
+    <Item3 Ref="146" Name="DetailData1" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt" ForeColor="Black" BorderColor="Transparent" Sides="Left" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="2" />
+    <Item4 Ref="147" Name="DetailData3_Odd" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt" ForeColor="Black" BackColor="255,243,245,248" BorderColor="Transparent" Sides="None" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="1" />
+    <Item5 Ref="148" Name="PageInfo" BorderStyle="Inset" Padding="2,2,0,0,100" Font="Arial, 8.25pt, style=Bold" ForeColor="255,64,70,80" StringFormat="Near;Near;0;None;Character;Default" />
+  </StyleSheet>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v20.1" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9IktiZlN0ZWVsQ29ubmVjdGlvbiIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz48UXVlcnkgVHlwZT0iQ3VzdG9tU3FsUXVlcnkiIE5hbWU9IlF1ZXJ5Ij48UGFyYW1ldGVyIE5hbWU9IkRhdGVGaW4iIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkRhdGVUaW1lKSg/RGF0ZUZpbik8L1BhcmFtZXRlcj48UGFyYW1ldGVyIE5hbWU9IkRhdGVEZWJ1dCIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uRGF0ZVRpbWUpKD9EYXRlRGVidXQpPC9QYXJhbWV0ZXI+PFNxbD5TRUxFQ1QgQ09OVkVSVCh2YXJjaGFyLCBEYXRlQXJyZXQsIDMpIGFzIERhdGVBcnJldCwgDQogICAgICAgU1VNKElJRihFbnVtQXJyZXQgTGlrZSAnSEgnLCBkYXRlZGlmZihtaW51dGUsIEhldXJlRGVidXQsIEhldXJlRmluKSwwKSkgQVMgSEgsDQogICAgICAgU1VNKElJRihFbnVtQXJyZXQgTGlrZSAnSEknLCBkYXRlZGlmZihtaW51dGUsIEhldXJlRGVidXQsIEhldXJlRmluKSwwKSkgQVMgSEksDQogICAgICAgU1VNKElJRihFbnVtQXJyZXQgTGlrZSAnRUInLCBkYXRlZGlmZihtaW51dGUsIEhldXJlRGVidXQsIEhldXJlRmluKSwwKSkgQVMgRUIsDQogICAgICAgU1VNKElJRihFbnVtQXJyZXQgTGlrZSAnTUInLCBkYXRlZGlmZihtaW51dGUsIEhldXJlRGVidXQsIEhldXJlRmluKSwwKSkgQVMgTUIsDQogICAgICAgU1VNKElJRihFbnVtQXJyZXQgTGlrZSAnS0snLCBkYXRlZGlmZihtaW51dGUsIEhldXJlRGVidXQsIEhldXJlRmluKSwwKSkgQVMgS0ssDQogICAgICAgU1VNKElJRihFbnVtQXJyZXQgTGlrZSAnU29uYWxnYXonLCBkYXRlZGlmZihtaW51dGUsIEhldXJlRGVidXQsIEhldXJlRmluKSwwKSkgQVMgU29uYWxnYXosDQogICAgICAgU1VNKElJRihFbnVtQXJyZXQgTGlrZSAnREcnLCBkYXRlZGlmZihtaW51dGUsIEhldXJlRGVidXQsIEhldXJlRmluKSwwKSkgQVMgREcsDQogICAgICAgU1VNKElJRihFbnVtQXJyZXQgTGlrZSAnVEYnLCBkYXRlZGlmZihtaW51dGUsIEhldXJlRGVidXQsIEhldXJlRmluKSwwKSkgQVMgVEYsDQogICAgICAgU1VNKElJRihFbnVtQXJyZXQgTGlrZSAnUFMnLCBkYXRlZGlmZihtaW51dGUsIEhldXJlRGVidXQsIEhldXJlRmluKSwwKSkgQVMgUFMNCiBGUk9NIGRiby5BcnJldFByb2R1Y3Rpb25Kb3VybmVlIA0KIFdIRVJFIERhdGVBcnJldCBCRVRXRUVOIEBEYXRlRGVidXQgYW5kIEBEYXRlRmluDQogR1JPVVAgQlkgQ09OVkVSVCh2YXJjaGFyLCBEYXRlQXJyZXQsIDMpPC9TcWw+PC9RdWVyeT48UXVlcnkgVHlwZT0iQ3VzdG9tU3FsUXVlcnkiIE5hbWU9IlF1ZXJ5XzEiPjxQYXJhbWV0ZXIgTmFtZT0iRGF0ZURlYnV0IiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5EYXRlVGltZSkoP0RhdGVEZWJ1dCk8L1BhcmFtZXRlcj48UGFyYW1ldGVyIE5hbWU9IkRhdGVGaW4iIFR5cGU9IkRldkV4cHJlc3MuRGF0YUFjY2Vzcy5FeHByZXNzaW9uIj4oU3lzdGVtLkRhdGVUaW1lKSg/RGF0ZUZpbik8L1BhcmFtZXRlcj48U3FsPlNFTEVDVCAgQXJyZXRQcm9kdWN0aW9uSm91cm5lZS5EYXRlQXJyZXQsDQoJICBzdW0oZGF0ZWRpZmYobWludXRlLCBBcnJldFByb2R1Y3Rpb25Kb3VybmVlLkhldXJlRGVidXQsIEFycmV0UHJvZHVjdGlvbkpvdXJuZWUuSGV1cmVGaW4pKSBhcyBkdXJlZQ0KICAgICAgLFtFbnVtQXJyZXRdDQogICAgICANCiAgRlJPTSBbS0JGc3RlZWxdLltkYm9dLltBcnJldFByb2R1Y3Rpb25Kb3VybmVlXQ0Kd2hlcmUgQXJyZXRQcm9kdWN0aW9uSm91cm5lZS5EYXRlQXJyZXQgJmx0Oz0gQERhdGVGaW4gYW5kDQpBcnJldFByb2R1Y3Rpb25Kb3VybmVlLkRhdGVBcnJldCAmZ3Q7PSBARGF0ZURlYnV0DQpHUk9VUCBCWSBHUk9VUElORyBTRVRTKA0KKEVudW1BcnJldCxEYXRlQXJyZXQpDQopIDwvU3FsPjwvUXVlcnk+PFJlc3VsdFNjaGVtYT48RGF0YVNldCBOYW1lPSJzcWxEYXRhU291cmNlMSI+PFZpZXcgTmFtZT0iUXVlcnkiPjxGaWVsZCBOYW1lPSJEYXRlQXJyZXQiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iSEgiIFR5cGU9IkludDMyIiAvPjxGaWVsZCBOYW1lPSJISSIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IkVCIiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0iTUIiIFR5cGU9IkludDMyIiAvPjxGaWVsZCBOYW1lPSJLSyIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IlNvbmFsZ2F6IiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0iREciIFR5cGU9IkludDMyIiAvPjxGaWVsZCBOYW1lPSJURiIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IlBTIiBUeXBlPSJJbnQzMiIgLz48L1ZpZXc+PFZpZXcgTmFtZT0iUXVlcnlfMSI+PEZpZWxkIE5hbWU9IkRhdGVBcnJldCIgVHlwZT0iRGF0ZVRpbWUiIC8+PEZpZWxkIE5hbWU9ImR1cmVlIiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0iRW51bUFycmV0IiBUeXBlPSJTdHJpbmciIC8+PC9WaWV3PjwvRGF0YVNldD48L1Jlc3VsdFNjaGVtYT48Q29ubmVjdGlvbk9wdGlvbnMgQ2xvc2VDb25uZWN0aW9uPSJ0cnVlIiAvPjwvU3FsRGF0YVNvdXJjZT4=" />
+  </ComponentStorage>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.1" Ref="2" Content="System.DateTime" Type="System.Type" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

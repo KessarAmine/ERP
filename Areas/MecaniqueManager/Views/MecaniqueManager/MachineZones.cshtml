@@ -1,0 +1,37 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@(Html.DevExtreme().TreeMap()
+            .DataSource(ds => ds.Mvc()
+                .Controller("Machines")
+                .LoadAction("GetZones")
+            )
+            .Title(t => t
+                .Text("Organisation des machines")
+                .PlaceholderSize(100))
+        .Colorizer(c => c.Palette(VizPalette.Soft))
+        .InteractWithGroup(false)
+        .LayoutDirection(TreeMapLayoutDirection.LeftTopRightBottom)
+        .Size(s => s.Height(1000)
+        .Width(1400))
+            .Tooltip(t => t
+        .Enabled(true)
+        .Format(Format.Thousands)
+        .CustomizeTooltip(@<text>
+            function(arg) {
+                var data = arg.node.data,
+                    result = null;
+                if (arg.node.isLeaf()) {
+                    result =  data.name +"("+data.value +")";
+                }
+                return {
+                    text: result
+                };
+            }
+        </text>))
+)

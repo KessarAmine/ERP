@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="C:\Users\HP\source\repos\DevKbfSteel\DevKbfSteel\obj\Release\netcoreapp3.1\win-x64\PubTmp\Out\" />
+  <dbfullsql path="C:\Users\HP\source\repos\DevKbfSteel\DevKbfSteel\obj\Release\netcoreapp3.1\win-x64\PubTmp\EFSQLScripts\DevKbfSteel.Data.AuthDbContextContext.sql" />
+  <dbfullsql path="C:\Users\HP\source\repos\DevKbfSteel\DevKbfSteel\obj\Release\netcoreapp3.1\win-x64\PubTmp\EFSQLScripts\DevKbfSteel.Entities.KBFsteelContext.sql" />
+</sitemanifest>

@@ -1,0 +1,21 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers;
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Etat Fournisseur N° " + XpertHelper.EtatFournisseur;
+}
+<title>@ViewData["Title"]</title>
+@{EtatFournisseur raport = new EtatFournisseur();
+    raport.Parameters["NumeroFournisseur"].Value = XpertHelper.EtatFournisseur;
+    raport.Parameters["DateDebut"].Value = DateTime.Now.Date;
+    raport.Parameters["DateFin"].Value = DateTime.Now.Date;
+    raport.Name = "Etat Fournisseur N° " + XpertHelper.EtatFournisseur;
+    raport.RequestParameters = true;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

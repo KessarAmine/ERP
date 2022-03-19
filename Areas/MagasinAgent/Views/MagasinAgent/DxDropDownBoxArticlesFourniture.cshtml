@@ -1,0 +1,66 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+<script>
+    function gridBox_valueChanged(args, setValueMethod) {
+        var $dataGrid = $("#embedded-datagridMultipleIdEmployee");
+        if ($dataGrid.length) {
+            var dataGrid = $dataGrid.dxDataGrid("instance");
+            dataGrid.selectRows(args.value, false);
+        }
+        setValueMethod(args.value);
+    }
+    function onSelectionChanged(e, dropDownBoxInstance) {
+        var keys = e.selectedRowKeys;
+        dropDownBoxInstance.option("value", keys);
+    }
+    function onCloseBtnClick(args, dropDownBoxInstance) {
+        dropDownBoxInstance.close();
+    }
+</script>
+@(Html.DevExtreme().DropDownBox()
+                .ValueExpr("CodePdr")
+                .DisplayExpr("DesignationPdr")
+                .DataSource(d => d.Mvc()
+                .Controller("StkPdrs")
+                .LoadAction("GetPdr")
+                .LoadMode(DataSourceLoadMode.Raw)
+                .Key("CodePdr"))
+                .Placeholder("Select a value...")
+                .ShowClearButton(true)
+                .OnValueChanged(@"function(args) { gridBox_valueChanged(args, setValue); }")
+                .ContentTemplate(@<text>
+                    @(Html.DevExtreme().DataGrid()
+                        .ID("embedded-datagridMultipleIdEmployee")
+                        .DataSource(new JS(@"component.getDataSource()"))
+                        .Columns(columns =>
+                        {
+                            columns.Add().DataField("CodePdr");
+                            columns.Add().DataField("DesignationPdr");
+                            columns.Add().DataField("CodeUniteMesure").Lookup(lookup => lookup
+                            .DataSource(ds => ds.WebApi().Controller("ApproDemandesFournitures").LoadAction("CodeUniteMesureLookup").Key("Value"))
+                            .ValueExpr("Value")
+                            .DisplayExpr("Text")
+                            .AllowClearing(true)
+                            );
+                        })
+                        .HoverStateEnabled(true)
+                        .Paging(p => p.PageSize(10))
+                        .FilterRow(f => f.Visible(true))
+                        .Scrolling(s => s.Mode(GridScrollingMode.Infinite))
+                        .Height(345)
+                        .Selection(s => s.Mode(SelectionMode.Single))
+                        .SelectedRowKeys(new JS("component.option('value')"))
+                        .OnSelectionChanged(@"function(args) { onSelectionChanged(args, component); }")
+                    )
+                    @(Html.DevExtreme().Button()
+                         .ElementAttr(new { style = "margin-top:10px;float:right" })
+                         .Text("Close")
+                         .OnClick(@"function(args) { onCloseBtnClick(args, component); }"))
+                </text>)
+)

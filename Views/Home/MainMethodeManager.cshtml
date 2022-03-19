@@ -1,0 +1,24 @@
+﻿@using DevKbfSteel.Helpers;
+
+@{
+    ViewData["Title"] = "Methodes Manager";
+    Layout = "~/Views/Shared/_LayoutMethodeManager.cshtml";
+}
+<html style="height:100%;">
+
+<body style="        height: 98%;">
+    @(Html.DevExtreme().ScrollView()
+        .ID("scrollview")
+        .Direction(ScrollDirection.Both)
+        .ScrollByContent(true)
+        .ScrollByThumb(true)
+        .ShowScrollbar(ShowScrollbarMode.OnScroll)
+        .BounceEnabled(true)
+        .Content(@<text>
+        @(Html.Partial("DashboardMainMethodeManager"))
+        </text>)
+    )
+
+</body>
+</html>
+

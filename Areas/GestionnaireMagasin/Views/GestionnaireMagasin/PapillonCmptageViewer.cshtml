@@ -1,0 +1,19 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers;
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Papillon Comptage N° " + XpertHelperGestionnaireMagasin.IdEquipeXtra;
+}
+<title>@ViewData["Title"]</title>
+@{PapillonComptage raport = new PapillonComptage();
+    raport.Parameters["CodeEquipe"].Value = XpertHelperGestionnaireMagasin.IdEquipeXtra;
+    raport.Name = "Papillon Comptage N° " + XpertHelperGestionnaireMagasin.IdEquipeXtra;
+    raport.RequestParameters = false;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

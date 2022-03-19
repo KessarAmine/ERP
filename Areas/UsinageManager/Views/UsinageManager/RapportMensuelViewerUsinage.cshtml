@@ -1,0 +1,23 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers;
+
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Rapport OT/DT";
+}
+<title>@ViewData["Title"]</title>
+@{
+    RaportMensuelDTOT raport = new RaportMensuelDTOT();
+    raport.Parameters["Date_Debut"].Value = XpertHelper.Datedebut;
+    raport.Parameters["Date_Fin"].Value = XpertHelper.Datefin;
+    raport.Parameters["CodeReceveur"].Value = XpertHelper.CodeUsinage;
+    raport.Name = "RaportMensuelDTOT_Sodure";
+    raport.RequestParameters = true;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

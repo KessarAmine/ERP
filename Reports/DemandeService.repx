@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XtraReportsLayoutSerializer SerializerVersion="20.1.3.0" Ref="1" ControlType="DevExpress.XtraReports.UI.XtraReport, DevExpress.XtraReports.v20.1, Version=20.1.3.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Name="DemandeService" PageWidth="850" PageHeight="1100" Version="20.1" DataSource="#Ref-0" Font="Arial, 9.75pt">
+  <Parameters>
+    <Item1 Ref="3" ValueInfo="0" Name="NumeroDemandeService" Type="#Ref-2" />
+  </Parameters>
+  <Bands>
+    <Item1 Ref="4" ControlType="TopMarginBand" Name="TopMargin" />
+    <Item2 Ref="5" ControlType="BottomMarginBand" Name="BottomMargin">
+      <Controls>
+        <Item1 Ref="6" ControlType="XRLine" Name="line3" SizeF="266.0652,2.31481457" LocationFloat="192.074585,9.999974" />
+        <Item2 Ref="7" ControlType="XRPageInfo" Name="pageInfo1" PageInfo="DateTime" TextAlignment="MiddleCenter" SizeF="650,23" LocationFloat="0,13.3463545">
+          <StylePriority Ref="8" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="9" ControlType="XRPageInfo" Name="pageInfo2" TextFormatString="Page {0} of {1}" TextAlignment="MiddleCenter" SizeF="650,23.0000038" LocationFloat="0,36.34637">
+          <StylePriority Ref="10" UseTextAlignment="false" />
+        </Item3>
+      </Controls>
+    </Item2>
+    <Item3 Ref="11" ControlType="ReportHeaderBand" Name="ReportHeader" HeightF="90.0000153">
+      <Controls>
+        <Item1 Ref="12" ControlType="XRLabel" Name="label1" Text="Demande Service" TextAlignment="MiddleCenter" SizeF="378.224976,89.99999" LocationFloat="95.20833,0" Font="Tahoma, 17.25pt, style=Bold, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" BorderColor="Black" Borders="Top, Bottom">
+          <StylePriority Ref="13" UseFont="false" UseBackColor="false" UseBorderColor="false" UseBorders="false" UseTextAlignment="false" />
+        </Item1>
+        <Item2 Ref="14" ControlType="XRLabel" Name="xrLabel15" Text="Ref : " TextAlignment="MiddleCenter" SizeF="176.566681,32.70833" LocationFloat="473.433319,0" Font="Times New Roman, 11.25pt, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="All" BorderDashStyle="Solid">
+          <StylePriority Ref="15" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+        </Item2>
+        <Item3 Ref="16" ControlType="XRPictureBox" Name="xrPictureBox1" ImageSource="img,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" Sizing="ZoomImage" ImageAlignment="MiddleCenter" SizeF="95.20833,89.99999" LocationFloat="0,0" Borders="All">
+          <StylePriority Ref="17" UseBorders="false" />
+        </Item3>
+        <Item4 Ref="18" ControlType="XRLabel" Name="label2" TextFormatString="N° : {0}" TextAlignment="MiddleLeft" SizeF="176.566681,32.708313" LocationFloat="473.433319,32.70836" Font="Times New Roman, 11.25pt, style=Bold, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="Left, Right" BorderDashStyle="Solid">
+          <DataBindings>
+            <Item1 Ref="19" PropertyName="Text" DataMember="Query.NumeroDemandeService" />
+          </DataBindings>
+          <StylePriority Ref="20" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+        </Item4>
+        <Item5 Ref="21" ControlType="XRLabel" Name="label3" TextFormatString="{0:dd/MM/yyyy}" TextAlignment="MiddleCenter" SizeF="123.602051,24.58332" LocationFloat="526.397949,65.41666" Font="Times New Roman, 11.25pt, style=Bold, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="Right, Bottom" BorderDashStyle="Solid">
+          <DataBindings>
+            <Item1 Ref="22" PropertyName="Text" DataMember="Query.DateDemande" />
+          </DataBindings>
+          <StylePriority Ref="23" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+        </Item5>
+        <Item6 Ref="24" ControlType="XRLabel" Name="label4" TextFormatString="{0}" Text="Date :" TextAlignment="MiddleLeft" SizeF="52.96469,24.5833282" LocationFloat="473.433319,65.41669" Font="Times New Roman, 11.25pt, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="Left, Bottom" BorderDashStyle="Solid">
+          <StylePriority Ref="25" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+        </Item6>
+      </Controls>
+    </Item3>
+    <Item4 Ref="26" ControlType="GroupHeaderBand" Name="GroupHeader1" GroupUnion="WithFirstDetail" HeightF="28">
+      <Controls>
+        <Item1 Ref="27" ControlType="XRTable" Name="table1" SizeF="650,28" LocationFloat="0,0">
+          <Rows>
+            <Item1 Ref="28" ControlType="XRTableRow" Name="tableRow1" Weight="1">
+              <Cells>
+                <Item1 Ref="29" ControlType="XRTableCell" Name="tableCell1" Weight="0.27353118896484374" Text="Code Article" TextAlignment="MiddleRight" StyleName="DetailCaption1" BorderColor="Transparent" Borders="None">
+                  <StylePriority Ref="30" UseBorderColor="false" UseBorders="false" UseTextAlignment="false" />
+                </Item1>
+                <Item2 Ref="31" ControlType="XRTableCell" Name="tableCell2" Weight="0.35889136681189904" Text="Designation PDR" TextAlignment="MiddleCenter" StyleName="DetailCaption1" BorderColor="Transparent">
+                  <StylePriority Ref="32" UseBorderColor="false" UseTextAlignment="false" />
+                </Item2>
+                <Item3 Ref="33" ControlType="XRTableCell" Name="tableCell3" Weight="0.36757746769831728" Text="Service Demandé" TextAlignment="MiddleCenter" StyleName="DetailCaption1" BorderColor="Transparent">
+                  <StylePriority Ref="34" UseBorderColor="false" UseTextAlignment="false" />
+                </Item3>
+              </Cells>
+            </Item1>
+          </Rows>
+        </Item1>
+      </Controls>
+    </Item4>
+    <Item5 Ref="35" ControlType="DetailBand" Name="Detail" HeightF="0" />
+    <Item6 Ref="36" ControlType="DetailReportBand" Name="DetailReport" Level="1">
+      <Bands>
+        <Item1 Ref="37" ControlType="DetailBand" Name="Detail1">
+          <Controls>
+            <Item1 Ref="38" ControlType="XRLabel" Name="label5" Multiline="true" Text="label5" TextAlignment="MiddleCenter" SizeF="224.843323,53.83339" LocationFloat="415.156677,36.1666031" Font="Times New Roman, 9.75pt, style=Bold, charSet=0" Padding="2,2,0,0,96">
+              <DataBindings>
+                <Item1 Ref="39" PropertyName="Text" DataMember="Query.Observation" />
+              </DataBindings>
+              <StylePriority Ref="40" UseFont="false" UseTextAlignment="false" />
+            </Item1>
+            <Item2 Ref="41" ControlType="XRLabel" Name="label15" TextFormatString="{0}" Text="Service demandeur :" TextAlignment="MiddleLeft" SizeF="145.616257,24.5833244" LocationFloat="10.0000067,9.999974" Font="Times New Roman, 11.25pt, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None" BorderDashStyle="Solid">
+              <StylePriority Ref="42" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+            </Item2>
+            <Item3 Ref="43" ControlType="XRLabel" Name="label16" TextFormatString="{0}" TextAlignment="MiddleCenter" SizeF="163.383743,24.5833282" LocationFloat="155.616257,9.999974" Font="Times New Roman, 11.25pt, style=Bold, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None" BorderDashStyle="Solid">
+              <DataBindings>
+                <Item1 Ref="44" PropertyName="Text" DataMember="Query.Designation" />
+              </DataBindings>
+              <StylePriority Ref="45" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+            </Item3>
+            <Item4 Ref="46" ControlType="XRLabel" Name="label17" TextFormatString="{0}" Text="Responsable :" TextAlignment="MiddleLeft" SizeF="145.616257,24.5833244" LocationFloat="10.0000067,34.5832825" Font="Times New Roman, 11.25pt, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None" BorderDashStyle="Solid">
+              <StylePriority Ref="47" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+            </Item4>
+            <Item5 Ref="48" ControlType="XRLabel" Name="label18" TextFormatString="{0}" TextAlignment="MiddleCenter" SizeF="163.383774,24.5833282" LocationFloat="155.616257,34.5832825" Font="Times New Roman, 11.25pt, style=Bold, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None" BorderDashStyle="Solid">
+              <DataBindings>
+                <Item1 Ref="49" PropertyName="Text" DataMember="Query.Responsable" />
+              </DataBindings>
+              <StylePriority Ref="50" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+            </Item5>
+            <Item6 Ref="51" ControlType="XRLabel" Name="label19" TextFormatString="{0}" Text="Visa :" TextAlignment="MiddleLeft" SizeF="145.616257,24.5833321" LocationFloat="10.0000067,59.16659" Font="Times New Roman, 11.25pt, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None" BorderDashStyle="Solid">
+              <StylePriority Ref="52" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+            </Item6>
+            <Item7 Ref="53" ControlType="XRLabel" Name="label20" TextFormatString="{0}" TextAlignment="MiddleCenter" SizeF="163.3838,24.5833321" LocationFloat="155.616257,59.16659" Font="Times New Roman, 11.25pt, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="All" BorderDashStyle="Solid">
+              <StylePriority Ref="54" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+            </Item7>
+            <Item8 Ref="55" ControlType="XRLabel" Name="label14" TextFormatString="{0}" Text="Observations :" TextAlignment="MiddleLeft" SizeF="111.241333,24.5833263" LocationFloat="415.156677,9.999974" Font="Times New Roman, 11.25pt, charSet=0" BackColor="Transparent" Padding="2,2,0,0,100" Borders="None" BorderDashStyle="Solid">
+              <StylePriority Ref="56" UseFont="false" UseBackColor="false" UseBorders="false" UseBorderDashStyle="false" UseTextAlignment="false" />
+            </Item8>
+            <Item9 Ref="57" ControlType="XRLabel" Name="label21" Multiline="true" SizeF="411.074646,97.2348862" LocationFloat="0,0" Padding="2,2,0,0,100" Borders="Left, Right, Bottom">
+              <StylePriority Ref="58" UseBorders="false" />
+            </Item9>
+            <Item10 Ref="59" ControlType="XRLabel" Name="label13" Multiline="true" SizeF="238.925354,97.2348862" LocationFloat="411.074646,0" Padding="2,2,0,0,100" Borders="Right, Bottom">
+              <StylePriority Ref="60" UseBorders="false" />
+            </Item10>
+          </Controls>
+        </Item1>
+      </Bands>
+    </Item6>
+    <Item7 Ref="61" ControlType="DetailReportBand" Name="DetailReport1" Level="0" DataMember="Query_1" DataSource="#Ref-0">
+      <Bands>
+        <Item1 Ref="62" ControlType="DetailBand" Name="Detail2" HeightF="25">
+          <Controls>
+            <Item1 Ref="63" ControlType="XRTable" Name="table2" KeepTogether="true" SizeF="650,25" LocationFloat="0,0" OddStyleName="DetailData3_Odd">
+              <Rows>
+                <Item1 Ref="64" ControlType="XRTableRow" Name="tableRow2" Weight="11.5">
+                  <Cells>
+                    <Item1 Ref="65" ControlType="XRTableCell" Name="tableCell4" Weight="0.27353118896484374" TextAlignment="MiddleRight" StyleName="DetailData1" Font="Times New Roman, 8.25pt, style=Bold, charSet=0" BorderColor="Black" Borders="Left, Bottom" BorderWidth="1">
+                      <DataBindings>
+                        <Item1 Ref="66" PropertyName="Text" DataMember="Query_1.CodeArticle" />
+                      </DataBindings>
+                      <StylePriority Ref="67" UseFont="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    </Item1>
+                    <Item2 Ref="68" ControlType="XRTableCell" Name="tableCell5" Weight="0.35889136681189904" TextAlignment="MiddleCenter" StyleName="DetailData1" Font="Times New Roman, 8.25pt, style=Bold, charSet=0" BorderColor="Black" Borders="Bottom" BorderWidth="1">
+                      <DataBindings>
+                        <Item1 Ref="69" PropertyName="Text" DataMember="Query_1.DesignationPDR" />
+                      </DataBindings>
+                      <StylePriority Ref="70" UseFont="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    </Item2>
+                    <Item3 Ref="71" ControlType="XRTableCell" Name="tableCell6" Weight="0.36757746769831728" TextAlignment="MiddleCenter" StyleName="DetailData1" Font="Times New Roman, 8.25pt, style=Bold, charSet=0" BorderColor="Black" Borders="Right, Bottom" BorderWidth="1">
+                      <DataBindings>
+                        <Item1 Ref="72" PropertyName="Text" DataMember="Query_1.ServiceDemande" />
+                      </DataBindings>
+                      <StylePriority Ref="73" UseFont="false" UseBorderColor="false" UseBorders="false" UseBorderWidth="false" UseTextAlignment="false" />
+                    </Item3>
+                  </Cells>
+                </Item1>
+              </Rows>
+            </Item1>
+          </Controls>
+        </Item1>
+      </Bands>
+    </Item7>
+  </Bands>
+  <StyleSheet>
+    <Item1 Ref="74" Name="Title" BorderStyle="Inset" Font="Arial, 14.25pt" ForeColor="255,75,75,75" BackColor="Transparent" BorderColor="Black" Sides="None" StringFormat="Near;Near;0;None;Character;Default" BorderWidthSerializable="1" />
+    <Item2 Ref="75" Name="DetailCaption1" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt, style=Bold" ForeColor="White" BackColor="255,75,75,75" BorderColor="White" Sides="Left" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="2" />
+    <Item3 Ref="76" Name="DetailData1" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt" ForeColor="Black" BorderColor="Transparent" Sides="Left" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="2" />
+    <Item4 Ref="77" Name="DetailData3_Odd" BorderStyle="Inset" Padding="6,6,0,0,100" Font="Arial, 8.25pt" ForeColor="Black" BackColor="255,231,231,231" BorderColor="Transparent" Sides="None" StringFormat="Near;Center;0;None;Character;Default" TextAlignment="MiddleLeft" BorderWidthSerializable="1" />
+    <Item5 Ref="78" Name="PageInfo" BorderStyle="Inset" Padding="2,2,0,0,100" Font="Arial, 8.25pt, style=Bold" ForeColor="255,75,75,75" StringFormat="Near;Near;0;None;Character;Default" />
+  </StyleSheet>
+  <ComponentStorage>
+    <Item1 Ref="0" ObjectType="DevExpress.DataAccess.Sql.SqlDataSource,DevExpress.DataAccess.v20.1" Name="sqlDataSource1" Base64="PFNxbERhdGFTb3VyY2UgTmFtZT0ic3FsRGF0YVNvdXJjZTEiPjxDb25uZWN0aW9uIE5hbWU9IktiZlN0ZWVsQ29ubmVjdGlvbiIgRnJvbUFwcENvbmZpZz0idHJ1ZSIgLz48UXVlcnkgVHlwZT0iQ3VzdG9tU3FsUXVlcnkiIE5hbWU9IlF1ZXJ5Ij48UGFyYW1ldGVyIE5hbWU9Ik51bWVyb0RlbWFuZGVTZXJ2aWNlIiBUeXBlPSJEZXZFeHByZXNzLkRhdGFBY2Nlc3MuRXhwcmVzc2lvbiI+KFN5c3RlbS5JbnQzMikoP051bWVyb0RlbWFuZGVTZXJ2aWNlKTwvUGFyYW1ldGVyPjxTcWw+U0VMRUNUIE51bWVyb0RlbWFuZGVTZXJ2aWNlDQogICAgICAsRGF0ZURlbWFuZGUNCiAgICAgICxTdHJ1Y3R1cmUuRGVzaWduYXRpb24NCgksU3RydWN0dXJlLlJlc3BvbnNhYmxlDQogICAgICAsT2JzZXJ2YXRpb24NCiAgRlJPTSBBUFBST19EZW1hbmRlU2VydmljZQ0KICBsZWZ0IEpPSU4gU3RydWN0dXJlIE9OIEFQUFJPX0RlbWFuZGVTZXJ2aWNlLkNvZGVTZXJ2aWNlRGVtYW5kZXVyID0gDQpjYXNlIHdoZW4NCkFQUFJPX0RlbWFuZGVTZXJ2aWNlLkNvZGVTZXJ2aWNlRGVtYW5kZXVyIGlzIG5vdCBudWxsIHRoZW4gU3RydWN0dXJlLkNvZGVTdHJ1Y3R1cmUNCmVuZA0KICB3aGVyZSBOdW1lcm9EZW1hbmRlU2VydmljZSA9ICBATnVtZXJvRGVtYW5kZVNlcnZpY2U8L1NxbD48L1F1ZXJ5PjxRdWVyeSBUeXBlPSJDdXN0b21TcWxRdWVyeSIgTmFtZT0iUXVlcnlfMSI+PFBhcmFtZXRlciBOYW1lPSJOdW1lcm9EZW1hbmRlU2VydmljZSIgVHlwZT0iRGV2RXhwcmVzcy5EYXRhQWNjZXNzLkV4cHJlc3Npb24iPihTeXN0ZW0uSW50MzIpKD9OdW1lcm9EZW1hbmRlU2VydmljZSk8L1BhcmFtZXRlcj48U3FsPlNFTEVDVCANCiAgICAgICBDb2RlQXJ0aWNsZQ0KCSAgLFNUS19QRFIuRGVzaWduYXRpb25QRFINCiAgICAgICxTZXJ2aWNlRGVtYW5kZQ0KICBGUk9NIEFQUFJPX0RlbWFuZGVTZXJ2aWNlRGV0YWlsDQpsZWZ0IEpPSU4gU1RLX1BEUiBPTiBBUFBST19EZW1hbmRlU2VydmljZURldGFpbC5Db2RlQXJ0aWNsZSA9IA0KY2FzZSB3aGVuDQpBUFBST19EZW1hbmRlU2VydmljZURldGFpbC5Db2RlQXJ0aWNsZSBpcyBub3QgbnVsbCB0aGVuIFNUS19QRFIuQ29kZVBEUg0KZW5kDQp3aGVyZSBOdW1lcm9EZW1hbmRlU2VydmljZSA9IEBOdW1lcm9EZW1hbmRlU2VydmljZTwvU3FsPjwvUXVlcnk+PFJlc3VsdFNjaGVtYT48RGF0YVNldCBOYW1lPSJzcWxEYXRhU291cmNlMSI+PFZpZXcgTmFtZT0iUXVlcnkiPjxGaWVsZCBOYW1lPSJOdW1lcm9EZW1hbmRlU2VydmljZSIgVHlwZT0iSW50MzIiIC8+PEZpZWxkIE5hbWU9IkRhdGVEZW1hbmRlIiBUeXBlPSJEYXRlVGltZSIgLz48RmllbGQgTmFtZT0iRGVzaWduYXRpb24iIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iUmVzcG9uc2FibGUiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iT2JzZXJ2YXRpb24iIFR5cGU9IlN0cmluZyIgLz48L1ZpZXc+PFZpZXcgTmFtZT0iUXVlcnlfMSI+PEZpZWxkIE5hbWU9IkNvZGVBcnRpY2xlIiBUeXBlPSJJbnQzMiIgLz48RmllbGQgTmFtZT0iRGVzaWduYXRpb25QRFIiIFR5cGU9IlN0cmluZyIgLz48RmllbGQgTmFtZT0iU2VydmljZURlbWFuZGUiIFR5cGU9IlN0cmluZyIgLz48L1ZpZXc+PC9EYXRhU2V0PjwvUmVzdWx0U2NoZW1hPjxDb25uZWN0aW9uT3B0aW9ucyBDbG9zZUNvbm5lY3Rpb249InRydWUiIC8+PC9TcWxEYXRhU291cmNlPg==" />
+  </ComponentStorage>
+  <ObjectStorage>
+    <Item1 ObjectType="DevExpress.XtraReports.Serialization.ObjectStorageInfo, DevExpress.XtraReports.v20.1" Ref="2" Content="System.Int32" Type="System.Type" />
+  </ObjectStorage>
+</XtraReportsLayoutSerializer>

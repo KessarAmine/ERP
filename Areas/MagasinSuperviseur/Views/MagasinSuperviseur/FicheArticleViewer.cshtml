@@ -1,0 +1,19 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Fiche Article N°:" + XpertHelper.FicheArticlePdr;
+}
+<title>@ViewData["Title"]</title>
+@{FicheArticle raport = new FicheArticle();
+    raport.Parameters["NumFicheArticle"].Value = XpertHelper.FicheArticlePdr;
+    raport.Name = "Fiche Article N°" + XpertHelper.FicheArticlePdr;
+    raport.RequestParameters = false;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

@@ -1,0 +1,71 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Helpers;
+<script>
+    function gridBox_valueChanged(args, setValueMethod) {
+        var $dataGrid = $("#embedded-Pdr");
+        if ($dataGrid.length) {
+            var dataGrid = $dataGrid.dxDataGrid("instance");
+            dataGrid.selectRows(args.value, false);
+        }
+        setValueMethod(args.value);
+    }
+
+</script>
+@(Html.DevExtreme().DropDownBox()
+                .ValueExpr("CodePdr")
+                .DisplayExpr("DesignationPdr")
+                .DataSource(d => d.Mvc()
+                .Controller("StkPdrs")
+                .LoadAction("GetArticleSortieLookupModel")
+                .LoadMode(DataSourceLoadMode.Raw)
+                .Key("CodePdr"))
+                .Placeholder("Select a value...")
+                .ShowClearButton(true)
+                .OnValueChanged(@"function(args) { gridBox_valueChanged(args, setValue); }")
+                .ContentTemplate(@<text>
+                    @(Html.DevExtreme().DataGrid()
+                        .ID("embedded-Pdr")
+                        .DataSource(new JS(@"component.getDataSource()"))
+                        .Grouping(grouping => grouping.AutoExpandAll(true))
+                        .Columns(columns =>
+                        {
+                            columns.Add().DataField("CodePdr").Caption("Code Art");
+                            columns.Add().DataField("DesignationPdr").Caption("Article");
+                            columns.Add().DataField("Lieu").Width(100).GroupIndex(0);
+                            columns.Add().DataField("Gisement").Width(100).GroupIndex(1);
+                            columns.Add()
+                            .Type(GridCommandColumnType.Buttons)
+                            .Width(110)
+                            .Buttons(b =>
+                            {
+                                b.Add().Name(GridColumnButtonName.Edit);
+                            });
+                        })
+                        .Editing(editing =>
+                        {
+                            editing.AllowUpdating(false);
+                            editing.AllowDeleting(false);
+                            editing.AllowAdding(false);
+                        })
+                        .HoverStateEnabled(true)
+                        .Paging(p => p.PageSize(10))
+                        .FilterRow(f => f.Visible(true))
+                        .Scrolling(s => s.Mode(GridScrollingMode.Infinite))
+                        .Height(345)
+                        .Selection(s => s.Mode(SelectionMode.Single))
+                        .SelectedRowKeys(new JS("component.option('value')"))
+                        .OnSelectionChanged(@"function(args) { onSelectionChanged(args, component); }")
+                        .AllowColumnResizing(true)
+                    )
+                    @(Html.DevExtreme().Button()
+                         .ElementAttr(new { style = "margin-top:10px;float:right" })
+                         .Text("Close")
+                         .OnClick(@"function(args) { onCloseBtnClick(args, component); }"))
+                </text>)
+)

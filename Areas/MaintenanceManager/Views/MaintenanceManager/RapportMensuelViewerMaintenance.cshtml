@@ -1,0 +1,17 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+
+@{RaportMensuelDTOT raport = new RaportMensuelDTOT();
+    raport.Parameters["CodeStructure"].Value = 6;
+    raport.Parameters["CodeStructure"].Visible = false;
+    raport.Name = "RaportMensuelDTOTMaintenance";
+    raport.RequestParameters = true;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

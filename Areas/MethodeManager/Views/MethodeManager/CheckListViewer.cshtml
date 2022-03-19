@@ -1,0 +1,20 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers;
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "CheckList N° " + XpertHelper.NumCheckList;
+}
+<title>@ViewData["Title"]</title>
+
+@{CheckListMaintenance raport = new CheckListMaintenance();
+    raport.Parameters["NumCheckList"].Value = XpertHelper.NumCheckList;
+    raport.Name = "CL_N°" + XpertHelper.NumCheckList;
+    raport.RequestParameters = false;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

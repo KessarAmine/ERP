@@ -1,0 +1,22 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+@using DevKbfSteel.Helpers;
+
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+@{
+    ViewData["Title"] = "Indicateurs de mesure maintenanace";
+}
+<title>@ViewData["Title"]</title>
+@{RaportOBJECTIFS_QUALITE_MAINTENANCE raport = new RaportOBJECTIFS_QUALITE_MAINTENANCE();
+    raport.Parameters["DateDebut"].Value = XpertHelper.Datedebut;
+    raport.Parameters["DateFin"].Value = XpertHelper.Datefin;
+    raport.Parameters["CodeReceveur"].Value = XpertHelper.CodeSodure;
+    raport.Name = "RaportOBJECTIFS_QUALITE_MAINTENANCE";
+    raport.RequestParameters = true;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

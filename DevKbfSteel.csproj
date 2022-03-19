@@ -1,0 +1,633 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UserSecretsId>95161d59-75e6-4da5-a03f-54cd16f507a7</UserSecretsId>
+    <IsTransformWebConfigDisabled>true</IsTransformWebConfigDisabled>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Reports\BilletteTransfert.vsrepx" />
+    <None Remove="Reports\BonAffectation.vsrepx" />
+    <None Remove="Reports\BonCession.vsrepx" />
+    <None Remove="Reports\BonEntreeMagasin.vsrepx" />
+    <None Remove="Reports\BonRetourTransfert.vsrepx" />
+    <None Remove="Reports\BonSortieMagasin.vsrepx" />
+    <None Remove="Reports\BonTransfert.vsrepx" />
+    <None Remove="Reports\CheckListMaintenance.repx" />
+    <None Remove="Reports\Consignation.vsrepx" />
+    <None Remove="Reports\ContratTravail.vsrepx" />
+    <None Remove="Reports\ContratTravailStagiere.vsrepx" />
+    <None Remove="Reports\ControlGeometrique.vsrepx" />
+    <None Remove="Reports\Decharge.vsrepx" />
+    <None Remove="Reports\DemandeAchat.vsrepx" />
+    <None Remove="Reports\DemandeFourniture.repx" />
+    <None Remove="Reports\DemandeService.repx" />
+    <None Remove="Reports\DemandeTravail.repx" />
+    <None Remove="Reports\EcartInventaire.vsrepx" />
+    <None Remove="Reports\EssaisMecaniqueQualite.vsrepx" />
+    <None Remove="Reports\EtatCompteComptable.vsrepx" />
+    <None Remove="Reports\EtatFournisseur.vsrepx" />
+    <None Remove="Reports\FicheArticle.repx" />
+    <None Remove="Reports\FicheSuiviMachine.repx" />
+    <None Remove="Reports\Formation.vsrepx" />
+    <None Remove="Reports\FournisseursGlobaleEntrees.vsrepx" />
+    <None Remove="Reports\PapillonComptage.vsrepx" />
+    <None Remove="Reports\ParametresProduction.vsrepx" />
+    <None Remove="Reports\PlannificationMensuelle.repx" />
+    <None Remove="Reports\PROD_SuiviProduction.repx" />
+    <None Remove="Reports\RaportDemandeTravail.repx" />
+    <None Remove="Reports\RaportMensuelDTOT.repx" />
+    <None Remove="Reports\RaportOBJECTIFS_QUALITE_MAINTENANCE.repx" />
+    <None Remove="Reports\RaportOrdreTravail.repx" />
+    <None Remove="Reports\RapportJournalierProduction.repx" />
+    <None Remove="Reports\RapportQualite.vsrepx" />
+    <None Remove="Reports\RecapeBillette.vsrepx" />
+    <None Remove="Reports\ReceptionBilette.vsrepx" />
+    <None Remove="Reports\Reintegration.vsrepx" />
+    <None Remove="Reports\Restitution.vsrepx" />
+    <None Remove="Reports\StkBonRetour.vsrepx" />
+    <None Remove="Reports\SuiviActiviteMecanique.repx" />
+    <None Remove="Reports\SuiviArrets.repx" />
+    <None Remove="Reports\SuiviArretsSonalgaz.repx" />
+    <None Remove="Reports\SuiviArretsSub.repx" />
+    <None Remove="Reports\SuiviArticle.vsrepx" />
+    <None Remove="Reports\SuiviCilsaillees.repx" />
+    <None Remove="Reports\SuiviComptesComptable.vsrepx" />
+    <None Remove="Reports\SuiviEtPlannificationMateriel.repx" />
+    <None Remove="Reports\SuiviMovementNew.vsrepx" />
+    <None Remove="Reports\SuiviMovements.vsrepx" />
+    <None Remove="Reports\SuiviMovementsServices.vsrepx" />
+    <None Remove="Reports\SuiviPersonnelInterventions.repx" />
+    <None Remove="Reports\TonnageMensuel.repx" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Reports\BilletteTransfert.vsrepx" />
+    <EmbeddedResource Include="Reports\BonAffectation.vsrepx" />
+    <EmbeddedResource Include="Reports\BonCession.vsrepx" />
+    <EmbeddedResource Include="Reports\BonEntreeMagasin.vsrepx" />
+    <EmbeddedResource Include="Reports\BonRetourTransfert.vsrepx" />
+    <EmbeddedResource Include="Reports\BonSortieMagasin.vsrepx" />
+    <EmbeddedResource Include="Reports\BonTransfert.vsrepx" />
+    <EmbeddedResource Include="Reports\CheckListMaintenance.repx" />
+    <EmbeddedResource Include="Reports\Consignation.vsrepx" />
+    <EmbeddedResource Include="Reports\ContratTravail.vsrepx" />
+    <EmbeddedResource Include="Reports\ContratTravailStagiere.vsrepx" />
+    <EmbeddedResource Include="Reports\ControlGeometrique.vsrepx" />
+    <EmbeddedResource Include="Reports\Decharge.vsrepx" />
+    <EmbeddedResource Include="Reports\DemandeAchat.vsrepx" />
+    <EmbeddedResource Include="Reports\DemandeFourniture.repx" />
+    <EmbeddedResource Include="Reports\DemandeService.repx" />
+    <EmbeddedResource Include="Reports\DemandeTravail.repx" />
+    <EmbeddedResource Include="Reports\EcartInventaire.vsrepx" />
+    <EmbeddedResource Include="Reports\EssaisMecaniqueQualite.vsrepx" />
+    <EmbeddedResource Include="Reports\EtatCompteComptable.vsrepx" />
+    <EmbeddedResource Include="Reports\EtatFournisseur.vsrepx" />
+    <EmbeddedResource Include="Reports\FicheArticle.repx" />
+    <EmbeddedResource Include="Reports\FicheSuiviMachine.repx" />
+    <EmbeddedResource Include="Reports\Formation.vsrepx" />
+    <EmbeddedResource Include="Reports\FournisseursGlobaleEntrees.vsrepx" />
+    <EmbeddedResource Include="Reports\PapillonComptage.vsrepx" />
+    <EmbeddedResource Include="Reports\ParametresProduction.vsrepx" />
+    <EmbeddedResource Include="Reports\PlannificationMensuelle.repx" />
+    <EmbeddedResource Include="Reports\PROD_SuiviProduction.repx" />
+    <EmbeddedResource Include="Reports\RaportDemandeTravail.repx" />
+    <EmbeddedResource Include="Reports\RaportMensuelDTOT.repx" />
+    <EmbeddedResource Include="Reports\RaportOBJECTIFS_QUALITE_MAINTENANCE.repx" />
+    <EmbeddedResource Include="Reports\RaportOrdreTravail.repx" />
+    <EmbeddedResource Include="Reports\RapportJournalierProduction.repx" />
+    <EmbeddedResource Include="Reports\RapportQualite.vsrepx" />
+    <EmbeddedResource Include="Reports\RecapeBillette.vsrepx" />
+    <EmbeddedResource Include="Reports\ReceptionBilette.vsrepx" />
+    <EmbeddedResource Include="Reports\Reintegration.vsrepx" />
+    <EmbeddedResource Include="Reports\Restitution.vsrepx" />
+    <EmbeddedResource Include="Reports\StkBonRetour.vsrepx" />
+    <EmbeddedResource Include="Reports\SuiviActiviteMecanique.repx" />
+    <EmbeddedResource Include="Reports\SuiviArretsSonalgaz.repx" />
+    <EmbeddedResource Include="Reports\SuiviArrets.repx" />
+    <EmbeddedResource Include="Reports\SuiviArretsSub.repx" />
+    <EmbeddedResource Include="Reports\SuiviArticle.vsrepx" />
+    <EmbeddedResource Include="Reports\SuiviCilsaillees.repx" />
+    <EmbeddedResource Include="Reports\SuiviComptesComptable.vsrepx" />
+    <EmbeddedResource Include="Reports\SuiviEtPlannificationMateriel.repx" />
+    <EmbeddedResource Include="Reports\SuiviMovementNew.vsrepx" />
+    <EmbeddedResource Include="Reports\SuiviMovements.vsrepx" />
+    <EmbeddedResource Include="Reports\SuiviMovementsServices.vsrepx" />
+    <EmbeddedResource Include="Reports\SuiviPersonnelInterventions.repx" />
+    <EmbeddedResource Include="Reports\TonnageMensuel.repx" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Ace.CodeEditor" Version="1.2.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
+    <PackageReference Include="Cake.Npm" Version="0.17.0" />
+    <PackageReference Include="DevExpress.AspNetCore.Common" Version="20.2.6" />
+    <PackageReference Include="DevExpress.AspNetCore.Dashboard" Version="20.2.6" />
+    <PackageReference Include="DevExpress.AspNetCore.Reporting" Version="20.2.6" />
+    <PackageReference Include="DevExpress.Reporting.Core" Version="20.2.6" />
+    <PackageReference Include="DevExtreme.AspNet.Core" Version="20.2.6" />
+    <PackageReference Include="DevExtreme.AspNet.Data" Version="2.7.1" />
+    <PackageReference Include="FluentFTP" Version="32.4.7" />
+    <PackageReference Include="jQuery" Version="3.6.0" />
+    <PackageReference Include="jQuery.UI" Version="1.12.1.1" />
+    <PackageReference Include="knockoutjs" Version="3.5.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="3.1.8" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Core" Version="1.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="1.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="2.1.76" />
+    <PackageReference Include="MicrosoftMvcAjax.Mvc5" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Reports\BilletteTransfert.cs">
+      <DependentUpon>BilletteTransfert.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BilletteTransfert.Designer.cs">
+      <DependentUpon>BilletteTransfert.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonAffectation.cs">
+      <DependentUpon>BonAffectation.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonAffectation.Designer.cs">
+      <DependentUpon>BonAffectation.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonCession.cs">
+      <DependentUpon>BonCession.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonCession.Designer.cs">
+      <DependentUpon>BonCession.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonEntreeMagasin.cs">
+      <DependentUpon>BonEntreeMagasin.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonEntreeMagasin.Designer.cs">
+      <DependentUpon>BonEntreeMagasin.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonRetourTransfert.cs">
+      <DependentUpon>BonRetourTransfert.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonRetourTransfert.Designer.cs">
+      <DependentUpon>BonRetourTransfert.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonSortieMagasin.cs">
+      <DependentUpon>BonSortieMagasin.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonSortieMagasin.Designer.cs">
+      <DependentUpon>BonSortieMagasin.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonTransfert.cs">
+      <DependentUpon>BonTransfert.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\BonTransfert.Designer.cs">
+      <DependentUpon>BonTransfert.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\CheckListMaintenance.cs">
+      <DependentUpon>CheckListMaintenance.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\CheckListMaintenance.Designer.cs">
+      <DependentUpon>CheckListMaintenance.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Consignation.cs">
+      <DependentUpon>Consignation.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Consignation.Designer.cs">
+      <DependentUpon>Consignation.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\ContratTravail.cs">
+      <DependentUpon>ContratTravail.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\ContratTravail.Designer.cs">
+      <DependentUpon>ContratTravail.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\ContratTravailStagiere.cs">
+      <DependentUpon>ContratTravailStagiere.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\ContratTravailStagiere.Designer.cs">
+      <DependentUpon>ContratTravailStagiere.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\ControlGeometrique.cs">
+      <DependentUpon>ControlGeometrique.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\ControlGeometrique.Designer.cs">
+      <DependentUpon>ControlGeometrique.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Decharge.cs">
+      <DependentUpon>Decharge.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Decharge.Designer.cs">
+      <DependentUpon>Decharge.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\DemandeAchat.cs">
+      <DependentUpon>DemandeAchat.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\DemandeAchat.Designer.cs">
+      <DependentUpon>DemandeAchat.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\DemandeFourniture.cs">
+      <DependentUpon>DemandeFourniture.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\DemandeFourniture.Designer.cs">
+      <DependentUpon>DemandeFourniture.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\DemandeService.cs">
+      <DependentUpon>DemandeService.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\DemandeService.Designer.cs">
+      <DependentUpon>DemandeService.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\DemandeTravail.cs">
+      <DependentUpon>DemandeTravail.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\DemandeTravail.Designer.cs">
+      <DependentUpon>DemandeTravail.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\EcartInventaire.cs">
+      <DependentUpon>EcartInventaire.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\EcartInventaire.Designer.cs">
+      <DependentUpon>EcartInventaire.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\EssaisMecaniqueQualite.cs">
+      <DependentUpon>EssaisMecaniqueQualite.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\EssaisMecaniqueQualite.Designer.cs">
+      <DependentUpon>EssaisMecaniqueQualite.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\EtatCompteComptable.cs">
+      <DependentUpon>EtatCompteComptable.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\EtatCompteComptable.Designer.cs">
+      <DependentUpon>EtatCompteComptable.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\EtatFournisseur.cs">
+      <DependentUpon>EtatFournisseur.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\EtatFournisseur.Designer.cs">
+      <DependentUpon>EtatFournisseur.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\FicheArticle.cs">
+      <DependentUpon>FicheArticle.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\FicheArticle.Designer.cs">
+      <DependentUpon>FicheArticle.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\FicheSuiviMachine.cs">
+      <DependentUpon>FicheSuiviMachine.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\FicheSuiviMachine.Designer.cs">
+      <DependentUpon>FicheSuiviMachine.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Formation.cs">
+      <DependentUpon>Formation.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Formation.Designer.cs">
+      <DependentUpon>Formation.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\FournisseursGlobaleEntrees.cs">
+      <DependentUpon>FournisseursGlobaleEntrees.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\FournisseursGlobaleEntrees.Designer.cs">
+      <DependentUpon>FournisseursGlobaleEntrees.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\PapillonComptage.cs">
+      <DependentUpon>PapillonComptage.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\PapillonComptage.Designer.cs">
+      <DependentUpon>PapillonComptage.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\ParametresProduction.cs">
+      <DependentUpon>ParametresProduction.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\ParametresProduction.Designer.cs">
+      <DependentUpon>ParametresProduction.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\PlannificationMensuelle.cs">
+      <DependentUpon>PlannificationMensuelle.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\PlannificationMensuelle.Designer.cs">
+      <DependentUpon>PlannificationMensuelle.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\PROD_SuiviProduction.cs">
+      <DependentUpon>PROD_SuiviProduction.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\PROD_SuiviProduction.Designer.cs">
+      <DependentUpon>PROD_SuiviProduction.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RaportDemandeTravail.cs">
+      <DependentUpon>RaportDemandeTravail.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RaportDemandeTravail.Designer.cs">
+      <DependentUpon>RaportDemandeTravail.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RaportMensuelDTOT.cs">
+      <DependentUpon>RaportMensuelDTOT.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RaportMensuelDTOT.Designer.cs">
+      <DependentUpon>RaportMensuelDTOT.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RaportOBJECTIFS_QUALITE_MAINTENANCE.cs">
+      <DependentUpon>RaportOBJECTIFS_QUALITE_MAINTENANCE.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RaportOBJECTIFS_QUALITE_MAINTENANCE.Designer.cs">
+      <DependentUpon>RaportOBJECTIFS_QUALITE_MAINTENANCE.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RaportOrdreTravail.cs">
+      <DependentUpon>RaportOrdreTravail.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RaportOrdreTravail.Designer.cs">
+      <DependentUpon>RaportOrdreTravail.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RapportJournalierProduction.cs">
+      <DependentUpon>RapportJournalierProduction.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RapportJournalierProduction.Designer.cs">
+      <DependentUpon>RapportJournalierProduction.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RapportQualite.cs">
+      <DependentUpon>RapportQualite.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RapportQualite.Designer.cs">
+      <DependentUpon>RapportQualite.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RecapeBillette.cs">
+      <DependentUpon>RecapeBillette.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\RecapeBillette.Designer.cs">
+      <DependentUpon>RecapeBillette.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\ReceptionBilette.cs">
+      <DependentUpon>ReceptionBilette.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\ReceptionBilette.Designer.cs">
+      <DependentUpon>ReceptionBilette.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Reintegration.cs">
+      <DependentUpon>Reintegration.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Reintegration.Designer.cs">
+      <DependentUpon>Reintegration.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Restitution.cs">
+      <DependentUpon>Restitution.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\Restitution.Designer.cs">
+      <DependentUpon>Restitution.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\StkBonRetour.cs">
+      <DependentUpon>StkBonRetour.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\StkBonRetour.Designer.cs">
+      <DependentUpon>StkBonRetour.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviActiviteMecanique.cs">
+      <DependentUpon>SuiviActiviteMecanique.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviActiviteMecanique.Designer.cs">
+      <DependentUpon>SuiviActiviteMecanique.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviArrets.cs">
+      <DependentUpon>SuiviArrets.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviArrets.Designer.cs">
+      <DependentUpon>SuiviArrets.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviArretsSonalgaz.cs">
+      <DependentUpon>SuiviArretsSonalgaz.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviArretsSonalgaz.Designer.cs">
+      <DependentUpon>SuiviArretsSonalgaz.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviArretsSub.cs">
+      <DependentUpon>SuiviArretsSub.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviArretsSub.Designer.cs">
+      <DependentUpon>SuiviArretsSub.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviArticle.cs">
+      <DependentUpon>SuiviArticle.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviArticle.Designer.cs">
+      <DependentUpon>SuiviArticle.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviCilsaillees.cs">
+      <DependentUpon>SuiviCilsaillees.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviCilsaillees.Designer.cs">
+      <DependentUpon>SuiviCilsaillees.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviComptesComptable.cs">
+      <DependentUpon>SuiviComptesComptable.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviComptesComptable.Designer.cs">
+      <DependentUpon>SuiviComptesComptable.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviEtPlannificationMateriel.cs">
+      <DependentUpon>SuiviEtPlannificationMateriel.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviEtPlannificationMateriel.Designer.cs">
+      <DependentUpon>SuiviEtPlannificationMateriel.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviMovementNew.cs">
+      <DependentUpon>SuiviMovementNew.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviMovementNew.Designer.cs">
+      <DependentUpon>SuiviMovementNew.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviMovements.cs">
+      <DependentUpon>SuiviMovements.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviMovements.Designer.cs">
+      <DependentUpon>SuiviMovements.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviMovementsServices.cs">
+      <DependentUpon>SuiviMovementsServices.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviMovementsServices.Designer.cs">
+      <DependentUpon>SuiviMovementsServices.vsrepx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviPersonnelInterventions.cs">
+      <DependentUpon>SuiviPersonnelInterventions.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\SuiviPersonnelInterventions.Designer.cs">
+      <DependentUpon>SuiviPersonnelInterventions.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\TonnageMensuel.cs">
+      <DependentUpon>TonnageMensuel.repx</DependentUpon>
+    </Compile>
+    <Compile Update="Reports\TonnageMensuel.Designer.cs">
+      <DependentUpon>TonnageMensuel.repx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\ElectriqueManager\Models\" />
+    <Folder Include="Areas\QualiteManager\Models\" />
+    <Folder Include="Areas\QualiteManager\Views\Shared\" />
+    <Folder Include="Areas\SodureManager\Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\Signatures\Anis.png" />
+    <None Include="wwwroot\Signatures\Atef.png" />
+    <None Include="wwwroot\Signatures\Malek.png" />
+    <None Include="wwwroot\Signatures\Nabil.png" />
+    <None Include="wwwroot\Signatures\Rezak.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Update="Areas\MecaniqueManager\Views\MecaniqueManager\DemandeServiceViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\MecaniqueManager\Views\MecaniqueManager\DemandeTravailViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\MecaniqueManager\Views\MecaniqueManager\FicheSuiviPersonnelViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\MecaniqueManager\Views\MecaniqueManager\OrdreTravailViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\MethodeManager\Views\MethodeManager\DemandeService.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\MethodeManager\Views\MethodeManager\DemandeTravailViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\MethodeManager\Views\MethodeManager\FicheSuiviPersonnelViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\MethodeManager\Views\MethodeManager\OrdreTravailViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\ActiviteSodureViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\Configuration.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\DemandeFournitureViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\DemandeService.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\DemandeServiceViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\DemandesFourniture.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\DemandeTravailsSodureRecieved.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\DemandeTravailsSodureSent.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\DemandeTravailViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\DxDropDownBox.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\DxDropDownBoxArticlesFourniture.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\FicheSuiviPersonnelViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\GestionPersonnels.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\ListePDR.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\ObjectifsQualiteViewerSodure.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\OrdresTravailSodureRecieved.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\OrdresTravailSodureSent.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\OrdreTravailViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\RapportMensuelViewerSodure.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\SodureManager\SuiviTraveaux.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\SodureManager\Views\Shared\_ViewImports.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\UsinageManager\Views\UsinageManager\DemandeFournitureViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\UsinageManager\Views\UsinageManager\DemandeServiceViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\UsinageManager\Views\UsinageManager\DemandeTravailViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Areas\UsinageManager\Views\UsinageManager\OrdreTravailViewer.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties bundleconfig_1json__JsonSchema="" DismissedDevExtremeVersion="20.2.6" />
+    </VisualStudio>
+  </ProjectExtensions>
+  <PropertyGroup>
+    <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
+    <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <WarningLevel>5</WarningLevel>
+  </PropertyGroup>
+</Project>

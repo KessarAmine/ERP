@@ -1,0 +1,17 @@
+﻿@using DevExpress.AspNetCore
+@using DevKbfSteel.Reports
+
+<link rel="stylesheet" href="~/css/thirdparty.bundle.css" />
+<script src="~/js/thirdparty.bundle.js"></script>
+
+<link rel="stylesheet" href="~/css/viewer.part.bundle.css" />
+<script src="~/js/viewer.part.bundle.js"></script>
+
+@{RaportOBJECTIFS_QUALITE_MAINTENANCE raport = new RaportOBJECTIFS_QUALITE_MAINTENANCE();
+    raport.Parameters["CodeReceveur"].Value = 7;
+    raport.Parameters["CodeReceveur"].Visible = false;
+    raport.Name = "RaportOBJECTIFS_QUALITE_MAINTENANCE";
+    raport.RequestParameters = true;
+    raport.Visible = true;
+}
+@Html.DevExpress().WebDocumentViewer("WebDocumentViewer").Height("1000px").Bind(raport);

@@ -1,0 +1,112 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@{
+    ViewData["Title"] = "Electrique-Plannification Préventif ";
+    Layout = "~/Views/Shared/_LayoutElectriqueManager.cshtml";
+}
+@(Html.DevExtreme().TabPanel()
+        .Height("100%")
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Planning")
+                .Template(new TemplateName("PlanningTemplate"));
+
+            items.Add()
+                .Title("Suivi des interventions préventifs")
+                .Template(new TemplateName("SuiviPreventif"));
+        })
+)
+@using (Html.DevExtreme().NamedTemplate("SuiviPreventif"))
+{
+
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.MethAppointementsPreventifs>()
+    .Height("95%")
+    .ShowBorders(true)
+    .LoadPanel(l => l.Enabled(false))
+    .Columns(columns =>
+    {
+        columns.AddFor(m => m.AppointmentId).Caption("ID").Width(50);
+        columns.AddFor(m => m.StartDate).Caption("Date").Format("d/M/yyyy").Width(100);
+        columns.AddFor(m => m.Description);
+        columns.AddFor(m => m.Statut).Width(100).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("MethPlanningPreventifs").LoadAction("StatutLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true));
+        columns.Add()
+            .Type(GridCommandColumnType.Buttons)
+            .Width(110)
+            .Buttons(b =>
+            {
+                b.Add().Name(GridColumnButtonName.Edit);
+                b.Add().Name(GridColumnButtonName.Delete);
+            });
+    })
+    .DataSource(ds => ds.Mvc()
+        .Controller("MethPlanningPreventifs")
+        .LoadAction("GetElectrique")
+        .Key("AppointmentId")
+    )
+
+    .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+    .NoDataText("Aucune donnée à afficher")
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(headerfilter => headerfilter.Visible(true))
+    .GroupPanel(p => p.Visible(true))
+    .AllowColumnReordering(true)
+    .AllowColumnResizing(true)
+    .Editing(editing =>
+    {
+        editing.AllowUpdating(false);
+        editing.AllowDeleting(false);
+        editing.AllowAdding(false);
+    })
+    .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("PlanningTemplate"))
+{
+    @(Html.DevExtreme().Scheduler()
+    .ID("scheduler")
+    .Height("95%")
+    .DataSource(d => d.Mvc()
+        .Controller("MethPlanningPreventifs")
+        .Key("AppointmentId")
+        .LoadAction("GetElectrique")
+    )
+    .Editing(editing =>
+    {
+        editing.AllowUpdating(true);
+        editing.AllowDeleting(false);
+        editing.AllowAdding(false);
+    })
+    .Views(new[] {
+    SchedulerViewType.Month
+    })
+    .RemoteFiltering(true)
+    .CurrentView(SchedulerViewType.Month)
+    .StartDayHour(0)
+    .EndDayHour(24)
+    .Height(800)
+    .TextExpr("Text")
+    .StartDateExpr("StartDate")
+    .EndDateExpr("EndDate")
+    .DescriptionExpr("Description")
+    .ShowAllDayPanel(false)
+    )
+}
+
+<script>
+    function getSchedulerInstance() {
+        return $("#scheduler").dxScheduler("instance");
+    }
+    function showToast(event, value, type) {
+        DevExpress.ui.notify(event + " \"" + value + "\"" + " task", type, 800);
+    }
+</script>

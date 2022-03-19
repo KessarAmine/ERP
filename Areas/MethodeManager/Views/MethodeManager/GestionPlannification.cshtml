@@ -1,0 +1,472 @@
+﻿@using DevKbfSteel.Models
+@using DevExpress.XtraReports.UI;
+@using DevKbfSteel.Controllers
+@using DevExpress.XtraReports.Parameters;
+@using DevKbfSteel.Reports
+@using DevExpress.AspNetCore
+@using DevExtreme.AspNet.Mvc
+@using DevKbfSteel.Entities;
+@{
+    ViewData["Title"] = "Méthodes-Plannification";
+    Layout = "~/Views/Shared/_LayoutMethodeManager.cshtml";
+}
+
+@(Html.DevExtreme().TabPanel()
+        .Height("100%")
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Gestion des opérations")
+                .Template(new TemplateName("OperationsTemplate"));
+
+            items.Add()
+                .Title("Planning")
+                .Template(new TemplateName("PlanningTemplate"));
+
+            items.Add()
+                .Title("Suivi des interventions préventifs")
+                .Template(new TemplateName("SuiviPreventif"));
+        })
+        )
+@using (Html.DevExtreme().NamedTemplate("SuiviPreventif"))
+{
+
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.MethAppointementsPreventifs>()
+    .Height("95%")
+    .ShowBorders(true)
+    .LoadPanel(l => l.Enabled(false))
+    .Columns(columns =>
+    {
+        columns.AddFor(m => m.AppointmentId).Caption("ID").Width(50);
+        columns.AddFor(m => m.StartDate).Caption("Date").Format("yyyy-MM-dd").Width(100);
+        columns.AddFor(m => m.Description);
+        columns.AddFor(m => m.Statut).Width(100).Lookup(lookup => lookup
+        .DataSource(ds => ds.WebApi().Controller("MethPlanningPreventifs").LoadAction("StatutLookup").Key("Value"))
+        .ValueExpr("Value")
+        .DisplayExpr("Text")
+        .AllowClearing(true));
+        columns.Add()
+            .Type(GridCommandColumnType.Buttons)
+            .Width(110)
+            .Buttons(b =>
+            {
+                b.Add().Name(GridColumnButtonName.Edit);
+                b.Add().Name(GridColumnButtonName.Delete);
+            });
+    })
+    .DataSource(ds => ds.Mvc()
+        .Controller("MethPlanningPreventifs")
+        .LoadAction("Get")
+        .Key("AppointmentId")
+    )
+
+    .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+    .NoDataText("Aucune donnée à afficher")
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(headerfilter => headerfilter.Visible(true))
+    .GroupPanel(p => p.Visible(true))
+    .AllowColumnReordering(true)
+    .AllowColumnResizing(true)
+    .Editing(editing =>
+    {
+        editing.AllowUpdating(false);
+        editing.AllowDeleting(false);
+        editing.AllowAdding(false);
+    })
+    .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("OperationsTemplate"))
+{
+
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.MethOperations>()
+    .ID("OperationsGrid")
+        .Height("95%")
+    .ShowBorders(true)
+    .LoadPanel(l => l.Enabled(false))
+    .Columns(columns =>
+    {
+        columns.AddFor(m => m.NumMachine).Caption("Machines")
+        .Lookup(lookup => lookup
+            .DataSource(ds => ds.Mvc().Controller("MethOperations").LoadAction("MachinesLookup").Key("Value"))
+            .AllowClearing(true)
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+        );
+        columns.AddFor(m => m.NumEquipement).Caption("Equipement")
+        .Lookup(lookup => lookup
+            .DataSource(ds => ds.Mvc().Controller("MethOperations").LoadAction("MaterielLookup").Key("Value"))
+            .AllowClearing(true)
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+        ).EditCellTemplate(@<text>
+    @Html.Partial("DxDropDownBoxEquipement")
+    </text>).AllowGrouping(true);
+        columns.AddFor(m => m.Description);
+        columns.AddFor(m => m.Fréquence);
+        columns.AddFor(m => m.Unité).Caption("Unité")
+        .Lookup(lookup => lookup
+            .DataSource(ds => ds.Mvc().Controller("MethOperations").LoadAction("UniteLookup").Key("Value"))
+            .AllowClearing(true)
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+        );
+        columns.AddFor(m => m.StructreConcernée).Caption("Structre Concernée")
+            .Lookup(lookup => lookup
+                .DataSource(ds => ds.Mvc().Controller("DemandeTravailsMethode").LoadAction("StructureLookup").Key("Value"))
+                .AllowClearing(true)
+                .ValueExpr("Value")
+                .DisplayExpr("Text")
+            );
+        columns.AddFor(m => m.Guide);
+
+        columns.Add()
+            .Type(GridCommandColumnType.Buttons)
+            .Width(110)
+            .Buttons(b =>
+            {
+                b.Add().Name(GridColumnButtonName.Edit);
+                b.Add().Name(GridColumnButtonName.Delete);
+            });
+    })
+    .DataSource(ds => ds.Mvc()
+        .Controller("MethOperations")
+        .LoadAction("Get")
+        .InsertAction("Post")
+        .UpdateAction("Put")
+        .DeleteAction("Delete")
+        .Key("Idoperation")
+    )
+    .MasterDetail(md => md
+    .Enabled(true)
+    .Template(new TemplateName("MaterielsDetails"))
+        )
+    .SearchPanel(sp => sp.Placeholder("Rechercher").Visible(true))
+    .NoDataText("Aucune donnée à afficher")
+    .FilterRow(f => f.Visible(true))
+    .HeaderFilter(headerfilter => headerfilter.Visible(true))
+    .GroupPanel(p => p.Visible(true))
+    .AllowColumnReordering(true)
+    .AllowColumnResizing(true)
+    .Editing(editing =>
+    {
+        editing.AllowUpdating(true);
+        editing.AllowDeleting(true);
+        editing.AllowAdding(true);
+        editing.Mode(GridEditMode.Popup)
+        .Popup(p => p.Title("Editer Opération")
+        .ShowTitle(true)
+        .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+    })
+    .ColumnChooser(cc => cc.Enabled(true).AllowSearch(true))
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("MaterielsDetails"))
+{
+    @(Html.DevExtreme().TabPanel()
+        .Items(items =>
+        {
+            items.Add()
+                .Title("Details des équipements")
+                .Template(new TemplateName("MaterielsGrid"))
+                .Option("MaterielsGrid", new { id = new JS("data.Idoperation")
+                }
+                );
+        })
+        )
+}
+@using (Html.DevExtreme().NamedTemplate("MaterielsGrid"))
+{
+    @(Html.DevExtreme().DataGrid<DevKbfSteel.Entities.MethOperationsMateriels>()
+    .ShowBorders(true)
+
+    .Columns(columns =>
+    {
+
+        columns.AddFor(m => m.NumEquipement).Caption("Equipement")
+                .Lookup(lookup => lookup
+                   .DataSource(ds => ds.Mvc().Controller("MethOperations").LoadAction("MaterielLookup").Key("Value"))
+                   .AllowClearing(true)
+                   .ValueExpr("Value")
+                   .DisplayExpr("Text")
+                );
+        columns.Add()
+                .Type(GridCommandColumnType.Buttons)
+                .Width(110)
+                .Buttons(b =>
+                {
+                    b.Add().Name(GridColumnButtonName.Edit);
+                    b.Add().Name(GridColumnButtonName.Delete);
+                });
+    })
+
+         .DataSource(ds => ds.WebApi()
+             .Controller("MethOperations")
+             .LoadAction("GetID")
+             .InsertAction("PostMateriel")
+             .UpdateAction("PutMateriel")
+             .DeleteAction("DeleteMateriel")
+             .LoadParams(new
+             {
+                 id = new JS("MaterielsGrid.id")
+             }
+             )
+             .Key("Id")
+            )
+         .GroupPanel(p => p.Visible(true))
+         .Editing(editing =>
+         {
+             editing.AllowUpdating(true);
+             editing.AllowDeleting(true);
+             editing.AllowAdding(true);
+             editing.Mode(GridEditMode.Row);
+         })
+    )
+}
+@using (Html.DevExtreme().NamedTemplate("PlanningTemplate"))
+{
+    @(Html.DevExtreme().Scheduler()
+    .ID("scheduler")
+    .DataSource(d => d.Mvc()
+        .Controller("MethPlanningPreventifs")
+        .Key("AppointmentId")
+        .LoadAction("Get")
+        .UpdateAction("Put")
+        .DeleteAction("Delete")
+    )
+    .Height("95%")
+    .Views(new[] {
+    SchedulerViewType.Month
+    })
+
+    .RemoteFiltering(true)
+    .CurrentView(SchedulerViewType.Month)
+    .StartDayHour(0)
+    .EndDayHour(24)
+    .Width("100%")
+    .Height(800)
+    .TextExpr("Text")
+    .StartDateExpr("StartDate")
+    .EndDateExpr("EndDate")
+    .DescriptionExpr("Description")
+    .ShowAllDayPanel(true)
+    .Editing(editing =>
+    {
+        editing.AllowUpdating(true);
+        editing.AllowDeleting(true);
+        editing.AllowAdding(false);
+    })
+    .UseDropDownViewSwitcher(true)
+    .OnAppointmentAdded(@<text>
+            function(e) {
+            showToast("Ajout Réussi :", e.appointmentData.Text, "success");
+            }
+    </text>)
+    .OnAppointmentUpdated(@<text>
+            function(e) {
+            showToast("Modification Réussi", e.appointmentData.Text, "info");
+            }
+    </text>)
+    .OnAppointmentDeleted(@<text>
+            function(e) {
+            showToast("Supression Réussi", e.appointmentData.Text, "warning");
+            }
+    </text>)
+    )
+    @(Html.DevExtreme().SpeedDialAction()
+        .Icon("plus")
+        .Hint("Ajouter une opération")
+            .Index(2)
+        .OnClick(@<text>
+        function showPopUpApp() {
+            var popup = $("#Appointement-popup").dxPopup("instance");
+            popup.option("contentTemplate", $("#popup-template"));
+            popup.show();
+        }
+        </text>)
+        )
+    @(Html.DevExtreme().SpeedDialAction()
+        .Icon("print")
+        .Hint("Planning mensuel")
+        .Index(3)
+        .OnClick(@<text>
+        function showPopUpApp() {
+        var ele = document.getElementsByClassName("dx-button-text");
+        var i;
+        console.log(ele[2].innerHTML);
+        var splited = ele[2].innerHTML.split(" ");
+        window.open(' @Url.Action("PlannificationMensuelleViewer", "MethodeManager")?Month='+splited[0]+'&Year='+splited[1], '_blank').focus();
+        }
+        </text>)
+)
+}
+@using (Html.DevExtreme().NamedTemplate("popup-template"))
+{
+    @using (Html.BeginForm("PostManual", "MethodeManager", FormMethod.Post))
+    {
+        using (Html.DevExtreme().ValidationGroup())
+        {
+            @(Html.DevExtreme().Form<MethAppointementsPreventifs>()
+                .ShowValidationSummary(true)
+                .Items(items =>
+                {
+                    items.AddGroup()
+                        .Caption("Operation détails")
+                        .Items(groupItems =>
+                        {
+                            groupItems.AddSimpleFor(m => m.IdOperation)
+                            .Editor(e => e.DropDownBox()
+                                .ValueExpr("Idoperation")
+                                .DisplayExpr("Description")
+                                .DataSource(ds => ds.Mvc()
+                                    .Controller("MethOperations")
+                                    .LoadAction("Get")
+                                    .InsertAction("Post")
+                                    .UpdateAction("Put")
+                                    .DeleteAction("Delete")
+                                    .Key("Idoperation")
+                                )
+                                .Placeholder("Selectionner une opération")
+                                .ShowClearButton(true)
+                                .OnValueChanged(@"function(args) { gridBox_valueChanged(args, setValue); }")
+                                .ContentTemplate(@<text>
+                                    @(Html.DevExtreme().DataGrid()
+                                        .ID("embedded-datagridMultipleIdEmployee")
+                                        .DataSource(new JS(@"component.getDataSource()"))
+                                        .Columns(columns =>
+                                        {
+                                            columns.Add().DataField("Description");
+                                            columns.Add().DataField("NumMachine").Caption("Machine")
+                                            .Lookup(lookup => lookup
+                                                .DataSource(ds => ds.Mvc().Controller("MethOperations").LoadAction("MachinesLookup").Key("Value"))
+                                                .AllowClearing(true)
+                                                .ValueExpr("Value")
+                                                .DisplayExpr("Text")
+                                            );
+                                            columns.Add().DataField("NumEquipement").Caption("Equipement")
+                                            .Lookup(lookup => lookup
+                                                .DataSource(ds => ds.Mvc().Controller("MethOperations").LoadAction("MaterielLookup").Key("Value"))
+                                                .AllowClearing(true)
+                                                .ValueExpr("Value")
+                                                .DisplayExpr("Text"))
+                                            .EditCellTemplate(new TemplateName("EquipementTemplate"));
+                                            columns.Add().DataField("Unité")
+                                            .Lookup(lookup => lookup
+                                            .DataSource(ds => ds.WebApi().Controller("MethOperations").LoadAction("UniteLookup").Key("Value"))
+                                            .AllowClearing(true)
+                                            .ValueExpr("Value")
+                                            .DisplayExpr("Text")
+                                            );
+                                            columns.Add().DataField("Fréquence");
+                                            columns.Add().DataField("StructreConcernée")
+                                                .Lookup(lookup => lookup
+                                                .DataSource(ds => ds.Mvc().Controller("DemandeTravailsMethode").LoadAction("StructureLookup").Key("Value"))
+                                                .AllowClearing(true)
+                                                .ValueExpr("Value")
+                                                .DisplayExpr("Text")
+                                            );
+                                            columns.Add()
+                                                .Type(GridCommandColumnType.Buttons)
+                                                .Width(110)
+                                                .Buttons(b =>
+                                                {
+                                                    b.Add().Name(GridColumnButtonName.Edit);
+                                                    b.Add().Name(GridColumnButtonName.Delete);
+                                                });
+                                        })
+                                        .Editing(editing =>
+                                        {
+                                            editing.AllowUpdating(false);
+                                            editing.AllowDeleting(false);
+                                            editing.AllowAdding(false);
+                                            editing.Mode(GridEditMode.Row)
+                                            .Popup(p => p.Title("Editer Opération")
+                                            .ShowTitle(true)
+                                            .Position(pos => pos.My(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).At(HorizontalAlignment.Center, VerticalAlignment.Top).Of(new JS("window"))));
+                                        })
+                                        .HoverStateEnabled(true)
+                                        .Paging(p => p.PageSize(10))
+                                        .FilterRow(f => f.Visible(true))
+                                        .Scrolling(s => s.Mode(GridScrollingMode.Infinite))
+                                        .Height(345)
+                                        .Selection(s => s.Mode(SelectionMode.Single))
+                                        .SelectedRowKeys(new JS("component.option('value')"))
+                                        .OnSelectionChanged(@"function(args) { onSelectionChanged(args, component); }")
+                                    )
+                                    @(Html.DevExtreme().Button()
+                                            .ElementAttr(new { style = "margin-top:10px;float:right" })
+                                            .Text("Close")
+                                            .OnClick(@"function(args) { onCloseBtnClick(args, component); }"))
+                                </text>));
+                            groupItems.AddSimpleFor(m => m.StartDate);
+                    });
+                    items.AddButton()
+                        .HorizontalAlignment(HorizontalAlignment.Right)
+                        .ButtonOptions(b => b.Text("Intervenir")
+                            .Type(ButtonType.Success)
+                            .UseSubmitBehavior(true)
+                    );
+
+                }
+            ))
+        }
+    }
+}
+@using (Html.DevExtreme().NamedTemplate("EquipementTemplate"))
+{
+@(Html.DevExtreme().DataGrid()
+    .ID("embedded-datagridMultipleEquipement")
+    .DataSource(new JS(@"component.getDataSource()"))
+    .Columns(columns =>
+    {
+        columns.Add().DataField("CodeInstallation")
+        .Lookup(lookup => lookup
+            .DataSource(ds => ds.Mvc().Controller("DemandeTravails").LoadAction("MachinesLookup").Key("Value"))
+            .AllowClearing(true)
+            .ValueExpr("Value")
+            .DisplayExpr("Text")
+        );
+        columns.Add().DataField("Equipement");
+    })
+    .HoverStateEnabled(true)
+    .Paging(p => p.PageSize(10))
+    .FilterRow(f => f.Visible(true))
+    .Scrolling(s => s.Mode(GridScrollingMode.Infinite))
+    .Height(345)
+    .Selection(s => s.Mode(SelectionMode.Single))
+    .SelectedRowKeys(new JS("component.option('value')"))
+    .OnSelectionChanged(@"function(args) { onSelectionChanged(args, component); }")
+)
+}
+
+@(Html.DevExtreme().Popup()
+        .ID("Appointement-popup")
+        .ShowTitle(true)
+        .Title("Ajouter une intervention")
+        .Visible(false)
+        .DragEnabled(false)
+        .CloseOnOutsideClick(true)
+)
+<script>
+    function getSchedulerInstance() {
+        return $("#scheduler").dxScheduler("instance");
+    }
+    function showToast(event, value, type) {
+        DevExpress.ui.notify(event + " \"" + value + "\"" + " task", type, 800);
+    }
+    function gridBox_valueChanged(args, setValueMethod) {
+        var $dataGrid = $("#embedded-datagridMultipleIdEmployee");
+        if ($dataGrid.length) {
+            var dataGrid = $dataGrid.dxDataGrid("instance");
+            dataGrid.selectRows(args.value, false);
+        }
+        setValueMethod(args.value);
+    }
+    function onSelectionChanged(e, dropDownBoxInstance) {
+        var keys = e.selectedRowKeys;
+        dropDownBoxInstance.option("value", keys);
+    }
+    function onCloseBtnClick(args, dropDownBoxInstance) {
+        dropDownBoxInstance.close();
+    }
+</script>
