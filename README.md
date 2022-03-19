@@ -1,2 +1,2 @@
 # ERP
- entreprise ressource planning
+ Entreprise ressource planning
